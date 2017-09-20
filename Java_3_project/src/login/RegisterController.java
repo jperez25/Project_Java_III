@@ -37,7 +37,7 @@ public class RegisterController {
 		LocalDateStringConverter strcon = new LocalDateStringConverter();
 		String dt =  strcon.toString(date.getValue());
 
-		AUBody body = new AUBody();
+		AuBody body = new AuBody();
 		regBtn.setOnAction(e->{
 			body.setFname(fname.getText());
 			body.setLname(lname.getText());
