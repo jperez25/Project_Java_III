@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextField?>
@@ -17,16 +16,17 @@
          <children>
             <ImageView fitHeight="122.0" fitWidth="240.0" layoutX="56.0" layoutY="22.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="file:/C:/Users/jsnak/Desktop/Java_III/Java_3_project/src/login/Screens/au_img.png" />
+                  <Image url="@au_img.png" />
                </image>
             </ImageView>
             <TextField fx:id="fname" layoutX="76.0" layoutY="202.0" prefHeight="25.0" prefWidth="183.0" promptText="First name" />
-            <Button fx:id="regBtn" layoutX="72.0" layoutY="483.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="192.0" text="Register" />
-            <TextField fx:id="auUserName" layoutX="76.0" layoutY="286.0" prefHeight="25.0" prefWidth="183.0" promptText="AU username" />
-            <TextField fx:id="email" layoutX="77.0" layoutY="363.0" prefHeight="25.0" prefWidth="183.0" promptText="email" />
-            <DatePicker fx:id="date" layoutX="73.0" layoutY="409.0" prefHeight="25.0" prefWidth="183.0" promptText="Today's Date" />
             <TextField fx:id="lname" layoutX="77.0" layoutY="245.0" prefHeight="25.0" prefWidth="183.0" promptText="Last name" />
+            <TextField fx:id="auUserName" layoutX="76.0" layoutY="286.0" prefHeight="25.0" prefWidth="183.0" promptText="AU username" />
+            <TextField fx:id="email" layoutX="75.0" layoutY="404.0" prefHeight="25.0" prefWidth="183.0" promptText="email" />
             <PasswordField fx:id="pass" layoutX="75.0" layoutY="325.0" prefHeight="25.0" prefWidth="183.0" promptText="Password" />
+            <PasswordField fx:id="pass" layoutX="75.0" layoutY="325.0" prefHeight="25.0" prefWidth="183.0" promptText="Password" />
+            <Button fx:id="regBtn" layoutX="72.0" layoutY="483.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="192.0" text="Register" />
+            
             <Label fx:id="fnameStar" layoutX="52.0" layoutY="201.0" prefHeight="25.0" prefWidth="8.0" text="*" textFill="#cd0808" visible="false">
                <font>
                   <Font size="24.0" />
@@ -47,12 +47,13 @@
                   <Font size="24.0" />
                </font>
             </Label>
-            <Label fx:id="emailStar" layoutX="52.0" layoutY="358.0" prefHeight="25.0" prefWidth="8.0" text="*" textFill="#cd0808" visible="false">
+            <Label fx:id="pass2Star" layoutX="53.0" layoutY="358.0" prefHeight="25.0" prefWidth="8.0" text="*" textFill="#cd0808" visible="false">
                <font>
                   <Font size="24.0" />
                </font>
             </Label>
-            <Label fx:id="dateStar" layoutX="52.0" layoutY="404.0" prefHeight="25.0" prefWidth="8.0" text="*" textFill="#cd0808" visible="false">
+            <PasswordField fx:id="pass1" layoutX="75.0" layoutY="363.0" prefHeight="25.0" prefWidth="183.0" promptText="Password Again" />
+            <Label fx:id="emailStar" layoutX="51.0" layoutY="399.0" prefHeight="25.0" prefWidth="8.0" text="*" textFill="#cd0808" visible="false">
                <font>
                   <Font size="24.0" />
                </font>

@@ -1,7 +1,10 @@
 package login.Controllers;
 
 import java.io.IOException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.HashMap;
+import java.util.Date;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -29,9 +32,9 @@ public class RegisterController {
 	@FXML
 	private PasswordField pass;
 	@FXML
-	private TextField email;
+	private PasswordField pass1;
 	@FXML
-	private DatePicker date;
+	private TextField email;
 	@FXML
 	private Button regBtn;
 	@FXML
@@ -45,29 +48,29 @@ public class RegisterController {
 	@FXML
 	private Label passwordStar;
 	@FXML
-	private Label emailStar;
+	private Label pass2Star;
 	@FXML
-	private Label dateStar;
+	private Label emailStar;
 	 
 	public void initialize() throws Exception {
-		 //There is a bug Check it later    <<<---------------------------------------------------------
-		LocalDateStringConverter strcon = new LocalDateStringConverter();
-		String dt =  strcon.toString(date.getValue());
-
+		 //Getting Today's day
+		DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+		Date dt = new Date();
+		
+		//Our object
 		AUBody body = new AUBody();
 		regBtn.setOnAction(e->{
 			
-			System.out.println(dt+"It has nothing");
 			
 			fnameStar.setVisible(false);
 			lnameStar.setVisible(false);
 			auUserStar.setVisible(false);
 			passwordStar.setVisible(false);
-			passwordStar.setVisible(false);
+			pass2Star.setVisible(false);
 			emailStar.setVisible(false);
-			dateStar.setVisible(false);
 			
-			if (fname.getText().equals("") || lname.getText().equals("") || auUserName.getText().equals("") || pass.getText().equals("") || email.getText().equals("") || date.equals(null)) {
+			//If any of the fields is empty rise alert 
+			if (fname.getText().equals("") || lname.getText().equals("") || auUserName.getText().equals("") || pass.getText().equals("") || email.getText().equals("") || pass1.getText().equals("")) {
 				//Alert User of missing fields
 				Alert alert = new Alert(Alert.AlertType.INFORMATION);
 			    alert.setTitle("Message");
@@ -88,23 +91,44 @@ public class RegisterController {
 			    if (pass.getText().equals("")) {
 					passwordStar.setVisible(true);
 				}
+			    if (pass1.getText().equals("")) {
+					pass2Star.setVisible(true);
+				}
 			    if (email.getText().equals("")) {
 					emailStar.setVisible(true);
-				}
-			    //There is a bug Check it later    <<<---------------------
-			    if (date.equals(null)) {
-					dateStar.setVisible(true);
 				}
 			    
 			}
 			else {
-				body.setFname(fname.getText());
-				body.setLname(lname.getText());
-				body.setAuUsername(auUserName.getText());
-				body.setPassword(pass.getText());
-				body.setEmail(email.getText());
-				body.setRegistered_date(dt);
-				System.out.println("Succesful");
+				if (pass.getText().equals(pass1.getText())) {
+					body.setFname(fname.getText());
+					body.setLname(lname.getText());
+					body.setAuUsername(auUserName.getText());
+					body.setPassword(pass.getText());
+					body.setEmail(email.getText());
+					body.setRegistered_date(dateFormat.format(dt));
+					System.out.println("Successful");
+					
+					FXMLLoader loader2 = new FXMLLoader(getClass().getResource("..\\Screens\\First_Login.fxml"));
+			        Parent root2;
+					try {
+						root2 = loader2.load();
+				        Scene scene = new Scene(root2);
+						Stage stage = (Stage) backBtn.getScene().getWindow(); 
+						stage.setScene(scene);
+					} catch (IOException e1) {
+						e1.printStackTrace();
+					}
+				}
+				else {
+					Alert alert = new Alert(Alert.AlertType.INFORMATION);
+				    alert.setTitle("Message");
+				    alert.setHeaderText("Passwords");
+				    alert.setContentText("Passwords entered do not match");
+				    alert.showAndWait();
+					passwordStar.setVisible(true);
+					pass2Star.setVisible(true);
+				}
 			}
 		});
 		backBtn.setOnAction(e->{

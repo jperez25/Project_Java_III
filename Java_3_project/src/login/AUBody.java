@@ -3,7 +3,10 @@ package login;
 /**
 * AUBody
 */
+//This class is used as the template for our objects
+//Objects represent the users
 public class AUBody {
+	//All the data we want to capture from our users
    private String fname;
    private String lname;
    private String auUsername;
@@ -11,7 +14,9 @@ public class AUBody {
    private String email;
    private String registered_date;
 
+   //Default Constructor
    public AUBody () {}
+   //Constructor that take arguments
    public AUBody (String fname,String lname, String auU,String password,String email,String rd) {
        this.fname = fname;
        this.lname = lname;
@@ -20,6 +25,7 @@ public class AUBody {
        this.email = email;
        this.registered_date = rd;
    }
+   //Copy Constructor
    public AUBody (AUBody au) {
        au.fname = fname;
        au.lname = lname;
@@ -28,7 +34,7 @@ public class AUBody {
        au.email = email;
        au.registered_date = registered_date;
    }
-   //missing more setters and getters
+   //Getters and setters, nothing special below
    public void setFname(String fname) {this.fname = fname;}
    public String getFname() {
 		return fname;
