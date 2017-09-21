@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="900.0" style="-fx-background-color: #7caf4b;" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.ParkingLotsController">
+   <children>
+      <AnchorPane layoutX="96.0" layoutY="62.0" prefHeight="566.0" prefWidth="708.0" style="-fx-background-color: #1b4a7c;">
+         <children>
+            <Label fx:id="IceLot" alignment="CENTER" layoutX="126.0" layoutY="89.0" prefHeight="78.0" prefWidth="457.0" style="-fx-background-color: #c1b313;" text="First Lot" textAlignment="CENTER">
+               <font>
+                  <Font name="Bradley Hand ITC" size="36.0" />
+               </font>
+            </Label>
+            <Label fx:id="stemLot" alignment="CENTER" layoutX="126.0" layoutY="193.0" prefHeight="78.0" prefWidth="457.0" style="-fx-background-color: #c1b313;" text="Something Else" textAlignment="CENTER">
+               <font>
+                  <Font name="Bradley Hand ITC" size="36.0" />
+               </font>
+            </Label>
+            <Label fx:id="vagoSTLot" alignment="CENTER" layoutX="126.0" layoutY="294.0" prefHeight="78.0" prefWidth="457.0" style="-fx-background-color: #c1b313;" text="I dont know what else to write" textAlignment="CENTER">
+               <font>
+                  <Font name="Bradley Hand ITC" size="36.0" />
+               </font>
+            </Label>
+            <Label fx:id="vagoNTLot" alignment="CENTER" layoutX="126.0" layoutY="395.0" prefHeight="78.0" prefWidth="457.0" style="-fx-background-color: #c1b313;" text="Please help me" textAlignment="CENTER">
+               <font>
+                  <Font name="Bradley Hand ITC" size="36.0" />
+               </font>
+            </Label>
+         </children>
+      </AnchorPane>
+      <Button fx:id="backBtn" alignment="CENTER" contentDisplay="CENTER" layoutY="34.0" mnemonicParsing="false" prefHeight="54.0" prefWidth="84.0" style="-fx-background-color: #7caf4b;" text="&lt;">
+         <font>
+            <Font name="Forte" size="31.0" />
+         </font>
+      </Button>
+   </children>
+</Pane>

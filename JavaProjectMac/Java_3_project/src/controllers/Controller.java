@@ -10,8 +10,10 @@ import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Hyperlink;
+import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
 //imports...
@@ -57,11 +59,24 @@ public class Controller {
 					    alert.showAndWait();
 				 }
 				 else {
+					 	//Alert not need
 						Alert alert = new Alert(Alert.AlertType.INFORMATION);
 					    alert.setTitle("Message");
 					    alert.setHeaderText("Sucessful Login");
-					    alert.setContentText("User has login successfully");
+					    alert.setContentText("User has log in successfully");
 					    alert.showAndWait();
+					    
+					    //go to pick a lot
+					    FXMLLoader loader2 = new FXMLLoader(getClass().getResource("/screens/ParkingLotsScreen.fxml"));
+				        Parent root2;
+						try {
+							root2 = loader2.load();
+					        Scene scene = new Scene(root2);
+							Stage stage = (Stage) bt1.getScene().getWindow(); 
+							stage.setScene(scene);
+						} catch (IOException e1) {
+							e1.printStackTrace();
+						}
 				}
 				
 			 }
