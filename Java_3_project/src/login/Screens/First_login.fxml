@@ -15,11 +15,11 @@
          <children>
             <ImageView fitHeight="122.0" fitWidth="240.0" layoutX="53.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@au_img.png" />
+                  <Image url="file:/C:/Users/jsnak/Desktop/Java_III/Java_3_project/src/images/au_img.png" />
                </image>
             </ImageView>
             <TextField fx:id="txtfl" layoutX="80.0" layoutY="155.0" prefHeight="25.0" prefWidth="183.0" promptText="User name" />
-            <PasswordField fx:id="passfl" layoutX="81.0" layoutY="197.0" prefHeight="25.0" prefWidth="183.0" promptText="AU Id" />
+            <PasswordField fx:id="passfl" layoutX="81.0" layoutY="197.0" prefHeight="25.0" prefWidth="183.0" promptText="Password" />
             <Hyperlink fx:id="lnk1" layoutX="81.0" layoutY="234.0" text="Register" />
             <Hyperlink fx:id="lnk2" layoutX="164.0" layoutY="234.0" text="Forgot Password?" />
             <Button fx:id="bt1" layoutX="76.0" layoutY="285.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="192.0" text="Send" />

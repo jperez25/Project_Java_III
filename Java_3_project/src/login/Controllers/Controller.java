@@ -10,16 +10,14 @@ import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Hyperlink;
-import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
-import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
 //imports...
 
 public class Controller {
-	 
+//Fxml injections
  @FXML
  private Button bt1 ;
  @FXML
@@ -33,6 +31,7 @@ public class Controller {
 
  // called by the FXML loader after the labels declared above are injected:
 	 public void initialize() throws Exception {
+		 //Locally working with data bases 
 		HashMap<String, String> map = new HashMap<String, String>();
 		 map.put("jojo","123456");
 		 
@@ -44,23 +43,12 @@ public class Controller {
 			 String username = txtfl.getText();
 			 String pass = passfl.getText();
 			 
-			 //If user name and password match let user login
+			 //If user name and password match let user log in
 			 if (map.containsKey(username)) {
-				 //If password matches
+				 //If password matches check for password value
 				 if (map.containsValue(pass)) {
 					//switch scenes
-					 
-				 }
-				 if (pass.equals("")) {
-						Alert alert = new Alert(Alert.AlertType.INFORMATION);
-					    alert.setTitle("Message");
-					    alert.setHeaderText("Empty Field");
-					    alert.setContentText("The Password filed is empty, try again");
-					    alert.showAndWait();
-				 }
-				 else {
-					 	//Alert not need
-						Alert alert = new Alert(Alert.AlertType.INFORMATION);
+					 Alert alert = new Alert(Alert.AlertType.INFORMATION);
 					    alert.setTitle("Message");
 					    alert.setHeaderText("Sucessful Login");
 					    alert.setContentText("User has log in successfully");
@@ -77,6 +65,24 @@ public class Controller {
 						} catch (IOException e1) {
 							e1.printStackTrace();
 						}
+					 
+				 }
+				 //User entered a user name but not a password
+				 else if (pass.equals("")) {
+						Alert alert = new Alert(Alert.AlertType.INFORMATION);
+					    alert.setTitle("Message");
+					    alert.setHeaderText("Empty Field");
+					    alert.setContentText("The Password filed is empty, try again");
+					    alert.showAndWait();
+				 }
+				 //wrong password
+				 else {
+						Alert alert = new Alert(Alert.AlertType.INFORMATION);
+					    alert.setTitle("Message");
+					    alert.setHeaderText("Input does not match our records");
+					    alert.setContentText("User name or password does not match our records");
+					    alert.showAndWait();
+					    
 				}
 				
 			 }
@@ -91,6 +97,7 @@ public class Controller {
 			}
 			 //Wrong user name
 			 else {
+				 //Empty password field
 				 if (pass.equals("")) {
 						Alert alert = new Alert(Alert.AlertType.INFORMATION);
 					    alert.setTitle("Message");
@@ -98,6 +105,7 @@ public class Controller {
 					    alert.setContentText("The Password filed is empty, try again");
 					    alert.showAndWait();
 				 }
+				 //wrong password
 				 else {
 					Alert alert = new Alert(Alert.AlertType.INFORMATION);
 				    alert.setTitle("Message");
@@ -112,6 +120,7 @@ public class Controller {
 		 }
 		);
 		lnk1.setOnAction(e->{
+			//Go to register Scene
 	        FXMLLoader loader2 = new FXMLLoader(getClass().getResource("..\\Screens\\RegisterScene.fxml"));
 	        Parent root2;
 			try {
@@ -125,6 +134,7 @@ public class Controller {
 
 		});
 		lnk2.setOnAction(e->{
+			//Go to Forgot my password Screen
 	        FXMLLoader loader2 = new FXMLLoader(getClass().getResource("..\\Screens\\ForgotPassword.fxml"));
 	        Parent root2;
 			try {
@@ -138,5 +148,7 @@ public class Controller {
 
 		});
 		txtfl.requestFocus();
+		passfl.requestFocus();
+		bt1.requestFocus();
 	}
 }

@@ -1,41 +1,57 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="900.0" style="-fx-background-color: #7caf4b;" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="login.Controllers.ParkingLotsController">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="900.0" style="-fx-background-color: #7caf4b;" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <AnchorPane layoutX="96.0" layoutY="62.0" prefHeight="566.0" prefWidth="708.0" style="-fx-background-color: #1b4a7c;">
-         <children>
-            <Label fx:id="IceLot" alignment="CENTER" layoutX="126.0" layoutY="89.0" prefHeight="78.0" prefWidth="457.0" style="-fx-background-color: #c1b313;" text="First Lot" textAlignment="CENTER">
-               <font>
-                  <Font name="Bradley Hand ITC" size="36.0" />
-               </font>
-            </Label>
-            <Label fx:id="stemLot" alignment="CENTER" layoutX="126.0" layoutY="193.0" prefHeight="78.0" prefWidth="457.0" style="-fx-background-color: #c1b313;" text="Something Else" textAlignment="CENTER">
-               <font>
-                  <Font name="Bradley Hand ITC" size="36.0" />
-               </font>
-            </Label>
-            <Label fx:id="vagoSTLot" alignment="CENTER" layoutX="126.0" layoutY="294.0" prefHeight="78.0" prefWidth="457.0" style="-fx-background-color: #c1b313;" text="I dont know what else to write" textAlignment="CENTER">
-               <font>
-                  <Font name="Bradley Hand ITC" size="36.0" />
-               </font>
-            </Label>
-            <Label fx:id="vagoNTLot" alignment="CENTER" layoutX="126.0" layoutY="395.0" prefHeight="78.0" prefWidth="457.0" style="-fx-background-color: #c1b313;" text="Please help me" textAlignment="CENTER">
-               <font>
-                  <Font name="Bradley Hand ITC" size="36.0" />
-               </font>
-            </Label>
-         </children>
-      </AnchorPane>
-      <Button fx:id="backBtn" alignment="CENTER" contentDisplay="CENTER" layoutY="34.0" mnemonicParsing="false" prefHeight="54.0" prefWidth="84.0" style="-fx-background-color: #7caf4b;" text="&lt;">
+      <MenuBar layoutY="2.0" prefHeight="25.0" prefWidth="132.0">
+        <menus>
+          <Menu mnemonicParsing="false" text="File">
+            <items>
+              <MenuItem mnemonicParsing="false" text="Close" />
+            </items>
+          </Menu>
+          <Menu mnemonicParsing="false" text="Edit">
+            <items>
+              <MenuItem mnemonicParsing="false" text="Delete" />
+            </items>
+          </Menu>
+          <Menu mnemonicParsing="false" text="Help">
+            <items>
+              <MenuItem mnemonicParsing="false" text="About" />
+            </items>
+          </Menu>
+        </menus>
+      </MenuBar>
+      <Button fx:id="backBtn" layoutX="762.0" layoutY="2.0" mnemonicParsing="false" prefHeight="95.0" prefWidth="124.0" style="-fx-background-color: #7c4f4b; -fx-background-radius: 200px;" text="Sign Out">
          <font>
-            <Font name="Forte" size="31.0" />
+            <Font name="Forte" size="24.0" />
          </font>
       </Button>
+      <AnchorPane layoutX="16.0" layoutY="102.0" prefHeight="585.0" prefWidth="874.0" style="-fx-background-color: #d86d38;">
+         <children>
+            <ComboBox layoutX="322.0" layoutY="27.0" prefHeight="37.0" prefWidth="198.0" />
+            <ComboBox layoutX="37.0" layoutY="84.0" prefWidth="150.0" />
+            <Label layoutX="37.0" layoutY="125.0" text="Label" />
+            <Label layoutX="37.0" layoutY="149.0" text="Label" />
+            <Label layoutX="37.0" layoutY="175.0" text="Label" />
+            <ImageView fitHeight="338.0" fitWidth="316.0" layoutX="37.0" layoutY="230.0" pickOnBounds="true" preserveRatio="true" />
+            <ImageView fitHeight="257.0" fitWidth="287.0" layoutX="499.0" layoutY="271.0" pickOnBounds="true" preserveRatio="true" />
+         </children>
+      </AnchorPane>
+      <Label layoutX="273.0" layoutY="35.0" text="Choose Your Parking Lot" textFill="#753535">
+         <font>
+            <Font name="Berlin Sans FB" size="33.0" />
+         </font>
+      </Label>
    </children>
 </Pane>

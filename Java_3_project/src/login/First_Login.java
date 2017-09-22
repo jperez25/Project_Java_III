@@ -13,13 +13,13 @@ public class First_Login extends Application {
 
         // just load fxml file and display it in the stage:
 
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("Screens\\First_Login.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("Screens\\WelcomeScreen.fxml"));
         //FXMLLoader loader2 = new FXMLLoader(getClass().getResource("RegisterScene.fxml"));
         Parent root = loader.load();
         //Parent root2 = loader2.load();
         Scene scene = new Scene(root);
         primaryStage.setScene(scene);
-        primaryStage.setTitle("AU parking");
+        primaryStage.setTitle("Dude, Where's my spot?");
         primaryStage.show();
     }
 

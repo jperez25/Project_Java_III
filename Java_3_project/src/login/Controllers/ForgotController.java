@@ -11,6 +11,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import login.AUBody;
 
@@ -27,6 +28,14 @@ public class ForgotController {
 	private Label userStar;
 	@FXML
 	private Label emailStar;
+	@FXML
+	private AnchorPane codePane;
+	@FXML
+	private AnchorPane ogPane;
+	@FXML
+	private TextField resTxtFl;
+	@FXML
+	private Button verifyBtn;
 	
 	
 	
@@ -62,18 +71,17 @@ public class ForgotController {
 			 String username = userfl.getText();
 			 String email = emailfl.getText();
 			if (username.equals(body.getAuUsername())) {
+				
 				//send email with validation code
 				if (email.equals(body.getEmail())) {
-					FXMLLoader loader = new FXMLLoader(getClass().getResource("..\\Screens\\PasswordRestoration.fxml"));
-					Parent root;
-					try {
-						root = loader.load();
-					    Scene scene = new Scene(root);
-						Stage stage = (Stage) backBtn.getScene().getWindow(); 
-						stage.setScene(scene);
-					} catch (IOException e1) {
-						e1.printStackTrace();
-					}
+					
+					ogPane.setVisible(false);
+					codePane.setLayoutY(ogPane.getLayoutY());
+					codePane.setLayoutX(ogPane.getLayoutX());
+					codePane.setVisible(true);
+					
+
+					
 				}
 				
 				else if (email.equals("")) {
@@ -99,6 +107,11 @@ public class ForgotController {
 			    alert.setContentText("User name not found on database");
 			    alert.showAndWait();
 			}
+		});
+		//Check code and compare with the code send to user
+		verifyBtn.setOnAction(e->{
+			 String rescode = resTxtFl.getText();
+			 
 		});
 	}
 

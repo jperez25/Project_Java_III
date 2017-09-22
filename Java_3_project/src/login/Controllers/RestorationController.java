@@ -17,7 +17,7 @@ public class RestorationController {
 	
 	public void initialize() throws Exception {
 			
-		backBtn.setOnAction(e->{
+		/*backBtn.setOnAction(e->{
 	        FXMLLoader loader2 = new FXMLLoader(getClass().getResource("..\\Screens\\First_Login.fxml"));
 	        Parent root2;
 			try {
@@ -28,6 +28,6 @@ public class RestorationController {
 			} catch (IOException e1) {
 				e1.printStackTrace();
 			}
-		});
+		});*/
 	}
 }

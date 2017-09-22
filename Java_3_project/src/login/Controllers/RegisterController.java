@@ -3,7 +3,6 @@ package login.Controllers;
 import java.io.IOException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.util.HashMap;
 import java.util.Date;
 
 import javafx.fxml.FXML;
@@ -12,13 +11,10 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
-import javafx.scene.control.DatePicker;
-import javafx.scene.control.Hyperlink;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
-import javafx.util.converter.LocalDateStringConverter;
 import login.AUBody;
 
 public class RegisterController {
@@ -59,9 +55,10 @@ public class RegisterController {
 		
 		//Our object
 		AUBody body = new AUBody();
+		System.out.println(body);
 		regBtn.setOnAction(e->{
 			
-			
+			//Set starts to false every time user click button
 			fnameStar.setVisible(false);
 			lnameStar.setVisible(false);
 			auUserStar.setVisible(false);
@@ -99,6 +96,7 @@ public class RegisterController {
 				}
 			    
 			}
+			//If everything is right set object data fields
 			else {
 				if (pass.getText().equals(pass1.getText())) {
 					body.setFname(fname.getText());
@@ -120,6 +118,7 @@ public class RegisterController {
 						e1.printStackTrace();
 					}
 				}
+				//If the passwords dont match
 				else {
 					Alert alert = new Alert(Alert.AlertType.INFORMATION);
 				    alert.setTitle("Message");
@@ -131,6 +130,7 @@ public class RegisterController {
 				}
 			}
 		});
+		//Go back to the main screen
 		backBtn.setOnAction(e->{
 	        FXMLLoader loader = new FXMLLoader(getClass().getResource("..\\Screens\\First_login.fxml"));
 	        Parent root;
