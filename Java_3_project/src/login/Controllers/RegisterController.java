@@ -1,6 +1,10 @@
 package login.Controllers;
 
 import java.io.IOException;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.Statement;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -49,6 +53,12 @@ public class RegisterController {
 	private Label emailStar;
 	 
 	public void initialize() throws Exception {
+		
+		try{  
+			 Class.forName("com.mysql.jdbc.Driver");
+			 }catch(Exception e){ 
+				 System.out.println(e);}
+		
 		 //Getting Today's day
 		DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
 		Date dt = new Date();
@@ -98,25 +108,62 @@ public class RegisterController {
 			}
 			//If everything is right set object data fields
 			else {
+				//If passwords are equal
 				if (pass.getText().equals(pass1.getText())) {
-					body.setFname(fname.getText());
-					body.setLname(lname.getText());
-					body.setAuUsername(auUserName.getText());
-					body.setPassword(pass.getText());
-					body.setEmail(email.getText());
-					body.setRegistered_date(dateFormat.format(dt));
-					System.out.println("Successful");
 					
-					FXMLLoader loader2 = new FXMLLoader(getClass().getResource("..\\Screens\\First_Login.fxml"));
-			        Parent root2;
+					ResultSet rs;
+					//Connect to data base
 					try {
-						root2 = loader2.load();
-				        Scene scene = new Scene(root2);
-						Stage stage = (Stage) backBtn.getScene().getWindow(); 
-						stage.setScene(scene);
-					} catch (IOException e1) {
-						e1.printStackTrace();
-					}
+						//Connect
+						Connection con=DriverManager.getConnection(  "jdbc:mysql://localhost:3306/whereismyspot","root","Computer1");
+						//Statement
+						Statement stmt=con.createStatement();  
+						//Query
+						rs = stmt.executeQuery("select UserName from user where UserName='"+auUserName.getText()+"';");
+						boolean isEmpty = rs.next();
+						
+						
+						//If user name is not found in data base
+						if (!isEmpty) {
+							//Write data to DB
+							String val = "'"+fname.getText()+"','"+lname.getText()+"','"+auUserName.getText()+"','"+pass.getText()+"','"+email.getText()+"'";
+							int update = stmt.executeUpdate("insert into user (First_Name, Last_Name, UserName, Password, Email) values ("+val+");");
+							
+							//Switch screens
+							FXMLLoader loader2 = new FXMLLoader(getClass().getResource("..\\Screens\\First_Login.fxml"));
+					        Parent root2;
+							try {
+								root2 = loader2.load();
+						        Scene scene = new Scene(root2);
+								Stage stage = (Stage) backBtn.getScene().getWindow(); 
+								stage.setScene(scene);
+							} catch (IOException e1) {
+								e1.printStackTrace();
+							}
+							//Close connection
+							con.close();
+						}
+						//Else if block might not be needed it
+						else if (auUserName.getText().equals(rs.getString(1))) {
+							auUserStar.setVisible(true);
+							Alert alert = new Alert(Alert.AlertType.INFORMATION);
+						    alert.setTitle("Alert!");
+						    alert.setHeaderText("Username in use");
+						    alert.setContentText("The user name you entered is already in use, \n please choose another user name");
+						    alert.showAndWait();
+						}
+						
+						//User name was found and cannot continue
+						else {
+							auUserStar.setVisible(true);
+							Alert alert = new Alert(Alert.AlertType.INFORMATION);
+						    alert.setTitle("Alert!");
+						    alert.setHeaderText("Username in use");
+						    alert.setContentText("The user name you entered is already in use, \n please choose another user name");
+						    alert.showAndWait();
+						}
+						
+					}catch(Exception a) {a.printStackTrace();}
 				}
 				//If the passwords dont match
 				else {
@@ -144,4 +191,12 @@ public class RegisterController {
 			}
 		});
 	}
-}
+}/*
+body.setFname(fname.getText());
+body.setLname(lname.getText());
+body.setAuUsername(auUserName.getText());
+body.setPassword(pass.getText());
+body.setEmail(email.getText());
+body.setRegistered_date(dateFormat.format(dt));
+System.out.println("Successful");
+*/
