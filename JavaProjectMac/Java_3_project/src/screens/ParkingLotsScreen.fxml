@@ -1,12 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="900.0" style="-fx-background-color: #7caf4b;" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.ParkingLotsController">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="900.0" style="-fx-background-color: #7caf4b;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.ParkingLotsController">
    <children>
       <AnchorPane layoutX="96.0" layoutY="62.0" prefHeight="566.0" prefWidth="708.0" style="-fx-background-color: #1b4a7c;">
          <children>
@@ -30,6 +34,12 @@
                   <Font name="Bradley Hand ITC" size="36.0" />
                </font>
             </Label>
+            <Hyperlink fx:id="logoutBtn" alignment="CENTER" layoutX="592.0" layoutY="14.0" prefHeight="29.0" prefWidth="102.0" text="Logout" textAlignment="CENTER" textFill="#d5ff05">
+               <font>
+                  <Font name="Arial Bold" size="20.0" />
+               </font>
+            </Hyperlink>
+            <ComboBox fx:id="testDropdown" layoutX="158.0" layoutY="26.0" prefHeight="42.0" prefWidth="295.0" promptText="CHOOSE A PARKING LOT" />
          </children>
       </AnchorPane>
       <Button fx:id="backBtn" alignment="CENTER" contentDisplay="CENTER" layoutY="34.0" mnemonicParsing="false" prefHeight="54.0" prefWidth="84.0" style="-fx-background-color: #7caf4b;" text="&lt;">
