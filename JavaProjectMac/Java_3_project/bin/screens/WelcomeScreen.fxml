@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ProgressBar?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="900.0" style="-fx-background-color: #7caf4b;" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="login.Controllers.WelcomeController">
+   <children>
+      <AnchorPane layoutX="68.0" layoutY="43.0" prefHeight="618.0" prefWidth="783.0" style="-fx-background-color: #1b4a7c;">
+         <children>
+            <Label fx:id="welcomeLbl" alignment="CENTER" layoutX="264.0" layoutY="91.0" prefHeight="113.0" prefWidth="255.0" style="-fx-background-color: #315a9b; -fx-background-radius: 400px;" text="Welcome &#10;to our app" textAlignment="CENTER" textFill="#2f2cbf">
+               <font>
+                  <Font name="Comic Sans MS" size="36.0" />
+               </font>
+            </Label>
+            <ImageView fitHeight="163.0" fitWidth="288.0" layoutX="248.0" layoutY="237.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="file:/C:/Users/jsnak/Desktop/Java_III/Java_3_project/src/images/au_img.png" />
+               </image>
+            </ImageView>
+            <ProgressBar fx:id="progressBar" layoutX="245.0" layoutY="422.0" prefHeight="18.0" prefWidth="270.0" progress="0.0" />
+         </children>
+      </AnchorPane>
+   </children>
+</Pane>

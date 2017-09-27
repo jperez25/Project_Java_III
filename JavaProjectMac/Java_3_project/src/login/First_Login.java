@@ -19,7 +19,7 @@ public class First_Login extends Application {
         //Parent root2 = loader2.load();
         Scene scene = new Scene(root);
         primaryStage.setScene(scene);
-        primaryStage.setTitle("AU parking");
+        primaryStage.setTitle("Dude, Where's my spot?");
         primaryStage.show();
     }
 
