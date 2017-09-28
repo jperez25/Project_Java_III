@@ -89,7 +89,7 @@ public class Controller {
 					 //User is found
 					 else {
 						//If password does not match registers
-						 ResultSet passW = stmt.executeQuery("select Password from user where Password='"+pass+"';");
+						 ResultSet passW = stmt.executeQuery("select Password from user where Password='"+pass+"' and UserName='"+username+"';");
 						 boolean isEmptyPass = passW.next();
 						 if (!isEmptyPass) {
 							 Alert alert = new Alert(Alert.AlertType.INFORMATION);
