@@ -6,10 +6,12 @@
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
+<?import javafx.scene.web.WebView?>
 
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="900.0" style="-fx-background-color: #7caf4b;" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
    <children>
@@ -39,13 +41,21 @@
       </Button>
       <AnchorPane layoutX="16.0" layoutY="102.0" prefHeight="585.0" prefWidth="874.0" style="-fx-background-color: #d86d38;">
          <children>
-            <ComboBox layoutX="322.0" layoutY="27.0" prefHeight="37.0" prefWidth="198.0" />
-            <ComboBox layoutX="37.0" layoutY="84.0" prefWidth="150.0" />
-            <Label layoutX="37.0" layoutY="125.0" text="Label" />
-            <Label layoutX="37.0" layoutY="149.0" text="Label" />
-            <Label layoutX="37.0" layoutY="175.0" text="Label" />
-            <ImageView fitHeight="338.0" fitWidth="316.0" layoutX="37.0" layoutY="230.0" pickOnBounds="true" preserveRatio="true" />
-            <ImageView fitHeight="257.0" fitWidth="287.0" layoutX="499.0" layoutY="271.0" pickOnBounds="true" preserveRatio="true" />
+            <ComboBox layoutX="338.0" layoutY="14.0" prefHeight="37.0" prefWidth="198.0" promptText="Choose Parking Lot" />
+            <ComboBox layoutX="37.0" layoutY="84.0" prefWidth="150.0" promptText="Day" />
+            <Label layoutX="37.0" layoutY="125.0" text="Spots" />
+            <Label layoutX="37.0" layoutY="149.0" text="Average" />
+            <Label layoutX="37.0" layoutY="175.0" text="Something" />
+            <ImageView fitHeight="327.0" fitWidth="360.0" layoutX="37.0" layoutY="241.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../images/ICE_Parking_Lot.png" />
+               </image></ImageView>
+            <ImageView fitHeight="267.0" fitWidth="399.0" layoutX="445.0" layoutY="261.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../images/ICE_Parking_Lot.png" />
+               </image></ImageView>
+            <ComboBox layoutX="195.0" layoutY="84.0" prefWidth="150.0" promptText="Hour" />
+            <WebView layoutX="405.0" layoutY="70.0" prefHeight="167.0" prefWidth="444.0" />
          </children>
       </AnchorPane>
       <Label layoutX="273.0" layoutY="35.0" text="Choose Your Parking Lot" textFill="#753535">
