@@ -2,66 +2,40 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ComboBox?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.Menu?>
-<?import javafx.scene.control.MenuBar?>
-<?import javafx.scene.control.MenuItem?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.control.Hyperlink?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
+<?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 <?import javafx.scene.web.WebView?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="900.0" style="-fx-background-color: #7caf4b;" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="832.0" style="-fx-background-color: #439f3e;" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="login.Controllers.ParkingLotsController">
    <children>
-      <MenuBar layoutY="2.0" prefHeight="25.0" prefWidth="132.0">
-        <menus>
-          <Menu mnemonicParsing="false" text="File">
-            <items>
-              <MenuItem mnemonicParsing="false" text="Close" />
-            </items>
-          </Menu>
-          <Menu mnemonicParsing="false" text="Edit">
-            <items>
-              <MenuItem mnemonicParsing="false" text="Delete" />
-            </items>
-          </Menu>
-          <Menu mnemonicParsing="false" text="Help">
-            <items>
-              <MenuItem mnemonicParsing="false" text="About" />
-            </items>
-          </Menu>
-        </menus>
-      </MenuBar>
-      <Button fx:id="backBtn" layoutX="762.0" layoutY="2.0" mnemonicParsing="false" prefHeight="95.0" prefWidth="124.0" style="-fx-background-color: #7c4f4b; -fx-background-radius: 200px;" text="Sign Out">
+      <Hyperlink fx:id="logoutBtn" alignment="CENTER" layoutX="690.0" layoutY="14.0" prefHeight="29.0" prefWidth="102.0" text="Logout" textAlignment="CENTER" textFill="WHITE">
          <font>
-            <Font name="Forte" size="24.0" />
+            <Font name="Book Antiqua" size="20.0" />
          </font>
-      </Button>
-      <AnchorPane layoutX="16.0" layoutY="102.0" prefHeight="585.0" prefWidth="874.0" style="-fx-background-color: #d86d38;">
+      </Hyperlink>
+      <AnchorPane layoutX="62.0" layoutY="57.0" prefHeight="566.0" prefWidth="708.0" style="-fx-background-color: #f2f2f2;">
          <children>
-            <ComboBox layoutX="338.0" layoutY="14.0" prefHeight="37.0" prefWidth="198.0" promptText="Choose Parking Lot" />
-            <ComboBox layoutX="37.0" layoutY="84.0" prefWidth="150.0" promptText="Day" />
-            <Label layoutX="37.0" layoutY="125.0" text="Spots" />
-            <Label layoutX="37.0" layoutY="149.0" text="Average" />
-            <Label layoutX="37.0" layoutY="175.0" text="Something" />
-            <ImageView fitHeight="327.0" fitWidth="360.0" layoutX="37.0" layoutY="241.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../../images/ICE_Parking_Lot.png" />
-               </image></ImageView>
-            <ImageView fitHeight="267.0" fitWidth="399.0" layoutX="445.0" layoutY="261.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../../images/ICE_Parking_Lot.png" />
-               </image></ImageView>
-            <ComboBox layoutX="195.0" layoutY="84.0" prefWidth="150.0" promptText="Hour" />
-            <WebView layoutX="405.0" layoutY="70.0" prefHeight="167.0" prefWidth="444.0" />
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#faffb7" height="316.0" layoutX="14.0" layoutY="119.0" stroke="#00467f" strokeType="OUTSIDE" strokeWidth="6.0" width="314.0" />
+            <ComboBox fx:id="selectLot" layoutX="43.0" layoutY="316.0" prefHeight="42.0" prefWidth="184.0" promptText="CHOOSE A PARKING LOT" />
+            <Text fill="#00467f" layoutX="15.0" layoutY="71.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Welcome to the AU Parking Guide!" textAlignment="CENTER" wrappingWidth="677.13671875">
+               <font>
+                  <Font name="Berlin Sans FB" size="44.0" />
+               </font>
+            </Text>
+            <ComboBox fx:id="selectDay" layoutX="43.0" layoutY="206.0" prefHeight="42.0" prefWidth="184.0" promptText="CHOOSE A DAY" />
+            <ComboBox fx:id="selectHour" layoutX="43.0" layoutY="262.0" prefHeight="42.0" prefWidth="184.0" promptText="CHOOSE A TIME" />
+            <Text layoutX="37.0" layoutY="164.0" lineSpacing="3.0" strokeType="OUTSIDE" strokeWidth="0.0" text="To get started, choose a day, time, and lot you would like to check:" wrappingWidth="267.13671875">
+               <font>
+                  <Font name="Arial Rounded MT Bold" size="15.0" />
+               </font>
+            </Text>
+            <Button fx:id="submitBtn" layoutX="171.0" layoutY="379.0" mnemonicParsing="false" text="Submit" />
+            <WebView fx:id="weather" layoutX="389.0" layoutY="113.0" prefHeight="168.0" prefWidth="305.0" />
          </children>
       </AnchorPane>
-      <Label layoutX="273.0" layoutY="35.0" text="Choose Your Parking Lot" textFill="#753535">
-         <font>
-            <Font name="Berlin Sans FB" size="33.0" />
-         </font>
-      </Label>
    </children>
 </Pane>

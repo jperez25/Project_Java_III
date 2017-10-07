@@ -60,7 +60,7 @@ public class RegisterController {
 				 System.out.println(e);}
 		
 		 //Getting Today's day
-		DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+		DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 		Date dt = new Date();
 		
 		//Our object
@@ -126,11 +126,11 @@ public class RegisterController {
 						//If user name is not found in data base
 						if (!isEmpty) {
 							//Write data to DB
-							String val = "'"+fname.getText()+"','"+lname.getText()+"','"+auUserName.getText()+"','"+pass.getText()+"','"+email.getText()+"'";
-							int update = stmt.executeUpdate("insert into user (First_Name, Last_Name, UserName, Password, Email) values ("+val+");");
+							String val = "'"+fname.getText()+"','"+lname.getText()+"','"+auUserName.getText()+"','"+pass.getText()+"','"+email.getText()+"'"+"','"+dateFormat.format(dt)+"'";
+							int update = stmt.executeUpdate("insert into user (First_Name, Last_Name, UserName, Password, Email,Registered_Date) values ("+val+");");
 							
 							//Switch screens
-							FXMLLoader loader2 = new FXMLLoader(getClass().getResource("..\\Screens\\First_Login.fxml"));
+							FXMLLoader loader2 = new FXMLLoader(getClass().getResource("../Screens/First_Login.fxml"));
 					        Parent root2;
 							try {
 								root2 = loader2.load();
@@ -179,7 +179,7 @@ public class RegisterController {
 		});
 		//Go back to the main screen
 		backBtn.setOnAction(e->{
-	        FXMLLoader loader = new FXMLLoader(getClass().getResource("..\\Screens\\First_login.fxml"));
+	        FXMLLoader loader = new FXMLLoader(getClass().getResource("../Screens/First_login.fxml"));
 	        Parent root;
 			try {
 				root = loader.load();

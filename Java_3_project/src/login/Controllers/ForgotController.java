@@ -23,6 +23,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyCode;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
@@ -57,9 +58,16 @@ public class ForgotController {
 		body.setAuUsername("jojo");
 		HashMap<String, AUBody> map = new HashMap<String, AUBody>();
 		 map.put("jojo", body);*/
+		
+		//listener
+		emailfl.setOnKeyPressed(e->{
+			if (e.getCode() == KeyCode.ENTER) {
+				sendBtn.fire();	
+			}
+		 });
 
 		backBtn.setOnAction(e->{
-	        FXMLLoader loader = new FXMLLoader(getClass().getResource("..\\Screens\\First_login.fxml"));
+	        FXMLLoader loader = new FXMLLoader(getClass().getResource("../Screens/First_login.fxml"));
 	        Parent root;
 			try {
 				root = loader.load();
@@ -136,6 +144,7 @@ public class ForgotController {
 								props.put("mail.smtp.port", "587");
 								
 								Session session = Session.getInstance(props, new javax.mail.Authenticator() {
+									@Override
 									protected PasswordAuthentication getPasswordAuthentication() {
 										return new PasswordAuthentication(user, pass);
 									}
@@ -167,8 +176,8 @@ public class ForgotController {
 									alert.setContentText("An email was sent to your account with your password.\n Try not to forget it this time.");
 									alert.showAndWait();
 									
-									//go to pick a lot
-									 FXMLLoader loader2 = new FXMLLoader(getClass().getResource("..\\Screens\\First_Login.fxml"));
+									//Take user to login screen
+									 FXMLLoader loader2 = new FXMLLoader(getClass().getResource("../Screens/First_Login.fxml"));
 								     Parent root2;
 								     try {
 											root2 = loader2.load();

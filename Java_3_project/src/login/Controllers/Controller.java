@@ -1,7 +1,6 @@
 package login.Controllers;
 
 import java.io.IOException;
-import java.util.HashMap;
 import java.sql.*;
 
 import javafx.fxml.FXML;
@@ -14,6 +13,7 @@ import javafx.scene.control.Hyperlink;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyCode;
 import javafx.stage.Stage;
 
 //imports...
@@ -40,6 +40,13 @@ public class Controller {
 		 //Locally working with data bases 
 		/*HashMap<String, String> map = new HashMap<String, String>();
 		 map.put("jojo","123456");*/
+		 
+		 //listener
+		 passfl.setOnKeyPressed(e->{
+			if (e.getCode() == KeyCode.ENTER) {
+				bt1.fire();	
+			}
+		 });
 		 
 		 
 	     // do initialization and configuration work...
@@ -107,16 +114,15 @@ public class Controller {
 								alert.showAndWait();
 								    
 								//go to pick a lot
-								 FXMLLoader loader2 = new FXMLLoader(getClass().getResource("..\\Screens\\ParkingLotsScreen.fxml"));
-							     Parent root2;
-							     try {
-										root2 = loader2.load();
-								        Scene scene = new Scene(root2);
-										Stage stage = (Stage) bt1.getScene().getWindow(); 
-										stage.setScene(scene);
-								} 
-							     catch (IOException e1) {
-										System.out.println(e);
+								FXMLLoader loader2 = new FXMLLoader(getClass().getResource("../screens/ParkingLotsScreen.fxml"));
+						        Parent root2;
+								try {
+									root2 = loader2.load();
+							        Scene scene = new Scene(root2);
+									Stage stage = (Stage) bt1.getScene().getWindow(); 
+									stage.setScene(scene);
+								} catch (IOException e1) {
+									e1.printStackTrace();
 								}
 						}
 					 }
@@ -127,7 +133,7 @@ public class Controller {
 		);
 		lnk1.setOnAction(e->{
 			//Go to register Scene
-	        FXMLLoader loader2 = new FXMLLoader(getClass().getResource("..\\Screens\\RegisterScene.fxml"));
+	        FXMLLoader loader2 = new FXMLLoader(getClass().getResource("../Screens/RegisterScene.fxml"));
 	        Parent root2;
 			try {
 				root2 = loader2.load();
@@ -141,7 +147,7 @@ public class Controller {
 		});
 		lnk2.setOnAction(e->{
 			//Go to Forgot my password Screen
-	        FXMLLoader loader2 = new FXMLLoader(getClass().getResource("..\\Screens\\ForgotPassword.fxml"));
+	        FXMLLoader loader2 = new FXMLLoader(getClass().getResource("../Screens/ForgotPassword.fxml"));
 	        Parent root2;
 			try {
 				root2 = loader2.load();

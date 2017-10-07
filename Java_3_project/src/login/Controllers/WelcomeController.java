@@ -12,7 +12,6 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.lang.Thread;
-import java.util.Observable;
 
 public class WelcomeController {
 	private Task copyWorker;
@@ -32,7 +31,7 @@ public class WelcomeController {
 		delay.setOnFinished( e -> {
 			try {
 				
-				FXMLLoader loader2 = new FXMLLoader(getClass().getResource("..\\Screens\\First_Login.fxml"));
+				FXMLLoader loader2 = new FXMLLoader(getClass().getResource("../Screens/First_Login.fxml"));
 		        Parent root2;
 				root2 = loader2.load();
 		        Scene scene = new Scene(root2);
