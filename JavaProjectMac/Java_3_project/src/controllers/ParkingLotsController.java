@@ -13,30 +13,35 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Hyperlink;
-import javafx.scene.control.Label;
 import javafx.stage.Stage;
 
 public class ParkingLotsController {
 	@FXML
 	private Button backBtn;
 	@FXML
-	private Label IceLot;
+	private ComboBox<String> selectDay;
 	@FXML
-	private Label stemLot;
-	@FXML
-	private Label vagoSTLot;
-	@FXML
-	private Label vagoNTLot;
+	private ComboBox<String> selectHour;
 	@FXML
 	private Hyperlink logoutBtn;
 	@FXML
-	private ComboBox<String> testDropdown;
+	private ComboBox<String> selectLot;
+	@FXML
+	private Button submitBtn;
 
 	public void initialize() throws Exception {
 		
-		String[] array = {"Vago North", "Vago South", "STEM", "Institute", "Southlawn", "Eckhart", "Dunham", "UBH"};
-		ObservableList<String> list = FXCollections.observableArrayList(array);
-		testDropdown.getItems().addAll(list);
+		String[] lots = {"All lots", "Vago North", "Vago South", "STEM", "Institute", "Southlawn", "Eckhart", "Dunham", "UBH", "Parolini"};
+		ObservableList<String> lotList = FXCollections.observableArrayList(lots);
+		selectLot.getItems().addAll(lotList);
+		
+		String[] days = {"Monday", "Tuesday", "Wednesday", "Thursday", "Friday"};
+		ObservableList<String> dayList = FXCollections.observableArrayList(days);
+		selectDay.getItems().addAll(dayList);
+		
+		String[] hours = {"7:00", "8:00", "9:00", "10:00", "11:00", "12:00", "1:00", "2:00", "3:00", "4:00"};
+		ObservableList<String> hourList = FXCollections.observableArrayList(hours);
+		selectHour.getItems().addAll(hourList);
 		
 		backBtn.setOnAction(e->{
 	        FXMLLoader loader2 = new FXMLLoader(getClass().getResource("/screens/First_Login.fxml"));
@@ -50,7 +55,10 @@ public class ParkingLotsController {
 				e1.printStackTrace();
 			}
 		});
-		IceLot.setOnMouseClicked(e->{
+		submitBtn.setOnAction(e->{
+	       //get info from database and display on lots info screen
+		});
+		/* IceLot.setOnMouseClicked(e->{
 			Alert alert = new Alert(Alert.AlertType.INFORMATION);
 		    alert.setTitle("Message");
 		    alert.setHeaderText("Display info");
@@ -88,7 +96,7 @@ public class ParkingLotsController {
 		    alert.setHeaderText("Display info");
 		    alert.setContentText("We will show a lot of info about this parking lot\n just wait until our new vesion is released.");
 		    alert.showAndWait();
-		});
+		});  */
 		logoutBtn.setOnAction(e->{
 			Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
 			alert.setTitle("Message");
