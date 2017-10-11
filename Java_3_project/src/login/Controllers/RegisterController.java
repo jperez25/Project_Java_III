@@ -18,6 +18,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyCode;
 import javafx.stage.Stage;
 import login.AUBody;
 
@@ -56,16 +57,24 @@ public class RegisterController {
 		
 		try{  
 			 Class.forName("com.mysql.jdbc.Driver");
-			 }catch(Exception e){ 
+			 }
+		catch(Exception e){ 
 				 System.out.println(e);}
 		
-		 //Getting Today's day
+		//Getting Today's day
 		DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 		Date dt = new Date();
 		
 		//Our object
 		AUBody body = new AUBody();
 		System.out.println(body);
+		
+		email.setOnKeyPressed(e->{
+			if (e.getCode()== KeyCode.ENTER) {
+				regBtn.fire();
+			}
+		});
+		
 		regBtn.setOnAction(e->{
 			
 			//Set starts to false every time user click button
@@ -126,8 +135,9 @@ public class RegisterController {
 						//If user name is not found in data base
 						if (!isEmpty) {
 							//Write data to DB
-							String val = "'"+fname.getText()+"','"+lname.getText()+"','"+auUserName.getText()+"','"+pass.getText()+"','"+email.getText()+"'"+"','"+dateFormat.format(dt)+"'";
-							int update = stmt.executeUpdate("insert into user (First_Name, Last_Name, UserName, Password, Email,Registered_Date) values ("+val+");");
+							String val = "'"+fname.getText()+"','"+lname.getText()+"','"+auUserName.getText()+"','"+pass.getText()+"','"+email.getText()+"', '"+dateFormat.format(dt)+"'";
+							System.out.println(pass.getText());
+							int update = stmt.executeUpdate("insert into user (First_Name, Last_Name, UserName, Password, Email,Register_Date) values ("+val+");");
 							
 							//Switch screens
 							FXMLLoader loader2 = new FXMLLoader(getClass().getResource("../Screens/First_Login.fxml"));

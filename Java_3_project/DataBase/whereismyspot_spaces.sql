@@ -16,31 +16,37 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `user`
+-- Table structure for table `spaces`
 --
 
-DROP TABLE IF EXISTS `user`;
+DROP TABLE IF EXISTS `spaces`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `user` (
-  `First_Name` varchar(32) DEFAULT NULL,
-  `Last_Name` varchar(32) DEFAULT NULL,
-  `UserName` varchar(32) NOT NULL,
-  `Password` varchar(32) DEFAULT NULL,
-  `Email` varchar(32) DEFAULT NULL,
-  `Register_Date` date DEFAULT NULL,
-  PRIMARY KEY (`UserName`)
+CREATE TABLE `spaces` (
+  `lot_id` varchar(45) NOT NULL,
+  `day` varchar(9) NOT NULL,
+  `spots_at_7` int(11) NOT NULL,
+  `spots_at_8` int(11) NOT NULL,
+  `spots_at_9` int(11) NOT NULL,
+  `spots_at_10` int(11) NOT NULL,
+  `spots_at_11` int(11) NOT NULL,
+  `spots_at_12` int(11) NOT NULL,
+  `spots_at_1` int(11) NOT NULL,
+  `spots_at_2` int(11) NOT NULL,
+  `spots_at_3` int(11) NOT NULL,
+  `spots_at_4` int(11) NOT NULL,
+  PRIMARY KEY (`lot_id`,`day`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `user`
+-- Dumping data for table `spaces`
 --
 
-LOCK TABLES `user` WRITE;
-/*!40000 ALTER TABLE `user` DISABLE KEYS */;
-INSERT INTO `user` VALUES ('Jovanny','Perez','jojo','password','jperez16@aurora.edu','2017-09-07');
-/*!40000 ALTER TABLE `user` ENABLE KEYS */;
+LOCK TABLES `spaces` WRITE;
+/*!40000 ALTER TABLE `spaces` DISABLE KEYS */;
+INSERT INTO `spaces` VALUES ('Dunham','Monday',1,2,3,4,5,6,7,8,9,10),('Eckhart','Monday',1,2,3,4,5,6,7,8,9,10),('Institute','Monday',1,2,3,4,5,6,7,8,9,10),('Parolini','Monday',1,2,3,4,5,6,7,8,9,10),('Southlawn','Monday',1,2,3,4,5,6,7,8,9,10),('Stem','Monday',1,2,3,4,5,6,7,8,9,10),('UBH','Monday',1,2,3,4,5,6,7,8,9,10),('Vago North','Monday',1,2,3,4,5,6,7,8,9,10),('Vago South','Monday',1,2,3,4,5,6,7,8,9,10);
+/*!40000 ALTER TABLE `spaces` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 

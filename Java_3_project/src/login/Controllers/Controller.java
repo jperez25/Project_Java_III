@@ -1,6 +1,8 @@
 package login.Controllers;
 
 import java.io.IOException;
+import java.net.Socket;
+import java.net.SocketAddress;
 import java.sql.*;
 
 import javafx.fxml.FXML;
@@ -77,10 +79,10 @@ public class Controller {
 			 else {
 				 try{ 
 					 Class.forName("com.mysql.jdbc.Driver");  
-					 Connection con=DriverManager.getConnection(  "jdbc:mysql://localhost:3306/whereismyspot","root","Computer1");  
+					 Connection con=DriverManager.getConnection(  "jdbc:mysql://localhost:3306/whereismyspot","root","Computer1"); 
 					 Statement stmt=con.createStatement();
 					 //If user not found returns null
-					 ResultSet userName = stmt.executeQuery("select UserName from user where UserName='"+username+"';");
+					 ResultSet userName = stmt.executeQuery("select UserName from user where UserName= '"+username+"';");
 					 boolean isEmpty = userName.next();
 					 //System.out.println(userName.next());
 					 
@@ -161,6 +163,8 @@ public class Controller {
 		});
 		txtfl.requestFocus();
 		passfl.requestFocus();
+		lnk1.setFocusTraversable(false);
+		lnk2.setFocusTraversable(false);
 		bt1.requestFocus();
 	}
 }
