@@ -173,7 +173,15 @@ public class RegisterController {
 						    alert.showAndWait();
 						}
 						
-					}catch(Exception a) {a.printStackTrace();}
+					}catch(Exception a) {
+						a.printStackTrace();
+						//Let user know something happened
+						Alert alert = new Alert(Alert.AlertType.INFORMATION);
+						alert.setTitle("Connection Error");
+						alert.setHeaderText("Connection Error");
+						alert.setContentText("You are not connected to the internet");
+						alert.showAndWait();
+					}
 				}
 				//If the passwords dont match
 				else {

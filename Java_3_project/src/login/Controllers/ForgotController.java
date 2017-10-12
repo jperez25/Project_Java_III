@@ -79,6 +79,12 @@ public class ForgotController {
 			}
 		});
 		
+		emailfl.setOnKeyPressed(e->{
+			if (e.getCode() == KeyCode.ENTER) {
+				sendBtn.fire();	
+			}
+		 });
+		
 		//Check user and email
 		//send email with recovery code
 		sendBtn.setOnAction(e->{
@@ -153,10 +159,8 @@ public class ForgotController {
 								try {
 									ResultSet emailConfirm = stmt.executeQuery("select email from user where username='"+username+"';");
 									emailConfirm.next();
-									//System.out.println(emailConfirm.getString(1));
 									
 									
-									//System.out.println(emailPass.getString(1));
 									Message message = new MimeMessage(session);
 									message.setFrom(new InternetAddress("auparkinglot@gmail.com")); //Hard coded who's sending the email
 									message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(emailConfirm.getString(1))); //Hard coded who the email is being sent to
@@ -164,7 +168,6 @@ public class ForgotController {
 									message.setSubject("My first email"); //Subject of the email
 									ResultSet emailPass = stmt.executeQuery("select password from user where username='"+username+"';");
 									emailPass.next();
-									//ResultSet emailPass = stmt.executeQuery("select password from user where username='"+username+"';");
 									message.setContent("<h:body style=background-color:white;font-family:verdana; color:#002>" //Uses html for a basic setup for the email
 											+ "You're resetting your email!<br/>Your email is: "+ emailPass.getString(1) + "<br/>" //add email password from database in here
 											+ "</body>","text/html; charset=utf-8");
@@ -209,6 +212,8 @@ public class ForgotController {
 			codePane.setVisible(true);
 			 
 		});
+		userfl.setFocusTraversable(true);
+		emailfl.setFocusTraversable(true);
 	}
 
 }

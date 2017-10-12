@@ -4,6 +4,7 @@
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Hyperlink?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
@@ -19,7 +20,7 @@
             <Font name="Book Antiqua" size="20.0" />
          </font>
       </Hyperlink>
-      <AnchorPane layoutX="62.0" layoutY="57.0" prefHeight="566.0" prefWidth="708.0" style="-fx-background-color: #f2f2f2;">
+      <AnchorPane layoutX="62.0" layoutY="57.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="566.0" prefWidth="708.0" style="-fx-background-color: #f2f2f2;">
          <children>
             <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#faffb7" height="313.0" layoutX="11.0" layoutY="82.0" stroke="#00467f" strokeType="OUTSIDE" strokeWidth="6.0" width="300.0" />
             <ComboBox fx:id="selectLot" layoutX="43.0" layoutY="169.0" prefHeight="42.0" prefWidth="184.0" promptText="CHOOSE A PARKING LOT" />
@@ -49,6 +50,9 @@
                </font>
             </Label>
          </children>
+         <effect>
+            <DropShadow blurType="TWO_PASS_BOX" radius="27.79" width="92.16" />
+         </effect>
       </AnchorPane>
    </children>
 </Pane>

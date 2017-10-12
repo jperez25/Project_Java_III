@@ -71,6 +71,7 @@ public class ParkingLotsController {
 
 		// Making Sure comboBox are selected
 		selectLot.setOnAction(e -> {
+			//Add image
 			if (selectLot.getValue().equals("All lots")) {
 				selectDay.setDisable(true);
 			} else {
@@ -88,7 +89,10 @@ public class ParkingLotsController {
 		submitBtn.setOnAction(e -> {
 			// get info from database and display on lots info screen
 			if (selectHour.getValue() == null) {
-				System.out.println("Its null");
+				Alert alert = new Alert(Alert.AlertType.WARNING);
+				alert.setTitle("Message");
+				alert.setHeaderText("Please pick a lot,date and/or time");
+				alert.showAndWait();
 			} else {
 				String[] cutZeros = selectHour.getValue().split(":");
 				String hour = cutZeros[0];
