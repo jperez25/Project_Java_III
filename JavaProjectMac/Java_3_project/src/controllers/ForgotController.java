@@ -24,6 +24,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyCode;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import login.AuBody;
@@ -38,9 +39,9 @@ public class ForgotController {
 	@FXML
 	private TextField emailfl;
 	@FXML
-	private Label userStar;
+	private Label userStar1;
 	@FXML
-	private Label emailStar;
+	private Label emailStar1;
 	@FXML
 	private AnchorPane codePane;
 	@FXML
@@ -49,6 +50,8 @@ public class ForgotController {
 	private TextField resTxtFl;
 	@FXML
 	private Button verifyBtn;
+	@FXML
+	private Label notification;
 	
 	
 	public void initialize() throws Exception {
@@ -59,6 +62,12 @@ public class ForgotController {
 		body.setAuUsername("jojo");
 		HashMap<String, AUBody> map = new HashMap<String, AUBody>();
 		 map.put("jojo", body);*/
+		
+		emailfl.setOnKeyPressed(e->{
+			if (e.getCode() == KeyCode.ENTER) {
+				sendBtn.fire();	
+			}
+		 });
 
 		backBtn.setOnAction(e->{
 	        FXMLLoader loader = new FXMLLoader(getClass().getResource("/screens/First_login.fxml"));
@@ -77,8 +86,9 @@ public class ForgotController {
 		//send email with recovery code
 		sendBtn.setOnAction(e->{
 			//set stars to false
-			userStar.setVisible(false);
-			emailStar.setVisible(false);
+			
+			userStar1.setVisible(false);
+			emailStar1.setVisible(false);
 			
 			 String username = userfl.getText();
 			 String email = emailfl.getText();
@@ -92,10 +102,10 @@ public class ForgotController {
 					 alert.showAndWait();
 					    
 				if (username.equals("")) {
-					    	userStar.setVisible(true);
+					    	userStar1.setVisible(true);
 					}
 				if (email.equals("")) {
-					    	emailStar.setVisible(true);
+					    	emailStar1.setVisible(true);
 				}
 			}
 			else {
@@ -118,6 +128,9 @@ public class ForgotController {
 							alert1.showAndWait();
 						}
 						 else {
+							final String user = "auparkinglot@gmail.com";
+							final String pass = "ParkingLot"; 
+							
 							ResultSet eMail = stmt.executeQuery("select Email from user where Email='"+email+"';");
 							boolean isEmailEmpty = eMail.next();
 							if (!isEmailEmpty) {
@@ -127,9 +140,7 @@ public class ForgotController {
 								alert1.setContentText("The user name and email does not match our registers");
 								alert1.showAndWait();
 							}
-							else {
-								final String user = "auparkinglot@gmail.com";
-								final String pass = "ParkingLot";
+							else {	
 								
 								Properties props = new Properties();
 								props.put("mail.smtp.auth", "true");
@@ -144,6 +155,7 @@ public class ForgotController {
 								});
 								
 								try {
+									
 									ResultSet emailConfirm = stmt.executeQuery("select email from user where username='"+username+"';");
 									emailConfirm.next();
 									//System.out.println(emailConfirm.getString(1));
@@ -162,19 +174,22 @@ public class ForgotController {
 											+ "You're resetting your email!<br/>Your email is:"+ emailPass.getString(1) + "<br/>" //add email password from database in here
 											+ "</body>","text/html; charset=utf-8");
 									Transport.send(message); //Sends the message to the user
+									//notification.setVisible(true);
 									System.out.println("Was the email sent: Done"); //Notifies you if the email was sent properly
 									
-									/*FXMLLoader loader2 = new FXMLLoader(getClass().getResource("/screens/ParkingLotsScreen.fxml"));
-								     Parent root2;
-								     try {
-											root2 = loader2.load();
-									        Scene scene = new Scene(root2);
-											Stage stage = (Stage) bt1.getScene().getWindow(); 
-											stage.setScene(scene);
-									} 
-								     catch (IOException e1) {
-											System.out.println(e);
-									}*/
+									Alert alert1 = new Alert(Alert.AlertType.INFORMATION);
+									alert1.setTitle("Message");
+									alert1.setHeaderText("Email sent!");
+									alert1.setContentText("Your password was sent to your email. You will be redirected to the home page now.");
+									alert1.showAndWait();
+									
+									FXMLLoader loader2 = new FXMLLoader(getClass().getResource("/screens/First_login.fxml"));
+							        Parent root2;
+									root2 = loader2.load();
+							        Scene scene = new Scene(root2);
+									Stage stage = (Stage) sendBtn.getScene().getWindow(); 
+									stage.setScene(scene);
+									stage.show();
 								} catch (MessagingException x) {
 									throw new RuntimeException(x);
 								}
@@ -183,12 +198,17 @@ public class ForgotController {
 					 }
 					 catch(Exception a) {a.printStackTrace();}
 			}
+			
+			
 			 
 			
 		});
 		//Check code and compare with the code send to user
 		verifyBtn.setOnAction(e->{
-			 String rescode = resTxtFl.getText();
+			ogPane.setVisible(false);
+			codePane.setLayoutY(ogPane.getLayoutY());
+			codePane.setLayoutX(ogPane.getLayoutX());
+			codePane.setVisible(true);
 			 
 		});
 	}
