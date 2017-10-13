@@ -9,13 +9,13 @@ import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 
 import java.io.IOException;
 import java.lang.Thread;
-import java.util.Observable;
 
 public class WelcomeController {
-	private Task copyWorker;
+	private Task<?> copyWorker;
 	@FXML
 	private ProgressBar progressBar;
 	@FXML
@@ -28,9 +28,9 @@ public class WelcomeController {
 		progressBar.progressProperty().bind(copyWorker.progressProperty());
 		new Thread(copyWorker).start();
 		
-		PauseTransition delay = new PauseTransition();
+		PauseTransition delay = new PauseTransition(Duration.millis(3010));
 		delay.setOnFinished( e -> {
-			try {
+			 try {
 				
 				FXMLLoader loader2 = new FXMLLoader(getClass().getResource("/screens/First_Login.fxml"));
 		        Parent root2;
@@ -43,19 +43,21 @@ public class WelcomeController {
 				e1.printStackTrace();
 			}
 		} );
-		delay.play();
+			delay.play();
 	}
 	
-	public Task createWorker() {
-        return new Task() {
+	public Task<?> createWorker() {
+        return new Task<Object>() {
             @Override
             protected Object call() throws Exception {
                 for (int i = 0; i < 10; i++) {
-                    Thread.sleep(40);
+                	
+					Thread.sleep(300);
+					
                     //updateMessage("2000 milliseconds");
-                    updateProgress(i + 1, 10);
-
-                    System.out.println(progressBar.getProgress());
+                   updateProgress(i + 1, 10);
+                    
+                   System.out.println(progressBar.getProgress());
                 }
                 return true;
             }
