@@ -4,6 +4,7 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -12,7 +13,7 @@
 
 <Pane fx:id="back" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="900.0" style="-fx-background-color: #1e932d;" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="login.Controllers.RegisterController">
    <children>
-      <AnchorPane layoutX="275.0" layoutY="46.0" prefHeight="583.0" prefWidth="351.0" style="-fx-background-color: #1b4a7c;">
+      <AnchorPane layoutX="275.0" layoutY="46.0" prefHeight="583.0" prefWidth="351.0" style="-fx-background-color: #1b4a7c; -fx-background-radius: 20;">
          <children>
             <ImageView fitHeight="122.0" fitWidth="240.0" layoutX="56.0" layoutY="22.0" pickOnBounds="true" preserveRatio="true">
                <image>
@@ -57,7 +58,15 @@
                   <Font size="24.0" />
                </font>
             </Label>
+            <Label fx:id="errorLabel" alignment="CENTER" layoutX="73.0" layoutY="170.0" prefHeight="17.0" prefWidth="183.0" text="Please Fill Empty Fields" textAlignment="CENTER" textFill="RED">
+               <font>
+                  <Font name="Bookman Old Style" size="14.0" />
+               </font>
+            </Label>
          </children>
+         <effect>
+            <DropShadow height="136.4" radius="69.1825" width="142.33" />
+         </effect>
       </AnchorPane>
       <Button fx:id="backBtn" layoutX="30.0" layoutY="46.0" mnemonicParsing="false" prefHeight="65.0" prefWidth="108.0" style="-fx-background-color: #1e932d;" text="&lt;">
          <font>

@@ -14,7 +14,7 @@
 
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="900.0" style="-fx-background-color: #3cd8a4;" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="login.Controllers.WelcomeController">
    <children>
-      <AnchorPane layoutX="68.0" layoutY="43.0" prefHeight="618.0" prefWidth="783.0" style="-fx-background-color: #bc6018;">
+      <AnchorPane layoutX="68.0" layoutY="43.0" prefHeight="618.0" prefWidth="783.0" style="-fx-background-color: #bc6018; -fx-background-radius: 20px;">
          <children>
             <ImageView fitHeight="163.0" fitWidth="288.0" layoutX="248.0" layoutY="237.0" pickOnBounds="true" preserveRatio="true">
                <image>

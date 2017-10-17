@@ -26,6 +26,7 @@ import javafx.scene.control.ButtonType;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Hyperlink;
 import javafx.scene.control.Label;
+import javafx.scene.control.Labeled;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.web.WebEngine;
@@ -51,6 +52,8 @@ public class ParkingLotsController {
 	private ImageView lotImage;
 	@FXML
 	private Label spotsAv;
+	@FXML
+	private Labeled hoursAv;
 
 	public void initialize() throws Exception {
 		WebEngine webEngine = weather.getEngine();
@@ -71,7 +74,7 @@ public class ParkingLotsController {
 
 		// Making Sure comboBox are selected
 		selectLot.setOnAction(e -> {
-			//Add image
+			// Add image
 			if (selectLot.getValue().equals("All lots")) {
 				selectDay.setDisable(true);
 			} else {
@@ -101,10 +104,17 @@ public class ParkingLotsController {
 					Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/whereismyspot", "root",
 							"Computer1");
 					Statement stmt = con.createStatement();
-					//Add day to the query                  <----------------------------------------------------------------------------------------------------------
-					ResultSet spots = stmt.executeQuery("select spots_at_"+hour+" from spaces where lot_id = '"+selectLot.getValue()+"';");
+					
+					
+					ResultSet spots = stmt.executeQuery("select spots_at_" + hour + " from spaces where lot_id = '"
+							+ selectLot.getValue() + "' and day = '" + selectDay.getValue() + "';");
 					spots.next();
 					spotsAv.setText(spots.getString(1));
+					
+					
+					ResultSet hoursA = stmt.executeQuery("select hours_of_service from spaces where lot_id = '"+selectLot.getValue()+"';");
+					hoursA.next();
+					hoursAv.setText(hoursA.getString(1));
 				} catch (Exception e1) {
 					System.out.println(e1);
 				}

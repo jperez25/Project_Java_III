@@ -44,7 +44,17 @@
                   <Font name="Bodoni MT Bold" size="14.0" />
                </font>
             </Label>
-            <Label fx:id="spotsAv" layoutX="120.0" layoutY="431.0" prefHeight="25.0" prefWidth="102.0" textFill="#bf5f5f">
+            <Label fx:id="spotsAv" contentDisplay="CENTER" layoutX="120.0" layoutY="431.0" prefHeight="25.0" prefWidth="102.0" textFill="#bf5f5f">
+               <font>
+                  <Font name="Bodoni MT Bold" size="14.0" />
+               </font>
+            </Label>
+            <Label layoutX="19.0" layoutY="462.0" prefHeight="25.0" prefWidth="102.0" text="Hours of Service: " textFill="#bf5f5f">
+               <font>
+                  <Font name="Bodoni MT Bold" size="14.0" />
+               </font>
+            </Label>
+            <Label fx:id="hoursAv" contentDisplay="CENTER" layoutX="120.0" layoutY="462.0" prefHeight="25.0" prefWidth="102.0" textFill="#bf5f5f">
                <font>
                   <Font name="Bodoni MT Bold" size="14.0" />
                </font>

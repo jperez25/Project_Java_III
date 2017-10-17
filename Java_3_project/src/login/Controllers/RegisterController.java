@@ -1,10 +1,7 @@
 package login.Controllers;
 
 import java.io.IOException;
-import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.ResultSet;
-import java.sql.Statement;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -16,11 +13,12 @@ import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.Labeled;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
 import javafx.stage.Stage;
-import login.AUBody;
+import login.Connector;
 
 public class RegisterController {
 	// called by the FXML loader after the labels declared below are injected:
@@ -52,22 +50,14 @@ public class RegisterController {
 	private Label pass2Star;
 	@FXML
 	private Label emailStar;
-	 
+	@FXML
+	private Labeled errorLabel;
+	
 	public void initialize() throws Exception {
-		
-		try{  
-			 Class.forName("com.mysql.jdbc.Driver");
-			 }
-		catch(Exception e){ 
-				 System.out.println(e);}
 		
 		//Getting Today's day
 		DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 		Date dt = new Date();
-		
-		//Our object
-		AUBody body = new AUBody();
-		System.out.println(body);
 		
 		email.setOnKeyPressed(e->{
 			if (e.getCode()== KeyCode.ENTER) {
@@ -84,15 +74,14 @@ public class RegisterController {
 			passwordStar.setVisible(false);
 			pass2Star.setVisible(false);
 			emailStar.setVisible(false);
+			errorLabel.setVisible(false);
 			
 			//If any of the fields is empty rise alert 
-			if (fname.getText().equals("") || lname.getText().equals("") || auUserName.getText().equals("") || pass.getText().equals("") || email.getText().equals("") || pass1.getText().equals("")) {
+			if (fname.getText().equals("") || lname.getText().equals("") || auUserName.getText().equals("") ||
+					pass.getText().equals("") || email.getText().equals("") || pass1.getText().equals("")) {
+				
 				//Alert User of missing fields
-				Alert alert = new Alert(Alert.AlertType.INFORMATION);
-			    alert.setTitle("Message");
-			    alert.setHeaderText("Empty Fields");
-			    alert.setContentText("Some fileds might be empty, please fill the missing fields");
-			    alert.showAndWait();
+				errorLabel.setVisible(true);
 			    
 			    //Check every field individually
 			    if (fname.getText().equals("")) {
@@ -115,29 +104,23 @@ public class RegisterController {
 				}
 			    
 			}
-			//If everything is right set object data fields
+			//If all fields are filled
 			else {
 				//If passwords are equal
 				if (pass.getText().equals(pass1.getText())) {
-					
-					ResultSet rs;
-					//Connect to data base
 					try {
-						//Connect
-						Connection con=DriverManager.getConnection(  "jdbc:mysql://localhost:3306/whereismyspot","root","Computer1");
-						//Statement
-						Statement stmt=con.createStatement();  
+						//Connect to data base
+						Connector con = new Connector(); 
 						//Query
-						rs = stmt.executeQuery("select UserName from user where UserName='"+auUserName.getText()+"';");
-						boolean isEmpty = rs.next();
+						ResultSet user = con.execQuery("select UserName from user where UserName='"+auUserName.getText()+"';");
+						boolean isEmpty = user.next();
 						
 						
 						//If user name is not found in data base
 						if (!isEmpty) {
 							//Write data to DB
 							String val = "'"+fname.getText()+"','"+lname.getText()+"','"+auUserName.getText()+"','"+pass.getText()+"','"+email.getText()+"', '"+dateFormat.format(dt)+"'";
-							System.out.println(pass.getText());
-							int update = stmt.executeUpdate("insert into user (First_Name, Last_Name, UserName, Password, Email,Register_Date) values ("+val+");");
+							con.execUpdate("insert into user (First_Name, Last_Name, UserName, Password, Email,Register_Date) values ("+val+");");
 							
 							//Switch screens
 							FXMLLoader loader2 = new FXMLLoader(getClass().getResource("../Screens/First_Login.fxml"));
@@ -147,30 +130,23 @@ public class RegisterController {
 						        Scene scene = new Scene(root2);
 								Stage stage = (Stage) backBtn.getScene().getWindow(); 
 								stage.setScene(scene);
-							} catch (IOException e1) {
-								e1.printStackTrace();
+							} 
+							//Let user know screen was not found
+							catch (IOException e1) {
+								Alert alert = new Alert(Alert.AlertType.ERROR);
+								alert.setTitle("Screen Error");
+								alert.setHeaderText("Screen Not found");
+								alert.setContentText("The screen was not found");
+								alert.showAndWait();
 							}
 							//Close connection
 							con.close();
-						}
-						//Else if block might not be needed it
-						else if (auUserName.getText().equals(rs.getString(1))) {
-							auUserStar.setVisible(true);
-							Alert alert = new Alert(Alert.AlertType.INFORMATION);
-						    alert.setTitle("Alert!");
-						    alert.setHeaderText("Username in use");
-						    alert.setContentText("The user name you entered is already in use, \n please choose another user name");
-						    alert.showAndWait();
-						}
-						
+						}						
 						//User name was found and cannot continue
 						else {
 							auUserStar.setVisible(true);
-							Alert alert = new Alert(Alert.AlertType.INFORMATION);
-						    alert.setTitle("Alert!");
-						    alert.setHeaderText("Username in use");
-						    alert.setContentText("The user name you entered is already in use, \n please choose another user name");
-						    alert.showAndWait();
+							errorLabel.setText("UserName in use");
+							errorLabel.setVisible(true);
 						}
 						
 					}catch(Exception a) {
@@ -183,13 +159,10 @@ public class RegisterController {
 						alert.showAndWait();
 					}
 				}
-				//If the passwords dont match
+				//If the passwords don't match
 				else {
-					Alert alert = new Alert(Alert.AlertType.INFORMATION);
-				    alert.setTitle("Message");
-				    alert.setHeaderText("Passwords");
-				    alert.setContentText("Passwords entered do not match");
-				    alert.showAndWait();
+					errorLabel.setText("Passwords Do not Match");
+					errorLabel.setVisible(true);
 					passwordStar.setVisible(true);
 					pass2Star.setVisible(true);
 				}
@@ -205,16 +178,13 @@ public class RegisterController {
 				Stage stage = (Stage) backBtn.getScene().getWindow(); 
 				stage.setScene(scene);
 			} catch (IOException e1) {
-				e1.printStackTrace();
+				//Let user know screen was not found
+				Alert alert = new Alert(Alert.AlertType.ERROR);
+				alert.setTitle("Screen Error");
+				alert.setHeaderText("Screen Not found");
+				alert.setContentText("The screen was not found");
+				alert.showAndWait();
 			}
 		});
 	}
-}/*
-body.setFname(fname.getText());
-body.setLname(lname.getText());
-body.setAuUsername(auUserName.getText());
-body.setPassword(pass.getText());
-body.setEmail(email.getText());
-body.setRegistered_date(dateFormat.format(dt));
-System.out.println("Successful");
-*/
+}

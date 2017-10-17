@@ -15,6 +15,7 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
 import javafx.stage.Stage;
+import login.Connector;
 
 //imports...
 
@@ -34,14 +35,11 @@ public class Controller {
 	private Label userStar;
 	@FXML
 	private Label passStar;
+	@FXML
+	private Label errorLabel;
 
 	// called by the FXML loader after the labels declared above are injected:
 	public void initialize() throws Exception {
-		// Locally working with data bases
-		/*
-		 * HashMap<String, String> map = new HashMap<String, String>();
-		 * map.put("jojo","123456");
-		 */
 
 		// listener
 		passfl.setOnKeyPressed(e -> {
@@ -50,22 +48,19 @@ public class Controller {
 			}
 		});
 
-		// do initialization and configuration work...
 
 		// When send button is clicked it should grant access to the app
 		bt1.setOnAction(e -> {
 			userStar.setVisible(false);
 			passStar.setVisible(false);
+			errorLabel.setVisible(false);
 			String username = txtfl.getText();
 			String pass = passfl.getText();
 
 			// Check empty fields
 			if (username.equals("") || pass.equals("")) {
-				Alert alert = new Alert(Alert.AlertType.ERROR);
-				alert.setTitle("Message");
-				alert.setHeaderText("Empty Fields");
-				alert.setContentText("The username and password fields might be empty, try again");
-				alert.showAndWait();
+				errorLabel.setText("Empty Fields");
+				errorLabel.setVisible(true);
 
 				if (username.equals("")) {
 					userStar.setVisible(true);
@@ -77,45 +72,27 @@ public class Controller {
 
 			else {
 				try {
-					Class.forName("com.mysql.jdbc.Driver");
-					Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/whereismyspot", "root",
-							"Computer1");
-					Statement stmt = con.createStatement();
-					// If user not found returns null
-					ResultSet userName = stmt
-							.executeQuery("select UserName from user where UserName= '" + username + "';");
+					Connector con = new Connector();
+					ResultSet userName = con.execQuery("select UserName from user where UserName= '" + username + "';");
 					boolean isEmpty = userName.next();
-					// System.out.println(userName.next());
 
 					// If user is not found
 					if (!isEmpty) {
-						Alert alert = new Alert(Alert.AlertType.ERROR);
-						alert.setTitle("Message");
-						alert.setHeaderText("User not found");
-						alert.setContentText("The user name not found");
-						alert.showAndWait();
+						errorLabel.setText("Wrong Username or password");
+						errorLabel.setVisible(true);
 
 					}
 					// User is found
 					else {
 						// If password does not match registers
-						ResultSet passW = stmt.executeQuery("select Password from user where Password='" + pass
+						ResultSet passW = con.execQuery("select Password from user where Password='" + pass
 								+ "' and UserName='" + username + "';");
 						boolean isEmptyPass = passW.next();
 						if (!isEmptyPass) {
-							Alert alert = new Alert(Alert.AlertType.ERROR);
-							alert.setTitle("Message");
-							alert.setHeaderText("Wrong input");
-							alert.setContentText("User name and password do not match");
-							alert.showAndWait();
-						} else {
-							// switch scenes
-							Alert alert = new Alert(Alert.AlertType.INFORMATION);
-							alert.setTitle("Message");
-							alert.setHeaderText("Sucessful Login");
-							alert.setContentText("User has log in successfully");
-							alert.showAndWait();
-
+							errorLabel.setText("Wrong Username or password");
+							errorLabel.setVisible(true);
+						} 
+						else {
 							// go to pick a lot
 							FXMLLoader loader2 = new FXMLLoader(
 									getClass().getResource("../screens/ParkingLotsScreen.fxml"));
@@ -126,13 +103,18 @@ public class Controller {
 								Stage stage = (Stage) bt1.getScene().getWindow();
 								stage.setScene(scene);
 							} catch (IOException e1) {
-								e1.printStackTrace();
+								Alert alert = new Alert(Alert.AlertType.ERROR);
+								alert.setTitle("Screen Error");
+								alert.setHeaderText("Screen Not found");
+								alert.setContentText("The screen was not found");
+								alert.showAndWait();
 							}
 						}
 					}
-				} catch (Exception ex) {
+				}
+				 catch (Exception ex) {
 					System.out.println(ex);
-					Alert alert = new Alert(Alert.AlertType.INFORMATION);
+					Alert alert = new Alert(Alert.AlertType.ERROR);
 					alert.setTitle("Connection Error");
 					alert.setHeaderText("Connection Error");
 					alert.setContentText("You are not connected to the internet");
@@ -151,7 +133,11 @@ public class Controller {
 				Stage stage = (Stage) bt1.getScene().getWindow();
 				stage.setScene(scene);
 			} catch (IOException e1) {
-				e1.printStackTrace();
+				Alert alert = new Alert(Alert.AlertType.ERROR);
+				alert.setTitle("Screen Error");
+				alert.setHeaderText("Screen Not found");
+				alert.setContentText("The screen was not found");
+				alert.showAndWait();
 			}
 
 		});
@@ -165,14 +151,15 @@ public class Controller {
 				Stage stage = (Stage) bt1.getScene().getWindow();
 				stage.setScene(scene);
 			} catch (IOException e1) {
-				e1.printStackTrace();
+				Alert alert = new Alert(Alert.AlertType.ERROR);
+				alert.setTitle("Screen Error");
+				alert.setHeaderText("Screen Not found");
+				alert.setContentText("The screen was not found");
+				alert.showAndWait();
 			}
 
 		});
-		txtfl.requestFocus();
-		passfl.requestFocus();
 		lnk1.setFocusTraversable(false);
 		lnk2.setFocusTraversable(false);
-		bt1.requestFocus();
 	}
 }
