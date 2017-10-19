@@ -6,6 +6,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
 import javafx.stage.Stage;
@@ -40,7 +41,12 @@ public class WelcomeController {
 				Thread.sleep(1500);
 				stage.setScene(scene);
 			} catch (IOException | InterruptedException e1) {
-				e1.printStackTrace();
+				
+				Alert alert = new Alert(Alert.AlertType.ERROR);
+				alert.setTitle("Screen Error");
+				alert.setHeaderText("Screen Not found");
+				alert.setContentText("The screen was not found");
+				alert.showAndWait();
 			}
 		} );
 		delay.play();

@@ -1,10 +1,7 @@
 package login.Controllers;
 
 import java.io.IOException;
-import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.ResultSet;
-import java.sql.Statement;
 import java.util.Properties;
 
 import javax.mail.Message;
@@ -49,6 +46,8 @@ public class ForgotController {
 	private TextField resTxtFl;
 	@FXML
 	private Button verifyBtn;
+	@FXML
+	private Label errorLabel;
 
 	public void initialize() throws Exception {
 		// listener
@@ -81,16 +80,14 @@ public class ForgotController {
 			// set stars to false
 			userStar.setVisible(false);
 			emailStar.setVisible(false);
+			errorLabel.setVisible(false);
 
 			String username = userfl.getText();
 			String email = emailfl.getText();
 
 			if (username.equals("") || email.equals("")) {
-				Alert alert = new Alert(Alert.AlertType.INFORMATION);
-				alert.setTitle("Alert!");
-				alert.setHeaderText("Empty Fields");
-				alert.setContentText("Fields might be empty");
-				alert.showAndWait();
+				errorLabel.setText("Please fill empty Fields");
+				errorLabel.setVisible(true);
 
 				if (username.equals("")) {
 					userStar.setVisible(true);
@@ -107,11 +104,8 @@ public class ForgotController {
 					boolean isEmpty = userName.next();
 
 					if (!isEmpty) {
-						Alert alert1 = new Alert(Alert.AlertType.INFORMATION);
-						alert1.setTitle("Message");
-						alert1.setHeaderText("User not found");
-						alert1.setContentText("The user name you have entered was not found in our data base");
-						alert1.showAndWait();
+						errorLabel.setText("User Not Found");
+						errorLabel.setVisible(true);
 					} else {
 						final String user = "auparkinglot@gmail.com";
 						final String pass = "ParkingLot";
@@ -119,11 +113,8 @@ public class ForgotController {
 						ResultSet eMail = con.execQuery("select Email from user where Email='" + email + "';");
 						boolean isEmailEmpty = eMail.next();
 						if (!isEmailEmpty) {
-							Alert alert1 = new Alert(Alert.AlertType.INFORMATION);
-							alert1.setTitle("Message");
-							alert1.setHeaderText("Email address not found");
-							alert1.setContentText("The user name and email does not match our registers");
-							alert1.showAndWait();
+							errorLabel.setText("Email not found");
+							errorLabel.setVisible(true);
 						} else {
 							Properties props = new Properties();
 							props.put("mail.smtp.auth", "true");
@@ -196,7 +187,7 @@ public class ForgotController {
 								Alert alert1 = new Alert(Alert.AlertType.ERROR);
 								alert1.setTitle("Email Error");
 								alert1.setHeaderText("Email Not Sent");
-								alert1.setContentText("Something went wrong while sending you email");
+								alert1.setContentText("Something went wrong while sending your email");
 								alert1.showAndWait();
 							}
 

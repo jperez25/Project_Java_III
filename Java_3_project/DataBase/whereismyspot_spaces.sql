@@ -25,6 +25,7 @@ DROP TABLE IF EXISTS `spaces`;
 CREATE TABLE `spaces` (
   `lot_id` varchar(45) NOT NULL,
   `day` varchar(9) NOT NULL,
+  `hours_of_service` char(20) DEFAULT NULL,
   `spots_at_7` int(11) NOT NULL,
   `spots_at_8` int(11) NOT NULL,
   `spots_at_9` int(11) NOT NULL,
@@ -45,7 +46,7 @@ CREATE TABLE `spaces` (
 
 LOCK TABLES `spaces` WRITE;
 /*!40000 ALTER TABLE `spaces` DISABLE KEYS */;
-INSERT INTO `spaces` VALUES ('Dunham','Monday',1,2,3,4,5,6,7,8,9,10),('Eckhart','Monday',1,2,3,4,5,6,7,8,9,10),('Institute','Monday',1,2,3,4,5,6,7,8,9,10),('Parolini','Monday',1,2,3,4,5,6,7,8,9,10),('Southlawn','Monday',1,2,3,4,5,6,7,8,9,10),('Stem','Monday',1,2,3,4,5,6,7,8,9,10),('UBH','Monday',1,2,3,4,5,6,7,8,9,10),('Vago North','Monday',1,2,3,4,5,6,7,8,9,10),('Vago South','Monday',1,2,3,4,5,6,7,8,9,10);
+INSERT INTO `spaces` VALUES ('Dunham','Friday','7-11',23,3,4,4,4,4,4,4,4,4),('Dunham','Monday','',11,2,3,4,5,6,7,8,9,10),('Dunham','Thursday','',4,3,4,4,4,4,4,4,4,4),('Dunham','Tuesday','',7,3,4,4,4,4,4,4,4,4),('Dunham','Wednesday','',10,3,4,4,4,4,4,4,4,4),('Eckhart','Frriday','7-11',20,2,3,4,5,6,7,8,9,10),('Eckhart','Monday',NULL,10,2,3,4,5,6,7,8,9,10),('Eckhart','Thursday',NULL,9,2,3,4,3,6,7,8,9,10),('Eckhart','Tuesday',NULL,1,2,3,4,6,6,7,8,9,10),('Eckhart','Wednesday',NULL,1,2,3,4,2,6,7,8,9,10),('Institute','Friday','7-11',1,2,3,4,7,6,7,8,9,10),('Institute','Monday',NULL,1,2,3,4,2,6,7,8,9,10),('Institute','Thursday',NULL,1,2,3,4,7,6,7,8,9,10),('Institute','Tuesday',NULL,1,2,3,4,8,6,7,8,9,10),('Institute','Wednesday',NULL,1,2,3,4,5,6,7,8,9,10),('Parolini','Friday','7-11',1,2,3,4,5,6,7,8,9,10),('Parolini','Monday',NULL,1,2,3,4,5,6,7,8,9,10),('Parolini','Thursday',NULL,1,2,3,4,5,6,7,8,9,10),('Parolini','Tuesday',NULL,1,2,3,4,5,6,7,8,9,10),('Parolini','Wednesday',NULL,1,2,3,4,5,6,7,8,9,10),('Southlawn','Friday','7-11',1,2,6,4,93,6,7,8,9,10),('Southlawn','Monday',NULL,1,2,4,4,93,6,7,8,9,10),('Southlawn','Thursday',NULL,1,2,3,4,93,6,7,8,9,10),('Southlawn','Tuesday',NULL,1,2,3,4,93,6,7,8,9,10),('Southlawn','Wednesday',NULL,1,2,3,4,93,6,7,8,9,10),('Stem','Friday','7-11',1,2,9,4,8,6,7,8,9,10),('Stem','Monday',NULL,1,2,4,4,8,6,7,8,9,10),('Stem','Thursday',NULL,1,2,3,4,8,6,7,8,9,10),('Stem','Tuesday',NULL,1,2,2,4,8,6,7,8,9,10),('Stem','Wednesday',NULL,1,2,8,4,8,6,7,8,9,10),('UBH','Friday','7-11',1,2,8,4,2,6,7,8,9,10),('UBH','Monday',NULL,1,2,2,4,2,6,7,8,9,10),('UBH','Thursday',NULL,1,2,9,4,2,6,7,8,9,10),('UBH','Tuesday',NULL,1,2,2,4,2,6,7,8,9,10),('UBH','Wednesday',NULL,1,2,1,4,2,6,7,8,9,10),('Vago North','Friday','7-11',1,2,8,4,8,6,7,8,9,10),('Vago North','Monday',NULL,1,2,3,4,8,6,7,8,9,10),('Vago North','Thursday',NULL,1,2,2,4,8,6,7,8,9,10),('Vago North','Tuesday',NULL,1,2,8,4,8,6,7,8,9,10),('Vago North','Wednesday',NULL,1,2,2,4,8,6,7,8,9,10),('Vago South','Friday','7-11',1,2,5,4,2,6,7,8,9,10),('Vago South','Monday',NULL,1,2,7,4,2,6,7,8,9,10),('Vago South','Thursday',NULL,1,2,4,4,2,6,7,8,9,10),('Vago South','Tuesday',NULL,1,2,2,4,2,6,7,8,9,10),('Vago South','Wednesday',NULL,1,2,6,4,2,6,7,8,9,10);
 /*!40000 ALTER TABLE `spaces` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -58,4 +59,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-10-10 21:41:38
+-- Dump completed on 2017-10-17 12:38:13

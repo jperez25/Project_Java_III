@@ -32,6 +32,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.web.WebEngine;
 import javafx.scene.web.WebView;
 import javafx.stage.Stage;
+import login.Connector;
 
 public class ParkingLotsController {
 	@FXML
@@ -100,23 +101,24 @@ public class ParkingLotsController {
 				String[] cutZeros = selectHour.getValue().split(":");
 				String hour = cutZeros[0];
 				try {
-					Class.forName("com.mysql.jdbc.Driver");
-					Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/whereismyspot", "root",
-							"Computer1");
-					Statement stmt = con.createStatement();
+					Connector con = new Connector();
 					
 					
-					ResultSet spots = stmt.executeQuery("select spots_at_" + hour + " from spaces where lot_id = '"
+					ResultSet spots = con.execQuery("select spots_at_" + hour + " from spaces where lot_id = '"
 							+ selectLot.getValue() + "' and day = '" + selectDay.getValue() + "';");
 					spots.next();
 					spotsAv.setText(spots.getString(1));
 					
 					
-					ResultSet hoursA = stmt.executeQuery("select hours_of_service from spaces where lot_id = '"+selectLot.getValue()+"';");
+					ResultSet hoursA = con.execQuery("select hours_of_service from spaces where lot_id = '"+selectLot.getValue()+"';");
 					hoursA.next();
 					hoursAv.setText(hoursA.getString(1));
 				} catch (Exception e1) {
-					System.out.println(e1);
+					Alert alert = new Alert(Alert.AlertType.ERROR);
+					alert.setTitle("Connection Error");
+					alert.setHeaderText("Connection Error");
+					alert.setContentText("You are not connected to the internet");
+					alert.showAndWait();
 				}
 			}
 		});
@@ -135,7 +137,11 @@ public class ParkingLotsController {
 						Stage stage = (Stage) logoutBtn.getScene().getWindow();
 						stage.setScene(scene);
 					} catch (IOException e1) {
-						e1.printStackTrace();
+						Alert alert1 = new Alert(Alert.AlertType.ERROR);
+						alert1.setTitle("Screen Error");
+						alert1.setHeaderText("Screen Not found");
+						alert1.setContentText("The screen was not found");
+						alert1.showAndWait();
 					}
 				}
 			});
