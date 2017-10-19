@@ -60,6 +60,9 @@ public class ParkingLotsController {
 		WebEngine webEngine = weather.getEngine();
 		webEngine.load("https://www.yahoo.com/news/weather");
 
+		/*
+		 * Below are all the lists needed to populate the combo boxes.
+		 */
 		String[] lots = { "All lots", "Vago North", "Vago South", "STEM", "Institute", "Southlawn", "Eckhart", "Dunham",
 				"UBH", "Parolini" };
 		ObservableList<String> lotList = FXCollections.observableArrayList(lots);
@@ -73,7 +76,12 @@ public class ParkingLotsController {
 		ObservableList<String> hourList = FXCollections.observableArrayList(hours);
 		selectHour.getItems().addAll(hourList);
 
-		// Making Sure comboBox are selected
+		
+		/*
+		 * The next two Event Handlers make sure the user is user is not able to select
+		 * an option from the combo box without first choosing an option from the
+		 * previous combo box.
+		 */
 		selectLot.setOnAction(e -> {
 			// Add image
 			if (selectLot.getValue().equals("All lots")) {
@@ -82,7 +90,6 @@ public class ParkingLotsController {
 				selectDay.setDisable(false);
 			}
 		});
-
 		selectDay.setOnAction(e -> {
 			if (selectDay.getValue().equals("")) {
 				selectHour.setDisable(true);
@@ -90,6 +97,16 @@ public class ParkingLotsController {
 				selectHour.setDisable(false);
 			}
 		});
+		
+		
+
+		/*When submit button is clicked it checks if hour combo box is 
+		 * selected if not it tells the user to select an option.
+		 * If user choose an option get the time selected and execute
+		 * a query to the database for the information asked.
+		 * exception is raised if there is something wrong with
+		 *  the connection to the database.
+		*/
 		submitBtn.setOnAction(e -> {
 			// get info from database and display on lots info screen
 			if (selectHour.getValue() == null) {
@@ -101,16 +118,15 @@ public class ParkingLotsController {
 				String[] cutZeros = selectHour.getValue().split(":");
 				String hour = cutZeros[0];
 				try {
+
 					Connector con = new Connector();
-					
-					
 					ResultSet spots = con.execQuery("select spots_at_" + hour + " from spaces where lot_id = '"
 							+ selectLot.getValue() + "' and day = '" + selectDay.getValue() + "';");
 					spots.next();
 					spotsAv.setText(spots.getString(1));
-					
-					
-					ResultSet hoursA = con.execQuery("select hours_of_service from spaces where lot_id = '"+selectLot.getValue()+"';");
+
+					ResultSet hoursA = con.execQuery(
+							"select hours_of_service from spaces where lot_id = '" + selectLot.getValue() + "';");
 					hoursA.next();
 					hoursAv.setText(hoursA.getString(1));
 				} catch (Exception e1) {
@@ -123,6 +139,13 @@ public class ParkingLotsController {
 			}
 		});
 
+		
+		
+		/*
+		 * When clicked the user is going to be asked if it is sure to log out, if yes
+		 * take user to login Screen. If no let user stay on current screen.
+		 * If there is any error loading a screen an Exception is raised an alert is displayed.
+		 */
 		logoutBtn.setOnAction(e -> {
 			Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
 			alert.setTitle("Message");
