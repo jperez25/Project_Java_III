@@ -16,7 +16,6 @@ import java.io.IOException;
 import java.lang.Thread;
 
 public class WelcomeController {
-	private Task copyWorker;
 	@FXML
 	private ProgressBar progressBar;
 	@FXML
@@ -24,12 +23,48 @@ public class WelcomeController {
 	
 	
 	public void initialize() throws Exception {
-		copyWorker = createWorker();
-		progressBar.progressProperty().unbind();
-		progressBar.progressProperty().bind(copyWorker.progressProperty());
-		new Thread(copyWorker).start();
 		
-		PauseTransition delay = new PauseTransition();
+		/*To make it work it essential to understand multithreading.
+		 * The task below is executed in parallel to delay object.
+		 * It increases the progress bar percentage over time
+		 */
+		Task<Void> task = new Task<Void>() {
+
+			@Override
+			public Void call() {
+
+				for (int i = 0, j = 10; i <= 10; i++, j--) {
+					try {
+						Thread.sleep(j*100);
+					} catch (InterruptedException e) {
+						Thread.interrupted();
+						break;
+					}
+					System.out.println(progressBar.getProgress());
+					updateProgress(i + 1, 10);
+					
+					
+				}
+				return null;
+			}
+
+		};
+		
+		/*Binding progress bar to task
+		 * Create new thread a pass task as the task to be executed in parallel
+		 * start the task
+		 */
+		progressBar.progressProperty().bind(task.progressProperty());
+		Thread th = new Thread(task);
+		th.setDaemon(true);
+		th.start();
+		
+		
+		/*To make the transition between screens smooth add
+		 * a delay equal to the time the task takes to execute
+		 * and then resume threading
+		 */
+		PauseTransition delay = new PauseTransition(Duration.millis(5550));
 		delay.setOnFinished( e -> {
 			try {
 				
@@ -50,22 +85,7 @@ public class WelcomeController {
 			}
 		} );
 		delay.play();
-	}
-	
-	public Task createWorker() {
-        return new Task() {
-            @Override
-            protected Object call() throws Exception {
-                for (int i = 0; i < 10; i++) {
-                    Thread.sleep(40);
-                    //updateMessage("2000 milliseconds");
-                    updateProgress(i + 1, 10);
-
-                    System.out.println(progressBar.getProgress());
-                }
-                return true;
-            }
-        };
+		
     }
 
 }
