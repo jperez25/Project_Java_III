@@ -101,7 +101,7 @@ public class ParkingLotsController {
 				try {
 					Class.forName("com.mysql.jdbc.Driver");
 					Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/whereismyspot", "root",
-							"imeem2");
+							"");
 					Statement stmt = con.createStatement();
 					//Add day to the query                  
 					ResultSet spots = stmt.executeQuery("select spots_at_"+hour+" from spaces where lot_id = '"+selectLot.getValue()+"';");
