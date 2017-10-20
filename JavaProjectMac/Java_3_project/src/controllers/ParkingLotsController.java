@@ -1,6 +1,18 @@
 package controllers;
 
+import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.Statement;
+
+import javax.imageio.ImageIO;
+
+import com.mysql.jdbc.Buffer;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -13,6 +25,11 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Hyperlink;
+import javafx.scene.control.Label;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.web.WebEngine;
+import javafx.scene.web.WebView;
 import javafx.stage.Stage;
 
 public class ParkingLotsController {
@@ -28,94 +45,100 @@ public class ParkingLotsController {
 	private ComboBox<String> selectLot;
 	@FXML
 	private Button submitBtn;
+	@FXML
+	private WebView weather;
+	@FXML
+	private ImageView lotImage;
+	@FXML
+	private Label spotsAv;
+	@FXML
+	private Label hoursAv;
 
-	public void initialize() throws Exception {
-		
-		String[] lots = {"All lots", "Vago North", "Vago South", "STEM", "Institute", "Southlawn", "Eckhart", "Dunham", "UBH", "Parolini"};
+	public void initialize() {
+		WebEngine webEngine = weather.getEngine();
+		webEngine.load("https://www.yahoo.com/news/weather");
+
+		String[] lots = { "All lots", "Vago North", "Vago South", "STEM", "Institute", "Southlawn", "Eckhart", "Dunham",
+				"UBH", "Parolini" };
 		ObservableList<String> lotList = FXCollections.observableArrayList(lots);
 		selectLot.getItems().addAll(lotList);
-		
-		String[] days = {"Monday", "Tuesday", "Wednesday", "Thursday", "Friday"};
+
+		String[] days = { "Monday", "Tuesday", "Wednesday", "Thursday", "Friday" };
 		ObservableList<String> dayList = FXCollections.observableArrayList(days);
 		selectDay.getItems().addAll(dayList);
-		
-		String[] hours = {"7:00", "8:00", "9:00", "10:00", "11:00", "12:00", "1:00", "2:00", "3:00", "4:00"};
+
+		String[] hours = { "7:00", "8:00", "9:00", "10:00", "11:00", "12:00", "1:00", "2:00", "3:00", "4:00" };
 		ObservableList<String> hourList = FXCollections.observableArrayList(hours);
 		selectHour.getItems().addAll(hourList);
-		
-		backBtn.setOnAction(e->{
-	        FXMLLoader loader2 = new FXMLLoader(getClass().getResource("/screens/First_Login.fxml"));
-	        Parent root2;
-			try {
-				root2 = loader2.load();
-		        Scene scene = new Scene(root2);
-				Stage stage = (Stage) backBtn.getScene().getWindow(); 
-				stage.setScene(scene);
-			} catch (IOException e1) {
-				e1.printStackTrace();
+
+		// Making Sure comboBox are selected
+		selectLot.setOnAction(e -> {
+			//Add image
+			if (selectLot.getValue().equals("All lots")) {
+				selectDay.setDisable(true);
+			} else {
+				selectDay.setDisable(false);
 			}
 		});
-		submitBtn.setOnAction(e->{
-	       //get info from database and display on lots info screen
-		});
-		/* IceLot.setOnMouseClicked(e->{
-			Alert alert = new Alert(Alert.AlertType.INFORMATION);
-		    alert.setTitle("Message");
-		    alert.setHeaderText("Display info");
-		    alert.setContentText("We will show a lot of info about this parking lot\n just wait until our new vesion is released.");
-		    alert.showAndWait();
-		    
-		    FXMLLoader loader2 = new FXMLLoader(getClass().getResource("/screens/ParkingInfoScreen.fxml"));
-	        Parent root2;
-			try {
-				root2 = loader2.load();
-		        Scene scene = new Scene(root2);
-				Stage stage = (Stage) backBtn.getScene().getWindow(); 
-				stage.setScene(scene);
-			} catch (IOException e1) {
-				e1.printStackTrace();
+
+		selectDay.setOnAction(e -> {
+			if (selectDay.getValue().equals("")) {
+				selectHour.setDisable(true);
+			} else {
+				selectHour.setDisable(false);
 			}
 		});
-		stemLot.setOnMouseClicked(e->{
-			Alert alert = new Alert(Alert.AlertType.INFORMATION);
-		    alert.setTitle("Message");
-		    alert.setHeaderText("Display info");
-		    alert.setContentText("We will show a lot of info about this parking lot\n just wait until our new vesion is released.");
-		    alert.showAndWait();
+		submitBtn.setOnAction(e -> {
+			// get info from database and display on lots info screen
+			if (selectHour.getValue() == null) {
+				Alert alert = new Alert(Alert.AlertType.WARNING);
+				alert.setTitle("Message");
+				alert.setHeaderText("Please pick a lot,date and/or time");
+				alert.showAndWait();
+			} else {
+				String[] cutZeros = selectHour.getValue().split(":");
+				String hour = cutZeros[0];
+				try {
+					Class.forName("com.mysql.jdbc.Driver");
+					Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/whereismyspot", "root",
+							"imeem2");
+					Statement stmt = con.createStatement();
+					//Add day to the query                  
+					ResultSet spots = stmt.executeQuery("select spots_at_"+hour+" from spaces where lot_id = '"+selectLot.getValue()+"';");
+					spots.next();
+					spotsAv.setText(spots.getString(1));
+					// get hours of operation and image title in query
+					ResultSet image = stmt.executeQuery("select hours, image from lot where lot_id = '"+selectLot.getValue()+"';");
+					image.next();
+					hoursAv.setText(image.getString(1));
+					Image pic = new Image("images/" + image.getString(2));
+					lotImage.setImage(pic);
+					
+				} catch (Exception e1) {
+					System.out.println(e1);
+				}
+			}
 		});
-		vagoNTLot.setOnMouseClicked(e->{
-			Alert alert = new Alert(Alert.AlertType.INFORMATION);
-		    alert.setTitle("Message");
-		    alert.setHeaderText("Display info");
-		    alert.setContentText("We will show a lot of info about this parking lot\n just wait until our new vesion is released.");
-		    alert.showAndWait();
-		});
-		vagoSTLot.setOnMouseClicked(e->{
-			Alert alert = new Alert(Alert.AlertType.INFORMATION);
-		    alert.setTitle("Message");
-		    alert.setHeaderText("Display info");
-		    alert.setContentText("We will show a lot of info about this parking lot\n just wait until our new vesion is released.");
-		    alert.showAndWait();
-		});  */
-		logoutBtn.setOnAction(e->{
+
+		logoutBtn.setOnAction(e -> {
 			Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
 			alert.setTitle("Message");
 			alert.setHeaderText("Are you sure you want to logout?");
 			alert.showAndWait().ifPresent(response -> {
 				if (response == ButtonType.OK) {
-					FXMLLoader loader2 = new FXMLLoader(getClass().getResource("/screens/First_Login.fxml"));
-			        Parent root2;
+					FXMLLoader loader2 = new FXMLLoader(getClass().getResource("../Screens/First_Login.fxml"));
+					Parent root2;
 					try {
 						root2 = loader2.load();
-				        Scene scene = new Scene(root2);
-						Stage stage = (Stage) backBtn.getScene().getWindow(); 
+						Scene scene = new Scene(root2);
+						Stage stage = (Stage) logoutBtn.getScene().getWindow();
 						stage.setScene(scene);
 					} catch (IOException e1) {
 						e1.printStackTrace();
 					}
 				}
 			});
-			 
+
 		});
 	}
 }
