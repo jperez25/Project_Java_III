@@ -1,4 +1,3 @@
-
 package login.Controllers;
 
 import javafx.animation.PauseTransition;

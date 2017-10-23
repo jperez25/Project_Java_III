@@ -1,6 +1,7 @@
 package login;
 
 import java.io.IOException;
+import java.sql.SQLException;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -10,7 +11,7 @@ import javafx.scene.control.Alert;
 import javafx.stage.Stage;
 
 public class MainDriver extends Application {
-
+	public static Connector con;
     @Override
     public void start(Stage primaryStage){
 
@@ -36,9 +37,11 @@ public class MainDriver extends Application {
 
     // main method to support non-JavaFX-aware environments:
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws ClassNotFoundException, SQLException {
         // starts the FX toolkit, instantiates this class, 
         // and calls start(...) on the FX Application thread:
+    	//Single connection object
+    	con = new Connector();
         launch(args); 
     }
 }

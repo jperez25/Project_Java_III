@@ -1,5 +1,7 @@
 package login.Controllers;
 
+//imports...
+
 import java.io.IOException;
 import java.sql.*;
 
@@ -15,9 +17,7 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
 import javafx.stage.Stage;
-import login.Connector;
-
-//imports...
+import login.MainDriver;
 
 public class Controller {
 	// Fxml injections
@@ -49,8 +49,14 @@ public class Controller {
 		});
 
 
-		// When send button is clicked it should grant access to the app
+		/*when clicked check if fields are empty and make stars and
+		 * message visible.
+		 * If fields are fill execute query, if user and password match 
+		 * with our registers in the data base let user go to parking lots scene.
+		 * If not display error label.
+		 */
 		bt1.setOnAction(e -> {
+			//hide stars and labels
 			userStar.setVisible(false);
 			passStar.setVisible(false);
 			errorLabel.setVisible(false);
@@ -69,11 +75,12 @@ public class Controller {
 					passStar.setVisible(true);
 				}
 			}
-
+			
+			//if fields are not empty
 			else {
 				try {
-					Connector con = new Connector();
-					ResultSet userName = con.execQuery("select UserName from user where UserName= '" + username + "';");
+					//Execute query
+					ResultSet userName = MainDriver.con.execQuery("select UserName from user where UserName= '" + username + "';");
 					boolean isEmpty = userName.next();
 
 					// If user is not found
@@ -84,10 +91,11 @@ public class Controller {
 					}
 					// User is found
 					else {
-						// If password does not match registers
-						ResultSet passW = con.execQuery("select Password from user where Password='" + pass
+						//Execute query for password
+						ResultSet passW = MainDriver.con.execQuery("select Password from user where Password='" + pass
 								+ "' and UserName='" + username + "';");
 						boolean isEmptyPass = passW.next();
+						// If password does not match registers
 						if (!isEmptyPass) {
 							errorLabel.setText("Wrong Username or password");
 							errorLabel.setVisible(true);
@@ -112,6 +120,7 @@ public class Controller {
 						}
 					}
 				}
+				//Data base connection error
 				 catch (Exception ex) {
 					System.out.println(ex);
 					Alert alert = new Alert(Alert.AlertType.ERROR);
@@ -120,9 +129,13 @@ public class Controller {
 					alert.setContentText("You are not connected to the internet");
 					alert.showAndWait();
 				}
-			} // End of else block
-		}// end of event handler
-		);
+			} 
+		});
+		
+		/*When clicked
+		 * sent to Register Scene
+		 * if scene not found alert is raised
+		 */
 		lnk1.setOnAction(e -> {
 			// Go to register Scene
 			FXMLLoader loader2 = new FXMLLoader(getClass().getResource("../Screens/RegisterScene.fxml"));
@@ -141,6 +154,11 @@ public class Controller {
 			}
 
 		});
+		
+		/*When clicked
+		 * sent to Forgot password Scene
+		 * if Scene not found alert is raised
+		 */
 		lnk2.setOnAction(e -> {
 			// Go to Forgot my password Screen
 			FXMLLoader loader2 = new FXMLLoader(getClass().getResource("../Screens/ForgotPassword.fxml"));
@@ -159,6 +177,7 @@ public class Controller {
 			}
 
 		});
+		//tab does not affect
 		lnk1.setFocusTraversable(false);
 		lnk2.setFocusTraversable(false);
 	}

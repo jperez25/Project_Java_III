@@ -59,12 +59,17 @@ public class RegisterController {
 		DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 		Date dt = new Date();
 		
+		//Listener
 		email.setOnKeyPressed(e->{
 			if (e.getCode()== KeyCode.ENTER) {
 				regBtn.fire();
 			}
 		});
-		
+		/*When clicked set stars and error label to false.
+		 * if any fields is missing set stars and label visible 
+		 * If all fields are filled sent data to DB and register user.
+		 * Take user to login screen 
+		 */
 		regBtn.setOnAction(e->{
 			
 			//Set starts to false every time user click button
@@ -122,6 +127,12 @@ public class RegisterController {
 							String val = "'"+fname.getText()+"','"+lname.getText()+"','"+auUserName.getText()+"','"+pass.getText()+"','"+email.getText()+"', '"+dateFormat.format(dt)+"'";
 							con.execUpdate("insert into user (First_Name, Last_Name, UserName, Password, Email,Register_Date) values ("+val+");");
 							
+							//Tell user it's registered
+							Alert alert = new Alert(Alert.AlertType.INFORMATION);
+							alert.setTitle("Succesful Registering");
+							alert.setHeaderText("You are now registered");
+							alert.showAndWait();
+							
 							//Switch screens
 							FXMLLoader loader2 = new FXMLLoader(getClass().getResource("../Screens/First_Login.fxml"));
 					        Parent root2;
@@ -133,11 +144,11 @@ public class RegisterController {
 							} 
 							//Let user know screen was not found
 							catch (IOException e1) {
-								Alert alert = new Alert(Alert.AlertType.ERROR);
-								alert.setTitle("Screen Error");
-								alert.setHeaderText("Screen Not found");
-								alert.setContentText("The screen was not found");
-								alert.showAndWait();
+								Alert alert1 = new Alert(Alert.AlertType.ERROR);
+								alert1.setTitle("Screen Error");
+								alert1.setHeaderText("Screen Not found");
+								alert1.setContentText("The screen was not found");
+								alert1.showAndWait();
 							}
 							//Close connection
 							con.close();

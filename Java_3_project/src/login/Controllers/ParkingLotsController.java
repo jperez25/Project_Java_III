@@ -8,6 +8,7 @@ import java.net.URL;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
 
 import javax.imageio.ImageIO;
@@ -33,6 +34,7 @@ import javafx.scene.web.WebEngine;
 import javafx.scene.web.WebView;
 import javafx.stage.Stage;
 import login.Connector;
+import login.MainDriver;
 
 public class ParkingLotsController {
 	@FXML
@@ -83,7 +85,31 @@ public class ParkingLotsController {
 		 * previous combo box.
 		 */
 		selectLot.setOnAction(e -> {
-			// Add image
+			/*On selection display images
+			 * if user selects all lots display image, but don't able next combo Box
+			 * if user selects other than all lots display image and able the next combo box
+			 */
+			ResultSet image;
+			try {
+				if (selectLot.getValue().equals("All lots")) {				
+					Image pic = new Image("/images/allLots.png");
+					lotImage.setImage(pic);
+				}
+				else {
+					image = MainDriver.con.execQuery("select images from spaces where lot_id = '"+selectLot.getValue()+"';");
+					image.next();
+					System.out.println(image.getString(1));
+					Image pic = new Image(image.getString(1));
+					lotImage.setImage(pic);
+				}
+			} catch (SQLException e1) {
+				System.out.println(e1);
+				Alert alert = new Alert(Alert.AlertType.ERROR);
+				alert.setTitle("Img Error");
+				alert.setHeaderText("Image not found");
+				alert.showAndWait();
+			}
+
 			if (selectLot.getValue().equals("All lots")) {
 				selectDay.setDisable(true);
 			} else {
@@ -114,18 +140,21 @@ public class ParkingLotsController {
 				alert.setTitle("Message");
 				alert.setHeaderText("Please pick a lot,date and/or time");
 				alert.showAndWait();
-			} else {
+			}
+			//if not null
+			else {
+				//cut the zeros from the hour
 				String[] cutZeros = selectHour.getValue().split(":");
 				String hour = cutZeros[0];
 				try {
-
-					Connector con = new Connector();
-					ResultSet spots = con.execQuery("select spots_at_" + hour + " from spaces where lot_id = '"
+					//Execute query for number of spots at a certain time
+					ResultSet spots = MainDriver.con.execQuery("select spots_at_" + hour + " from spaces where lot_id = '"
 							+ selectLot.getValue() + "' and day = '" + selectDay.getValue() + "';");
 					spots.next();
 					spotsAv.setText(spots.getString(1));
-
-					ResultSet hoursA = con.execQuery(
+					
+					//Execute query for Service time
+					ResultSet hoursA = MainDriver.con.execQuery(
 							"select hours_of_service from spaces where lot_id = '" + selectLot.getValue() + "';");
 					hoursA.next();
 					hoursAv.setText(hoursA.getString(1));

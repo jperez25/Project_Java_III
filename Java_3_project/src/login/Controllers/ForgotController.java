@@ -23,7 +23,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
-import login.Connector;
+import login.MainDriver;
 
 public class ForgotController {
 	@FXML
@@ -50,13 +50,17 @@ public class ForgotController {
 	private Label errorLabel;
 
 	public void initialize() throws Exception {
+		
 		// listener
 		emailfl.setOnKeyPressed(e -> {
 			if (e.getCode() == KeyCode.ENTER) {
 				sendBtn.fire();
 			}
 		});
-
+		
+		/*When clicked sent back to Login Screen
+		 * If Screen not found raise alert.
+		 */
 		backBtn.setOnAction(e -> {
 			FXMLLoader loader = new FXMLLoader(getClass().getResource("../Screens/First_login.fxml"));
 			Parent root;
@@ -74,17 +78,23 @@ public class ForgotController {
 			}
 		});
 
-		// Check user and email
-		// send email with recovery code
+		/*When clicked check if any fields are empty. If they are
+		 * set stars and error label visible.
+		 * If not execute connection and check if values entered match with our registers in DB
+		 * if values match sent email if not display error label and stars.
+		 * Sent user back to login Screen if email sent successfully.
+		 */
 		sendBtn.setOnAction(e -> {
-			// set stars to false
+			//Set stars to false
 			userStar.setVisible(false);
 			emailStar.setVisible(false);
 			errorLabel.setVisible(false);
-
+			
+			//Get user name and email
 			String username = userfl.getText();
 			String email = emailfl.getText();
 
+			//check if fields are empty
 			if (username.equals("") || email.equals("")) {
 				errorLabel.setText("Please fill empty Fields");
 				errorLabel.setVisible(true);
@@ -97,25 +107,32 @@ public class ForgotController {
 				}
 			} else {
 				try {
-					Connector con = new Connector();
-					// If user not found returns null
-					ResultSet userName = con
+					// Execute query
+					ResultSet userName = MainDriver.con
 							.execQuery("select UserName from user where UserName='" + username + "';");
 					boolean isEmpty = userName.next();
 
+					//If user not found returns null
 					if (!isEmpty) {
 						errorLabel.setText("User Not Found");
 						errorLabel.setVisible(true);
-					} else {
+					} 
+					//If user is found check email
+					else {
 						final String user = "auparkinglot@gmail.com";
 						final String pass = "ParkingLot";
-
-						ResultSet eMail = con.execQuery("select Email from user where Email='" + email + "';");
+						
+						// Execute query for password
+						ResultSet eMail = MainDriver.con.execQuery("select Email from user where Email='" + email + "';");
 						boolean isEmailEmpty = eMail.next();
+						
+						//If email does not matche user name
 						if (!isEmailEmpty) {
 							errorLabel.setText("Email not found");
 							errorLabel.setVisible(true);
-						} else {
+						} 
+						//If email matches user name sent email
+						else {
 							Properties props = new Properties();
 							props.put("mail.smtp.auth", "true");
 							props.put("mail.smtp.starttls.enable", "true");
@@ -130,7 +147,7 @@ public class ForgotController {
 							});
 
 							try {
-								ResultSet emailConfirm = con
+								ResultSet emailConfirm = MainDriver.con
 										.execQuery("select email from user where username='" + username + "';");
 								emailConfirm.next();
 
@@ -142,7 +159,7 @@ public class ForgotController {
 																							// is being sent to
 								// Can use array or the database after being setup
 								message.setSubject("My first email"); // Subject of the email
-								ResultSet emailPass = con
+								ResultSet emailPass = MainDriver.con
 										.execQuery("select password from user where username='" + username + "';");
 								emailPass.next();
 								message.setContent(
@@ -183,7 +200,9 @@ public class ForgotController {
 									alert1.setContentText("The screen was not found");
 									alert1.showAndWait();
 								}
-							} catch (MessagingException x) {
+							} 
+							//If error happens while sending email
+							catch (MessagingException x) {
 								Alert alert1 = new Alert(Alert.AlertType.ERROR);
 								alert1.setTitle("Email Error");
 								alert1.setHeaderText("Email Not Sent");
@@ -193,7 +212,9 @@ public class ForgotController {
 
 						}
 					}
-				} catch (Exception a) {
+				} 
+				//If screen not found
+				catch (Exception a) {
 					Alert alert = new Alert(Alert.AlertType.ERROR);
 					alert.setTitle("Connection Error");
 					alert.setHeaderText("Connection Error");
@@ -203,7 +224,10 @@ public class ForgotController {
 			}
 
 		});
-		// Check code and compare with the code send to user
+		
+		/*Just if we change our minds
+		 * sent code with verification number
+		 */
 		verifyBtn.setOnAction(e -> {
 			ogPane.setVisible(false);
 			codePane.setLayoutY(ogPane.getLayoutY());
@@ -211,6 +235,7 @@ public class ForgotController {
 			codePane.setVisible(true);
 
 		});
+		//Tab does not affect
 		userfl.setFocusTraversable(true);
 		emailfl.setFocusTraversable(true);
 	}
