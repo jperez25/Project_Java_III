@@ -1,5 +1,5 @@
 
-package login.Controllers;
+package controllers;
 
 import javafx.animation.PauseTransition;
 import javafx.concurrent.Task;

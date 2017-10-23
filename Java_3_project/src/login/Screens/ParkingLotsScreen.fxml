@@ -13,7 +13,7 @@
 <?import javafx.scene.text.Text?>
 <?import javafx.scene.web.WebView?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="832.0" style="-fx-background-color: #439f3e;" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="login.Controllers.ParkingLotsController">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="900.0" style="-fx-background-color: #439f3e;" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="login.Controllers.ParkingLotsController">
    <children>
       <Hyperlink fx:id="logoutBtn" alignment="CENTER" layoutX="690.0" layoutY="14.0" prefHeight="29.0" prefWidth="102.0" text="Logout" textAlignment="CENTER" textFill="WHITE">
          <font>

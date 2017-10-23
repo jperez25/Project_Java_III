@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="src" path="Java_3_project/src"/>
+	<classpathentry kind="src" path="JavaProjectMac/Java_3_project/src"/>
+	<classpathentry kind="lib" path="Java_3_project/lib/jfoenix.jar"/>
+	<classpathentry kind="lib" path="Java_3_project/lib/mail-1.4.7.jar"/>
+	<classpathentry kind="lib" path="Java_3_project/lib/mysql-connector-java-5.1.44-bin.jar"/>
+	<classpathentry kind="lib" path="JavaProjectMac/Java_3_project/Lib/jfoenix.jar"/>
+	<classpathentry kind="lib" path="JavaProjectMac/Java_3_project/Lib/mail-1.4.7.jar"/>
+	<classpathentry kind="lib" path="JavaProjectMac/Java_3_project/Lib/mysql-connector-java-5.1.44-bin.jar"/>
+	<classpathentry kind="output" path="JavaProjectMac/Java_3_project/bin"/>
+</classpath>

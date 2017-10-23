@@ -1,4 +1,4 @@
-package login.Controllers;
+package controllers;
 
 import com.jfoenix.controls.JFXDrawer;
 import com.jfoenix.controls.JFXHamburger;

@@ -14,7 +14,7 @@ public class Connector {
 	public Connector() throws SQLException, ClassNotFoundException {
 		Class.forName("com.mysql.jdbc.Driver");
 		connec = DriverManager.getConnection("jdbc:mysql://localhost:3306/whereismyspot", "root",
-				"Computer1");
+				"");
 		stmt = connec.createStatement();
 	}
 	public void close() throws SQLException {
