@@ -1,3 +1,4 @@
+
 package login.Controllers;
 
 import javafx.animation.PauseTransition;
@@ -68,7 +69,7 @@ public class WelcomeController {
 		delay.setOnFinished( e -> {
 			try {
 				
-				FXMLLoader loader2 = new FXMLLoader(getClass().getResource("../Screens/First_Login.fxml"));
+				FXMLLoader loader2 = new FXMLLoader(getClass().getResource("../Screens/Home.fxml"));
 		        Parent root2;
 				root2 = loader2.load();
 		        Scene scene = new Scene(root2);
