@@ -1,4 +1,4 @@
-package controllers;
+package login.Controllers;
 
 import javafx.animation.PauseTransition;
 import javafx.concurrent.Task;
@@ -15,7 +15,7 @@ import java.io.IOException;
 import java.lang.Thread;
 
 public class WelcomeController {
-	private Task<?> copyWorker;
+	private Task copyWorker;
 	@FXML
 	private ProgressBar progressBar;
 	@FXML
@@ -28,11 +28,11 @@ public class WelcomeController {
 		progressBar.progressProperty().bind(copyWorker.progressProperty());
 		new Thread(copyWorker).start();
 		
-		PauseTransition delay = new PauseTransition(Duration.millis(3010));
+		PauseTransition delay = new PauseTransition(Duration.millis(3100));
 		delay.setOnFinished( e -> {
-			 try {
+			try {
 				
-				FXMLLoader loader2 = new FXMLLoader(getClass().getResource("/screens/First_Login.fxml"));
+				FXMLLoader loader2 = new FXMLLoader(getClass().getResource("../Screens/Home.fxml"));
 		        Parent root2;
 				root2 = loader2.load();
 		        Scene scene = new Scene(root2);
@@ -43,21 +43,19 @@ public class WelcomeController {
 				e1.printStackTrace();
 			}
 		} );
-			delay.play();
+		delay.play();
 	}
 	
-	public Task<?> createWorker() {
-        return new Task<Object>() {
+	public Task createWorker() {
+        return new Task() {
             @Override
             protected Object call() throws Exception {
                 for (int i = 0; i < 10; i++) {
-                	
-					Thread.sleep(300);
-					
+                    Thread.sleep(40);
                     //updateMessage("2000 milliseconds");
-                   updateProgress(i + 1, 10);
-                    
-                   System.out.println(progressBar.getProgress());
+                    updateProgress(i + 1, 10);
+
+                    System.out.println(progressBar.getProgress());
                 }
                 return true;
             }
