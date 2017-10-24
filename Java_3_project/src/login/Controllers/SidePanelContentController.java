@@ -81,7 +81,7 @@ public class SidePanelContentController implements Initializable {
 		});
 
 		b4.setOnAction(e -> {
-			FXMLLoader loader = new FXMLLoader(getClass().getResource("../Screens/First_login.fxml"));
+			FXMLLoader loader = new FXMLLoader(getClass().getResource("../Screens/Home.fxml"));
 			Parent root;
 			try {
 				root = loader.load();

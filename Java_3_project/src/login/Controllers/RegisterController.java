@@ -1,13 +1,22 @@
 package login.Controllers;
 
 import java.io.IOException;
+import java.net.URL;
 import java.sql.ResultSet;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
+import com.jfoenix.controls.JFXDrawer;
+import com.jfoenix.controls.JFXHamburger;
+import com.jfoenix.transitions.hamburger.HamburgerBackArrowBasicTransition;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
@@ -17,10 +26,12 @@ import javafx.scene.control.Labeled;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import login.Connector;
 
-public class RegisterController {
+public class RegisterController implements Initializable{
 	// called by the FXML loader after the labels declared below are injected:
 	@FXML
 	private TextField fname;
@@ -52,8 +63,34 @@ public class RegisterController {
 	private Label emailStar;
 	@FXML
 	private Labeled errorLabel;
+	@FXML
+	private JFXDrawer drawer;
+	@FXML
+	private JFXHamburger hamburger;
 	
-	public void initialize() throws Exception {
+	public void initialize(URL url, ResourceBundle rb) {
+		
+		//Loads the side panel after the hamburger is pressed
+		try {
+			VBox box = FXMLLoader.load(getClass().getResource("../Screens/SidePanelContent.fxml"));
+			drawer.setSidePane(box);
+		} catch (IOException ex) {
+			Logger.getLogger(HomeController.class.getName()).log(Level.SEVERE, null, ex);
+		}
+		//Transition used to create the effect when hamburger is pressed
+		HamburgerBackArrowBasicTransition transition = new HamburgerBackArrowBasicTransition(hamburger);
+		transition.setRate(-1);
+		//Event handler when hamburger pressed
+		hamburger.addEventHandler(MouseEvent.MOUSE_PRESSED,(e)->{
+			transition.setRate(transition.getRate()*-1);
+			transition.play();
+
+			if(drawer.isShown())
+			{
+				drawer.close();
+			}else
+				drawer.open();
+		});
 		
 		//Getting Today's day
 		DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
