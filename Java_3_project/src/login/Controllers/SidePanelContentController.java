@@ -26,6 +26,8 @@ public class SidePanelContentController implements Initializable {
 	private JFXButton b3;
 	@FXML
 	private JFXButton b4;
+	@FXML
+	private JFXButton b5;
 
 	@Override
 	public void initialize(URL url, ResourceBundle rb) {
@@ -82,6 +84,22 @@ public class SidePanelContentController implements Initializable {
 
 		b4.setOnAction(e -> {
 			FXMLLoader loader = new FXMLLoader(getClass().getResource("../Screens/Home.fxml"));
+			Parent root;
+			try {
+				root = loader.load();
+				Scene scene = new Scene(root);
+				Stage stage = (Stage) b3.getScene().getWindow();
+				stage.setScene(scene);
+			} catch (IOException e1) {
+				Alert alert = new Alert(Alert.AlertType.ERROR);
+				alert.setTitle("Screen Error");
+				alert.setHeaderText("Screen Not found");
+				alert.setContentText("The screen was not found");
+				alert.showAndWait();
+			}
+		});
+		b5.setOnAction(e -> {
+			FXMLLoader loader = new FXMLLoader(getClass().getResource("../Screens/JavaLessons.fxml"));
 			Parent root;
 			try {
 				root = loader.load();
