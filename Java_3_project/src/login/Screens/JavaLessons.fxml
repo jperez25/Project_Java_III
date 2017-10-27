@@ -33,6 +33,22 @@
             <Button fx:id="search" layoutY="1.0" mnemonicParsing="false" text="Search" />
             <Button fx:id="sort" layoutX="80.0" layoutY="1.0" mnemonicParsing="false" text="Sort" />
             <Button fx:id="hashing" layoutX="147.0" layoutY="1.0" mnemonicParsing="false" text="Hashing" />
+            <AnchorPane fx:id="searchPane" layoutX="29.0" layoutY="52.0" prefHeight="474.0" prefWidth="652.0">
+               <children>
+                  <Text layoutX="213.0" layoutY="48.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Enter a value to search for:">
+                     <font>
+                        <Font size="18.0" />
+                     </font></Text>
+                  <TextField fx:id="input" layoutX="243.0" layoutY="62.0" />
+                  <Text layoutX="21.0" layoutY="159.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Results:">
+                     <font>
+                        <Font size="18.0" />
+                     </font></Text>
+                  <TextArea fx:id="textArea" layoutX="21.0" layoutY="175.0" prefHeight="178.0" prefWidth="613.0" />
+                  <Button fx:id="run" layoutX="307.0" layoutY="95.0" mnemonicParsing="false" text="Run" />
+                  <Button fx:id="reset" layoutX="515.0" layoutY="367.0" mnemonicParsing="false" text="Reset" />
+               </children>
+            </AnchorPane>
          </children>
       </AnchorPane>
       <Text layoutX="252.0" layoutY="53.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Java Lessons 101">
