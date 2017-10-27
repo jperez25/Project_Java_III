@@ -11,20 +11,20 @@
 <?import com.jfoenix.controls.JFXHamburger?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane id="AnchorPane" fx:id="root" prefHeight="700.0" prefWidth="900.0" style="-fx-background-color: #1e932d;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="login.Controllers.HomeController">
+<AnchorPane id="AnchorPane" fx:id="root" prefHeight="700.0" prefWidth="832.0" style="-fx-background-color: #439f3e;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="login.Controllers.HomeController">
     <children>
-      <JFXHamburger fx:id="hamburger" layoutX="785.0" layoutY="53.0" />
-      <Text layoutX="186.0" layoutY="129.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Welcome to AU Parking Guide Homepage!">
-         <font>
-            <Font size="30.0" />
-         </font>
-      </Text>
-      <Text layoutX="272.0" layoutY="215.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Feel free to use our navigation menu to navigate through our application." textAlignment="CENTER" wrappingWidth="337.3101806640625">
+      <JFXHamburger fx:id="hamburger" layoutX="755.0" layoutY="33.0" />
+      <Text layoutX="177.0" layoutY="99.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Welcome to AU Parking Guide Homepage!">
          <font>
             <Font size="24.0" />
          </font>
       </Text>
-      <ImageView fitHeight="328.0" fitWidth="878.0" layoutX="11.0" layoutY="355.0" pickOnBounds="true" preserveRatio="true">
+      <Text layoutX="275.0" layoutY="197.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Feel free to use our navigation menu to navigate through our application." textAlignment="CENTER" wrappingWidth="281.2529296875">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Text>
+      <ImageView fitHeight="333.0" fitWidth="818.0" layoutX="7.0" layoutY="371.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="images/AuAerial.jpg" />
          </image>

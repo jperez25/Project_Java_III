@@ -18,7 +18,7 @@
       </ImageView>
       <JFXButton fx:id="b1" buttonType="RAISED" prefHeight="74.0" prefWidth="213.0" ripplerFill="#fc0000" style="-fx-background-color: #f1f1f1;" text="Register" />
       <JFXButton fx:id="b2" buttonType="RAISED" layoutX="10.0" layoutY="123.0" prefHeight="74.0" prefWidth="213.0" ripplerFill="#fc0000" style="-fx-background-color: #f1f1f1;" text="Login" />
-      <JFXButton fx:id="b3" buttonType="RAISED" layoutX="10.0" layoutY="197.0" prefHeight="74.0" prefWidth="213.0" ripplerFill="#fc0000" style="-fx-background-color: #f1f1f1;" text="Forgot Password" />
-      <JFXButton fx:id="b4" buttonType="RAISED" layoutX="10.0" layoutY="271.0" prefHeight="74.0" prefWidth="213.0" ripplerFill="#fc0000" style="-fx-background-color: #f1f1f1;" text="Guest" />
+      <JFXButton fx:id="b3" buttonType="RAISED" layoutX="10.0" layoutY="197.0" prefHeight="74.0" prefWidth="213.0" ripplerFill="#fc0000" style="-fx-background-color: #f1f1f1;" text="Events" />
+      <JFXButton fx:id="b4" buttonType="RAISED" layoutX="10.0" layoutY="271.0" prefHeight="74.0" prefWidth="213.0" ripplerFill="#fc0000" style="-fx-background-color: #f1f1f1;" text="Java Lessons" />
    </children>
 </VBox>

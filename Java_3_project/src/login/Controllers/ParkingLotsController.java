@@ -78,25 +78,25 @@ public class ParkingLotsController {
 		ObservableList<String> hourList = FXCollections.observableArrayList(hours);
 		selectHour.getItems().addAll(hourList);
 
-		
 		/*
 		 * The next two Event Handlers make sure the user is user is not able to select
 		 * an option from the combo box without first choosing an option from the
 		 * previous combo box.
 		 */
 		selectLot.setOnAction(e -> {
-			/*On selection display images
-			 * if user selects all lots display image, but don't able next combo Box
-			 * if user selects other than all lots display image and able the next combo box
+			/*
+			 * On selection display images if user selects all lots display image, but don't
+			 * able next combo Box if user selects other than all lots display image and
+			 * able the next combo box
 			 */
 			ResultSet image;
 			try {
-				if (selectLot.getValue().equals("All lots")) {				
+				if (selectLot.getValue().equals("All lots")) {
 					Image pic = new Image("/images/allLots.png");
 					lotImage.setImage(pic);
-				}
-				else {
-					image = MainDriver.con.execQuery("select images from spaces where lot_id = '"+selectLot.getValue()+"';");
+				} else {
+					image = MainDriver.con
+							.execQuery("select images from spaces where lot_id = '" + selectLot.getValue() + "';");
 					image.next();
 					System.out.println(image.getString(1));
 					Image pic = new Image(image.getString(1));
@@ -123,16 +123,14 @@ public class ParkingLotsController {
 				selectHour.setDisable(false);
 			}
 		});
-		
-		
 
-		/*When submit button is clicked it checks if hour combo box is 
-		 * selected if not it tells the user to select an option.
-		 * If user choose an option get the time selected and execute
-		 * a query to the database for the information asked.
-		 * exception is raised if there is something wrong with
-		 *  the connection to the database.
-		*/
+		/*
+		 * When submit button is clicked it checks if hour combo box is selected if not
+		 * it tells the user to select an option. If user choose an option get the time
+		 * selected and execute a query to the database for the information asked.
+		 * exception is raised if there is something wrong with the connection to the
+		 * database.
+		 */
 		submitBtn.setOnAction(e -> {
 			// get info from database and display on lots info screen
 			if (selectHour.getValue() == null) {
@@ -141,19 +139,20 @@ public class ParkingLotsController {
 				alert.setHeaderText("Please pick a lot,date and/or time");
 				alert.showAndWait();
 			}
-			//if not null
+			// if not null
 			else {
-				//cut the zeros from the hour
+				// cut the zeros from the hour
 				String[] cutZeros = selectHour.getValue().split(":");
 				String hour = cutZeros[0];
 				try {
-					//Execute query for number of spots at a certain time
-					ResultSet spots = MainDriver.con.execQuery("select spots_at_" + hour + " from spaces where lot_id = '"
-							+ selectLot.getValue() + "' and day = '" + selectDay.getValue() + "';");
+					// Execute query for number of spots at a certain time
+					ResultSet spots = MainDriver.con
+							.execQuery("select spots_at_" + hour + " from spaces where lot_id = '"
+									+ selectLot.getValue() + "' and day = '" + selectDay.getValue() + "';");
 					spots.next();
 					spotsAv.setText(spots.getString(1));
-					
-					//Execute query for Service time
+
+					// Execute query for Service time
 					ResultSet hoursA = MainDriver.con.execQuery(
 							"select hours_of_service from spaces where lot_id = '" + selectLot.getValue() + "';");
 					hoursA.next();
@@ -168,12 +167,10 @@ public class ParkingLotsController {
 			}
 		});
 
-		
-		
 		/*
 		 * When clicked the user is going to be asked if it is sure to log out, if yes
-		 * take user to login Screen. If no let user stay on current screen.
-		 * If there is any error loading a screen an Exception is raised an alert is displayed.
+		 * take user to login Screen. If no let user stay on current screen. If there is
+		 * any error loading a screen an Exception is raised an alert is displayed.
 		 */
 		logoutBtn.setOnAction(e -> {
 			Alert alert = new Alert(Alert.AlertType.CONFIRMATION);

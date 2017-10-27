@@ -5,16 +5,13 @@ import com.jfoenix.controls.JFXButton;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
-import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
-
 
 public class SidePanelContentController implements Initializable {
 
@@ -26,8 +23,6 @@ public class SidePanelContentController implements Initializable {
 	private JFXButton b3;
 	@FXML
 	private JFXButton b4;
-	@FXML
-	private JFXButton b5;
 
 	@Override
 	public void initialize(URL url, ResourceBundle rb) {
@@ -46,7 +41,7 @@ public class SidePanelContentController implements Initializable {
 				alert.setContentText("The screen was not found");
 				alert.showAndWait();
 			}
-		}); 
+		});
 
 		b2.setOnAction(e -> {
 			FXMLLoader loader = new FXMLLoader(getClass().getResource("../Screens/First_login.fxml"));
@@ -57,16 +52,17 @@ public class SidePanelContentController implements Initializable {
 				Stage stage = (Stage) b2.getScene().getWindow();
 				stage.setScene(scene);
 			} catch (IOException e1) {
+				System.out.println(e1);
 				Alert alert = new Alert(Alert.AlertType.ERROR);
 				alert.setTitle("Screen Error");
 				alert.setHeaderText("Screen Not found");
 				alert.setContentText("The screen was not found");
 				alert.showAndWait();
 			}
-		}); 
+		});
 
 		b3.setOnAction(e -> {
-			FXMLLoader loader = new FXMLLoader(getClass().getResource("../Screens/ForgotPassword.fxml"));
+			FXMLLoader loader = new FXMLLoader(getClass().getResource("../Screens/Events.fxml"));
 			Parent root;
 			try {
 				root = loader.load();
@@ -83,22 +79,6 @@ public class SidePanelContentController implements Initializable {
 		});
 
 		b4.setOnAction(e -> {
-			FXMLLoader loader = new FXMLLoader(getClass().getResource("../Screens/Home.fxml"));
-			Parent root;
-			try {
-				root = loader.load();
-				Scene scene = new Scene(root);
-				Stage stage = (Stage) b3.getScene().getWindow();
-				stage.setScene(scene);
-			} catch (IOException e1) {
-				Alert alert = new Alert(Alert.AlertType.ERROR);
-				alert.setTitle("Screen Error");
-				alert.setHeaderText("Screen Not found");
-				alert.setContentText("The screen was not found");
-				alert.showAndWait();
-			}
-		});
-		b5.setOnAction(e -> {
 			FXMLLoader loader = new FXMLLoader(getClass().getResource("../Screens/JavaLessons.fxml"));
 			Parent root;
 			try {
@@ -113,6 +93,6 @@ public class SidePanelContentController implements Initializable {
 				alert.setContentText("The screen was not found");
 				alert.showAndWait();
 			}
-		}); 
+		});
 	}
 }

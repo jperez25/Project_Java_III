@@ -39,7 +39,7 @@ CREATE TABLE `user` (
 
 LOCK TABLES `user` WRITE;
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
-INSERT INTO `user` VALUES ('Jovanny','Perez','jojo','password','jperez16@aurora.edu','2017-09-07');
+INSERT INTO `user` VALUES ('David','Benitez','1','poli','dbenitez01@aurora.edu','2017-10-19'),('Jovanny','Perez','jojo','password','jperez16@aurora.edu','2017-09-07');
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -52,4 +52,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-10-17 12:38:13
+-- Dump completed on 2017-10-26 23:35:39

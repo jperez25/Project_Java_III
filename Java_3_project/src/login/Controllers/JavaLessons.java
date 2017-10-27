@@ -1,6 +1,8 @@
 package login.Controllers;
 
 import java.io.IOException;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.Arrays;
 
 import javafx.fxml.FXML;
@@ -16,9 +18,10 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 public class JavaLessons {
-	static long begin_time;
-	static long stop_time;
-
+	static private long begin_time;
+	static private long stop_time;
+	
+	//Screen Elements
 	@FXML
 	private Button backBtn;
 	@FXML
@@ -27,6 +30,22 @@ public class JavaLessons {
 	private Button sort;
 	@FXML
 	private Button hashing;
+	
+	//Sorting Elements <--------------------------------------Karissa put Your Elements here
+	@FXML
+	private AnchorPane sortingPane;
+	
+	//Hash Elements
+	@FXML
+	private AnchorPane hashingPane;
+	@FXML
+	private Button hashStringBtn;
+	@FXML
+	private TextField HashFld;
+	@FXML
+	private TextArea showHashedStringTxtArea;
+	
+	//Search Elements
 	@FXML
 	private AnchorPane searchPane;
 	@FXML
@@ -39,10 +58,11 @@ public class JavaLessons {
 	private TextArea textArea;
 
 	public void initialize() {
-		// TODO Auto-generated method stub
-		//Set search pane to false until search button is pushed
+		
+		//Set panes to not visible
 		searchPane.setVisible(false);
-
+		hashingPane.setVisible(false);
+		
 		
 		//This is the Binary Search Code. 
 /*------------------------------------------------------------------------------------------------------------------------------*/
@@ -53,8 +73,11 @@ public class JavaLessons {
 
 		//Once search button is pressed then do the following...
 		search.setOnAction( e -> {
+			
 			//Set the searchPane true and textArea false
+			//Set other panes to false
 			searchPane.setVisible(true);
+			hashingPane.setVisible(false);
 			textArea.setEditable(false);
 			//
 			textArea.appendText(Arrays.toString(numbers));
@@ -112,7 +135,49 @@ public class JavaLessons {
 			textArea.appendText(Arrays.toString(numbers));
 		});
 /*------------------------------------------------------------------------------------------------------------------------------*/
-
+		
+		
+		
+		//This is the Hash Code. 
+/*------------------------------------------------------------------------------------------------------------------------------*/
+		hashing.setOnAction(e->{
+			hashingPane.setVisible(true);
+			searchPane.setVisible(false);
+		});
+		//Listener
+		HashFld.setOnKeyPressed(e -> {
+			if (e.getCode() == KeyCode.ENTER) {
+				hashStringBtn.fire();
+			}
+		});
+		hashStringBtn.setOnAction(e->{
+			//get text from field
+			String toHashString = HashFld.getText();
+			try {
+				//Create instance of the hashing class using sha-256 algorithm
+				MessageDigest messageDigest = MessageDigest.getInstance("SHA-256");
+				//hash string
+				messageDigest.update(toHashString.getBytes());
+				//Convert to hashed string bytes to String
+				String encryptedString = new String(messageDigest.digest());
+				//Display hashed String
+				showHashedStringTxtArea.setText(encryptedString);
+			} catch (NoSuchAlgorithmException e1) {
+				e1.printStackTrace();
+				Alert alert = new Alert(Alert.AlertType.ERROR);
+				alert.setTitle("Hashing Error");
+				alert.setHeaderText("Oops We couldn't hash your string");
+				alert.showAndWait();
+				
+			}
+		});
+		
+/*------------------------------------------------------------------------------------------------------------------------------*/
+		
+		//This is the Sorting Code. 
+/*------------------------------------------------------------------------------------------------------------------------------*/
+		//Karissa put your code here
+/*------------------------------------------------------------------------------------------------------------------------------*/
 		
 		
 		//Go back to the home page screen

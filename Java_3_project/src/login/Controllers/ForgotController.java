@@ -1,12 +1,8 @@
 package login.Controllers;
 
 import java.io.IOException;
-import java.net.URL;
 import java.sql.ResultSet;
 import java.util.Properties;
-import java.util.ResourceBundle;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 import javax.mail.Message;
 import javax.mail.MessagingException;
@@ -16,13 +12,8 @@ import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 
-import com.jfoenix.controls.JFXDrawer;
-import com.jfoenix.controls.JFXHamburger;
-import com.jfoenix.transitions.hamburger.HamburgerBackArrowBasicTransition;
-
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
@@ -30,13 +21,11 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import login.MainDriver;
 
-public class ForgotController implements Initializable{
+public class ForgotController {
 	@FXML
 	private Button backBtn;
 	@FXML
@@ -59,44 +48,18 @@ public class ForgotController implements Initializable{
 	private Button verifyBtn;
 	@FXML
 	private Label errorLabel;
-	@FXML
-	private JFXDrawer drawer;
-	@FXML
-	private JFXHamburger hamburger;
 
-	public void initialize(URL url, ResourceBundle rb) {
-		
-		//Loads the side panel after the hamburger is pressed
-		try {
-			VBox box = FXMLLoader.load(getClass().getResource("../Screens/SidePanelContent.fxml"));
-			drawer.setSidePane(box);
-		} catch (IOException ex) {
-			Logger.getLogger(HomeController.class.getName()).log(Level.SEVERE, null, ex);
-		}
-		//Transition used to create the effect when hamburger is pressed
-		HamburgerBackArrowBasicTransition transition = new HamburgerBackArrowBasicTransition(hamburger);
-		transition.setRate(-1);
-		//Event handler when hamburger pressed
-		hamburger.addEventHandler(MouseEvent.MOUSE_PRESSED,(e)->{
-			transition.setRate(transition.getRate()*-1);
-			transition.play();
+	public void initialize() throws Exception {
 
-			if(drawer.isShown())
-			{
-				drawer.close();
-			}else
-				drawer.open();
-		});
-		
 		// listener
 		emailfl.setOnKeyPressed(e -> {
 			if (e.getCode() == KeyCode.ENTER) {
 				sendBtn.fire();
 			}
 		});
-		
-		/*When clicked sent back to Login Screen
-		 * If Screen not found raise alert.
+
+		/*
+		 * When clicked sent back to Login Screen If Screen not found raise alert.
 		 */
 		backBtn.setOnAction(e -> {
 			FXMLLoader loader = new FXMLLoader(getClass().getResource("../Screens/First_login.fxml"));
@@ -115,23 +78,23 @@ public class ForgotController implements Initializable{
 			}
 		});
 
-		/*When clicked check if any fields are empty. If they are
-		 * set stars and error label visible.
-		 * If not execute connection and check if values entered match with our registers in DB
-		 * if values match sent email if not display error label and stars.
-		 * Sent user back to login Screen if email sent successfully.
+		/*
+		 * When clicked check if any fields are empty. If they are set stars and error
+		 * label visible. If not execute connection and check if values entered match
+		 * with our registers in DB if values match sent email if not display error
+		 * label and stars. Sent user back to login Screen if email sent successfully.
 		 */
 		sendBtn.setOnAction(e -> {
-			//Set stars to false
+			// Set stars to false
 			userStar.setVisible(false);
 			emailStar.setVisible(false);
 			errorLabel.setVisible(false);
-			
-			//Get user name and email
+
+			// Get user name and email
 			String username = userfl.getText();
 			String email = emailfl.getText();
 
-			//check if fields are empty
+			// check if fields are empty
 			if (username.equals("") || email.equals("")) {
 				errorLabel.setText("Please fill empty Fields");
 				errorLabel.setVisible(true);
@@ -149,26 +112,27 @@ public class ForgotController implements Initializable{
 							.execQuery("select UserName from user where UserName='" + username + "';");
 					boolean isEmpty = userName.next();
 
-					//If user not found returns null
+					// If user not found returns null
 					if (!isEmpty) {
 						errorLabel.setText("User Not Found");
 						errorLabel.setVisible(true);
-					} 
-					//If user is found check email
+					}
+					// If user is found check email
 					else {
 						final String user = "auparkinglot@gmail.com";
 						final String pass = "ParkingLot";
-						
+
 						// Execute query for password
-						ResultSet eMail = MainDriver.con.execQuery("select Email from user where Email='" + email + "';");
+						ResultSet eMail = MainDriver.con
+								.execQuery("select Email from user where Email='" + email + "';");
 						boolean isEmailEmpty = eMail.next();
-						
-						//If email does not matche user name
+
+						// If email does not matche user name
 						if (!isEmailEmpty) {
 							errorLabel.setText("Email not found");
 							errorLabel.setVisible(true);
-						} 
-						//If email matches user name sent email
+						}
+						// If email matches user name sent email
 						else {
 							Properties props = new Properties();
 							props.put("mail.smtp.auth", "true");
@@ -215,10 +179,12 @@ public class ForgotController implements Initializable{
 										"text/html; charset=utf-8");
 								Transport.send(message); // Sends the message to the user
 
-								Alert alert = new Alert(Alert.AlertType.INFORMATION); // Notify user that email was sent to their email address
+								Alert alert = new Alert(Alert.AlertType.INFORMATION); // Notify user that email was sent
+																						// to their email address
 								alert.setTitle("Email sent");
 								alert.setHeaderText("Email was sent");
-								alert.setContentText("An email was sent to your account with your password.\n Try not to forget it this time.");
+								alert.setContentText(
+										"An email was sent to your account with your password.\n Try not to forget it this time.");
 								alert.showAndWait();
 
 								// Take user to login screen
@@ -237,8 +203,8 @@ public class ForgotController implements Initializable{
 									alert1.setContentText("The screen was not found");
 									alert1.showAndWait();
 								}
-							} 
-							//If error happens while sending email
+							}
+							// If error happens while sending email
 							catch (MessagingException x) {
 								Alert alert1 = new Alert(Alert.AlertType.ERROR);
 								alert1.setTitle("Email Error");
@@ -249,8 +215,8 @@ public class ForgotController implements Initializable{
 
 						}
 					}
-				} 
-				//If screen not found
+				}
+				// If screen not found
 				catch (Exception a) {
 					Alert alert = new Alert(Alert.AlertType.ERROR);
 					alert.setTitle("Connection Error");
@@ -261,9 +227,9 @@ public class ForgotController implements Initializable{
 			}
 
 		});
-		
-		/*Just if we change our minds
-		 * sent code with verification number
+
+		/*
+		 * Just if we change our minds sent code with verification number
 		 */
 		verifyBtn.setOnAction(e -> {
 			ogPane.setVisible(false);
@@ -272,7 +238,7 @@ public class ForgotController implements Initializable{
 			codePane.setVisible(true);
 
 		});
-		//Tab does not affect
+		// Tab does not affect
 		userfl.setFocusTraversable(true);
 		emailfl.setFocusTraversable(true);
 	}

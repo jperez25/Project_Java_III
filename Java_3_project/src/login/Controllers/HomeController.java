@@ -27,30 +27,30 @@ public class HomeController implements Initializable {
 	private AnchorPane root;
 
 	public static AnchorPane rootP;
+
 	@Override
 	public void initialize(URL url, ResourceBundle rb) {
-		
-		//Loads the side panel after the hamburger is pressed
+		rootP = root;
+
 		try {
 			VBox box = FXMLLoader.load(getClass().getResource("../Screens/SidePanelContent.fxml"));
 			drawer.setSidePane(box);
 		} catch (IOException ex) {
 			Logger.getLogger(HomeController.class.getName()).log(Level.SEVERE, null, ex);
 		}
-		//Transition used to create the effect when hamburger is pressed
+
 		HamburgerBackArrowBasicTransition transition = new HamburgerBackArrowBasicTransition(hamburger);
 		transition.setRate(-1);
-		//Event handler when hamburger pressed
-		hamburger.addEventHandler(MouseEvent.MOUSE_PRESSED,(e)->{
-			transition.setRate(transition.getRate()*-1);
+		hamburger.setOnMouseClicked(e->{
+			transition.setRate(transition.getRate() * -1);
 			transition.play();
 
-			if(drawer.isShown())
-			{
+			if (drawer.isShown()) {
 				drawer.close();
-			}else
+			} else
 				drawer.open();
 		});
 	}
 
 }
+
