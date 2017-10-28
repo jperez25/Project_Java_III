@@ -1,8 +1,15 @@
 package login.Controllers;
 
+import java.io.BufferedOutputStream;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileOutputStream;
 //imports...
-
+import java.io.FileWriter;
 import java.io.IOException;
+import java.io.OutputStream;
+import java.io.OutputStreamWriter;
+import java.net.CookieStore;
 import java.net.URL;
 import java.sql.*;
 import java.util.ResourceBundle;
@@ -30,6 +37,8 @@ import javafx.stage.Stage;
 import login.MainDriver;
 
 public class Controller {
+	protected static String username;
+	protected static String pass;
 	// Fxml injections
 	@FXML
 	private CheckBox KeepLoggedIn;
@@ -103,8 +112,8 @@ public class Controller {
 			userStar.setVisible(false);
 			passStar.setVisible(false);
 			errorLabel.setVisible(false);
-			String username = txtfl.getText();
-			String pass = passfl.getText();
+			username = txtfl.getText();
+			pass = passfl.getText();
 
 			// Check empty fields
 			if (username.equals("") || pass.equals("")) {
@@ -143,7 +152,33 @@ public class Controller {
 						if (!isEmptyPass) {
 							errorLabel.setText("Wrong Username or password");
 							errorLabel.setVisible(true);
-						} else {
+						} 
+						else {
+							
+							//Check if checkbox is selected
+							if (KeepLoggedIn.isSelected()) {
+								//Create file to store cookies
+								try {
+									File fl = new File("Cookies/cookies.txt");
+									fl.createNewFile();
+									FileWriter cookies = new FileWriter(fl);
+									System.out.println("in check");
+									BufferedWriter cook = new BufferedWriter(cookies);
+									
+									cook.append(username+ " ");
+									
+									cook.append(pass+"");
+									cook.flush();
+									
+									cook.close();
+									cookies.close();
+									
+								} catch (Exception e2) {
+									System.out.println("Couldn't write to the file"+ e2);
+								}
+							}
+							
+							
 							// go to pick a lot
 							FXMLLoader loader2 = new FXMLLoader(
 									getClass().getResource("../screens/ParkingLotsScreen.fxml"));

@@ -1,8 +1,10 @@
 package login.Controllers;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.PrintWriter;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.sql.Connection;
@@ -177,6 +179,14 @@ public class ParkingLotsController {
 			alert.setTitle("Message");
 			alert.setHeaderText("Are you sure you want to logout?");
 			alert.showAndWait().ifPresent(response -> {
+				
+				try {
+					PrintWriter delCookies = new PrintWriter("Cookies/cookies.txt");
+					delCookies.close();
+				} catch (FileNotFoundException e2) {
+					
+				}
+				
 				if (response == ButtonType.OK) {
 					FXMLLoader loader2 = new FXMLLoader(getClass().getResource("../Screens/First_Login.fxml"));
 					Parent root2;

@@ -172,7 +172,7 @@ public class ForgotController {
 																												// for
 																												// the
 																												// email
-												+ "You're resetting your email!<br/>Your email is: "
+												+ "You're forgot your password!<br/>Your password is: "
 												+ emailPass.getString(1) + "<br/>" // add email password from database
 																					// in here
 												+ "</body>",
