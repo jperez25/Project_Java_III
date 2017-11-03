@@ -3,7 +3,9 @@ package login.Controllers;
 import java.io.IOException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -15,6 +17,12 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.Pane;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Rectangle;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 public class JavaLessons {
@@ -30,10 +38,29 @@ public class JavaLessons {
 	private Button sort;
 	@FXML
 	private Button hashing;
+	@FXML
+	private Button bblSort;
 	
-	//Sorting Elements <--------------------------------------Karissa put Your Elements here
+	//Selection sorting Elements 
 	@FXML
 	private AnchorPane sortingPane;
+	@FXML
+	private BorderPane sortingBorder;
+	@FXML
+	private HBox sortingBottom;
+	@FXML
+	private Button selectStart;
+	@FXML
+	private Button sortResetBtn;
+	@FXML
+	private Button sortStepBtn;
+	@FXML
+	private Pane pane;
+	
+	int searchSize = 10;
+	int passNumber = -1;
+	ArrayList<Integer> random = new ArrayList<>(searchSize);
+	
 	
 	//Hash Elements
 	@FXML
@@ -56,12 +83,33 @@ public class JavaLessons {
 	private Button reset;
 	@FXML
 	private TextArea textArea;
-
+	
+	// Bubble sort Elements
+	@FXML
+	private AnchorPane bblSortPane;
+	@FXML
+	private BorderPane bblSortBorder;
+	@FXML
+	private HBox bblSortBottom;
+	@FXML
+	private Button bblStart;
+	@FXML
+	private Button bblResetBtn;
+	@FXML
+	private Button bblStepBtn;
+	@FXML
+	private Pane bblPane;
+	
+	private boolean needNextPass = true;
+	private boolean endOfPass = true;
+	private int index = -1; 
+	
 	public void initialize() {
 		
 		//Set panes to not visible
 		searchPane.setVisible(false);
 		hashingPane.setVisible(false);
+		sortingPane.setVisible(false);
 		
 		
 		//This is the Binary Search Code. 
@@ -79,6 +127,8 @@ public class JavaLessons {
 			searchPane.setVisible(true);
 			hashingPane.setVisible(false);
 			textArea.setEditable(false);
+			sortingPane.setVisible(false);
+			bblSortPane.setVisible(false);
 			//
 			textArea.appendText(Arrays.toString(numbers));
 
@@ -143,6 +193,8 @@ public class JavaLessons {
 		hashing.setOnAction(e->{
 			hashingPane.setVisible(true);
 			searchPane.setVisible(false);
+			sortingPane.setVisible(false);
+			bblSortPane.setVisible(false);
 		});
 		//Listener
 		HashFld.setOnKeyPressed(e -> {
@@ -174,10 +226,78 @@ public class JavaLessons {
 		
 /*------------------------------------------------------------------------------------------------------------------------------*/
 		
-		//This is the Sorting Code. 
+		//This is the Selection sorting Code. 
 /*------------------------------------------------------------------------------------------------------------------------------*/
-		//Karissa put your code here
+
+		for (int i = 1; i <= searchSize; i++) {
+			 random.add(i);
+			}
+			Collections.shuffle(random);
+			
+			
+		sort.setOnAction(e->{
+			hashingPane.setVisible(false);
+			searchPane.setVisible(false);
+			sortingPane.setVisible(true);
+			bblSortPane.setVisible(false);
+		});
+		
+		selectStart.setOnAction(e->{
+			reset();
+			selectStart.setDisable(true);
+		});
+		
+		// when the next step button is pressed, this clears the visual, figures out the next swap being made,
+		// and repaints the scene
+	 sortStepBtn.setOnAction(e->{
+		   pane.getChildren().clear();
+		   nextStep();
+		   repaint();  
+	 
+	});
+	 	// resets the animation
+	 sortResetBtn.setOnAction(e->{
+		 	pane.getChildren().clear();
+		 	reset();
+	 });
+		
+		  
+		  
+	
 /*------------------------------------------------------------------------------------------------------------------------------*/
+	 
+	 //This is the Bubble sorting Code. 
+/*------------------------------------------------------------------------------------------------------------------------------*/
+
+	 		bblSort.setOnAction(e->{
+	 			hashingPane.setVisible(false);
+	 			searchPane.setVisible(false);
+	 			sortingPane.setVisible(false);
+	 			bblSortPane.setVisible(true);
+	 		});
+	 			
+	 		bblStart.setOnAction(e->{
+				bblReset();
+				bblStart.setDisable(true);
+			});
+	 		// when the next step button is pressed, this clears the visual, figures out the next step being made,
+	 		// and repaints the scene
+	 	 bblStepBtn.setOnAction(e->{
+	 		   bblPane.getChildren().clear();
+	 		   bblNextStep();
+	 		   bblRepaint();  
+	 	 
+	 	});
+	 	 	// resets the animation
+	 	 bblResetBtn.setOnAction(e->{
+	 		 	bblPane.getChildren().clear();
+	 		 	bblReset();
+	 	 });
+	 		
+	 		  
+	 		  
+	 	
+	 /*------------------------------------------------------------------------------------------------------------------------------*/
 		
 		
 		//Go back to the home page screen
@@ -195,8 +315,134 @@ public class JavaLessons {
 				alert.setTitle("Screen Error");
 				alert.setHeaderText("Screen Not found");
 				alert.setContentText("The screen was not found");
-				alert.showAndWait();
+				alert.showAndWait();	
 			}
 		});
+	}
+	
+/*------------------------------------------------------------------------------------------------------------------------------------------------*/
+	
+	// Selection sort methods
+/*-----------------------------------------------------------------------------------------------------------------------------------------------*/
+	// figuring out the next numbers being swapped in selection sort
+	public void nextStep() {
+	passNumber++;
+	   if (passNumber >= searchSize) { // end of sorting
+		  sortStepBtn.setDisable(true);
+	    passNumber = -1;
+	   } else {
+	    int currentMin = random.get(passNumber); // current number and its index are minimum
+	    int currentMinIndex = passNumber;
+
+	    for (int j = passNumber + 1; j < random.size(); j++) { 
+	     if (currentMin > random.get(j)) { // looking for a smaller number to be the new minimum
+	      currentMin = random.get(j);
+	      currentMinIndex = j;
+	     }
+	    }
+	    if (currentMinIndex != passNumber) { // if the index of the smallest number is not the one originally set as the minimum
+	     random.set(currentMinIndex, random.get(passNumber)); // swap the numbers 
+	     random.set(passNumber, currentMin);
+	    }    
+	   }
+	}
+	public void repaint() { // painting the rectangles and numbers 
+		double numberWidth = pane.getWidth() / (searchSize + 2);
+		   double numberHeight = pane.getHeight() / (searchSize + 2);
+		   for (int i = 0; i < searchSize; i++) {
+		    Rectangle r1 = new Rectangle(numberWidth * (i + 1), pane.getHeight() - numberHeight * random.get(i), numberWidth, numberHeight * random.get(i));
+		    r1.setFill(Color.WHITE);
+		    r1.setStroke(Color.BLACK);
+		    Text num = new Text(numberWidth * (i + 1), pane.getHeight() - numberHeight * random.get(i) - (int)(numberHeight * 0.5), random.get(i) + "");
+		    pane.getChildren().addAll(r1, num);
+		   }
+		   if ((passNumber != -1)&&(passNumber < searchSize)) {
+		    Rectangle r2 = new Rectangle(numberWidth * (passNumber + 1), pane.getHeight() - numberHeight * random.get(passNumber), numberWidth, numberHeight * random.get(passNumber));
+		    r2.setFill(Color.BLACK);
+		    pane.getChildren().add(r2);
+		   }
+	}
+	public void reset() { // resetting the selection sort animation
+		 Collections.shuffle(random);
+		 sortStepBtn.setDisable(false);
+		  passNumber = -1;
+		  repaint();
+		}
+	
+/*-------------------------------------------------------------------------------------------------------------------------------------*/
+	
+	// Bubble sort methods
+/*---------------------------------------------------------------------------------------------------------------------------------------*/
+	
+	//figuring out the next step to take
+	public void bblNextStep() {
+		   if (passNumber == -1) {
+		    passNumber = 1;
+		   } 
+		   else {
+		    if (endOfPass) {
+		     passNumber++;
+		    }
+		   }
+		   if (passNumber >= searchSize) {
+		    bblStepBtn.setDisable(true);
+		    passNumber = -1;
+		   } 
+		   else {    
+		    if (endOfPass) {
+		     needNextPass = false;
+		     endOfPass = false;
+		     index = 0;
+		    } 
+		    if (!endOfPass) {
+		     if (random.get(index) > random.get(index + 1)) {
+		      // Swap list[i] with list[i + 1]
+		      int temp = random.get(index);
+		      random.set(index, random.get(index + 1));
+		      random.set(index + 1, temp);
+		      needNextPass = true; // Next pass still needed      
+		     }
+		     index++;
+		     if (!(index < random.size() - passNumber)) {
+		      endOfPass = true;
+		     }
+		    }
+		    if (endOfPass) {
+		     if (!needNextPass) {
+		      bblStepBtn.setDisable(true);
+		      passNumber = -1;
+		      index = -1; 
+		     }
+		    }    		      
+		   }		   
+	}
+	
+	
+	public void bblRepaint() { // painting the rectangles and numbers 
+		double numberWidth = bblPane.getWidth() / (searchSize + 2);
+		   double numberHeight = bblPane.getHeight() / (searchSize + 2);
+		   for (int i = 0; i < searchSize; i++) {
+		    Rectangle r1 = new Rectangle(numberWidth * (i + 1), bblPane.getHeight() - numberHeight * random.get(i), numberWidth, numberHeight * random.get(i));
+		    r1.setFill(Color.WHITE);
+		    r1.setStroke(Color.BLACK);
+		    Text num = new Text(numberWidth * (i + 1), bblPane.getHeight() - numberHeight * random.get(i) - (int)(numberHeight * 0.5), random.get(i) + "");
+		    bblPane.getChildren().addAll(r1, num);
+		   }
+		   if ((index != -1)&&(index < searchSize)) {
+		    Rectangle r2 = new Rectangle(numberWidth * (index + 1), bblPane.getHeight() - numberHeight * random.get(index), numberWidth, numberHeight * random.get(index));
+		    r2.setFill(Color.BLACK);
+		    bblPane.getChildren().add(r2);
+		   }
+	}
+	
+	
+	public void bblReset() { // resetting the bubble sort animation
+		 Collections.shuffle(random);
+		 bblStepBtn.setDisable(false);
+		  passNumber = -1;
+		  needNextPass = true;
+		  endOfPass = true;
+		  index = -1;
+		  bblRepaint();
 	}
 }
