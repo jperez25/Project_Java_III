@@ -26,24 +26,34 @@
    </Button>
       <AnchorPane layoutX="79.0" layoutY="67.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="566.0" prefWidth="708.0" style="-fx-background-color: #f2f2f2;">
          <children>
-            <Button fx:id="search" layoutY="1.0" mnemonicParsing="false" text="Search" />
-            <Button fx:id="sort" layoutX="72.0" layoutY="1.0" mnemonicParsing="false" text="Selection Sort" />
-            <Button fx:id="hashing" layoutX="181.0" layoutY="1.0" mnemonicParsing="false" text="Hashing" />
-            <Button fx:id="bblSort" layoutX="264.0" layoutY="1.0" mnemonicParsing="false" text="Bubble Sort" />
+            <Button fx:id="search" layoutY="1.0" mnemonicParsing="false" text="Binary Search" />
+            <Button fx:id="sort" layoutX="113.0" layoutY="1.0" mnemonicParsing="false" text="Selection Sort" />
+            <Button fx:id="hashing" layoutX="226.0" layoutY="1.0" mnemonicParsing="false" text="Hashing" />
+            <Button fx:id="bblSort" layoutX="302.0" layoutY="1.0" mnemonicParsing="false" text="Bubble Sort" />
             <AnchorPane fx:id="searchPane" layoutX="29.0" layoutY="52.0" prefHeight="456.0" prefWidth="652.0" visible="false">
                <children>
-                  <Text layoutX="213.0" layoutY="48.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Enter a value to search for:">
+                  <Text fill="#943737" layoutX="200.0" layoutY="30.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Binary Search" textAlignment="CENTER" wrappingWidth="267.13671875">
+                     <font>
+                        <Font name="Bernard MT Condensed" size="37.0" />
+                     </font>
+                  </Text>
+                  <Label alignment="TOP_CENTER" layoutX="24.0" layoutY="66.0" prefHeight="106.0" prefWidth="608.0" text="Binary search is the other common search approach for a list of values. For binary search to work, the elements in the array must already be ordered. Assume that the array is in ascending order. The binary search first compares the key with the element in the middle of the array." textAlignment="CENTER" wrapText="true">
+                     <font>
+                        <Font name="Bell MT" size="14.0" />
+                     </font>
+                  </Label>
+                  <Text layoutX="213.0" layoutY="165.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Enter a value to search for:">
                      <font>
                         <Font size="18.0" />
                      </font></Text>
-                  <TextField fx:id="input" layoutX="243.0" layoutY="62.0" />
-                  <Text layoutX="21.0" layoutY="159.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Results:">
+                  <TextField fx:id="input" layoutX="243.0" layoutY="175.0" />
+                  <Button fx:id="run" layoutX="307.0" layoutY="210.0" mnemonicParsing="false" text="Run" />
+                  <Text layoutX="21.0" layoutY="234.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Results:">
                      <font>
                         <Font size="18.0" />
                      </font></Text>
-                  <TextArea fx:id="textArea" layoutX="21.0" layoutY="175.0" prefHeight="178.0" prefWidth="613.0" />
-                  <Button fx:id="run" layoutX="307.0" layoutY="95.0" mnemonicParsing="false" text="Run" />
-                  <Button fx:id="reset" layoutX="515.0" layoutY="367.0" mnemonicParsing="false" text="Reset" />
+                  <TextArea fx:id="textArea" layoutX="21.0" layoutY="250.0" prefHeight="178.0" prefWidth="613.0" />
+                  <Button fx:id="reset" layoutX="515.0" layoutY="450.0" mnemonicParsing="false" text="Reset" />
                </children>
             </AnchorPane>
             <AnchorPane fx:id="hashingPane" layoutX="29.0" layoutY="52.0" prefHeight="456.0" prefWidth="652.0" visible="false">
