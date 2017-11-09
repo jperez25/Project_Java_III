@@ -37,7 +37,7 @@
                         <Font name="Bernard MT Condensed" size="37.0" />
                      </font>
                   </Text>
-                  <Label alignment="TOP_CENTER" layoutX="24.0" layoutY="66.0" prefHeight="106.0" prefWidth="608.0" text="Binary search is the other common search approach for a list of values. For binary search to work, the elements in the array must already be ordered. Assume that the array is in ascending order. The binary search first compares the key with the element in the middle of the array." textAlignment="CENTER" wrapText="true">
+                  <Label alignment="TOP_CENTER" layoutX="24.0" layoutY="37.0" prefHeight="130.0" prefWidth="608.0" text="Binary search is the other common search approach for a list of values. For binary search to work, the elements in the array must already be ordered. Assume that the array is in ascending order. The binary search first compares the key with the element in the middle of the array. If the value of the search key is less than the element in the middle of the array, narrow the array to the lower half. Otherwise, narrow it to the upper half. Repeatedly check until the value is found or the array is empty." textAlignment="CENTER" wrapText="true">
                      <font>
                         <Font name="Bell MT" size="14.0" />
                      </font>
