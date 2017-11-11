@@ -76,6 +76,11 @@ public class SidePanelContentController implements Initializable {
 					
 					if (user.equals(hashedUserName) && pass.equals(hashedPassword)) {
 						
+						Alert alert = new Alert(Alert.AlertType.INFORMATION);
+						alert.setTitle("Sesion still active");
+						alert.setHeaderText("An active sesion was found");
+						alert.showAndWait();
+						
 						FXMLLoader loader = new FXMLLoader(getClass().getResource("../Screens/ParkingLotsScreen.fxml"));
 						Parent root;
 						try {
@@ -85,11 +90,11 @@ public class SidePanelContentController implements Initializable {
 							stage.setScene(scene);
 						} catch (IOException e1) {
 							System.out.println(e1);
-							Alert alert = new Alert(Alert.AlertType.ERROR);
-							alert.setTitle("Screen Error");
-							alert.setHeaderText("Screen Not found");
-							alert.setContentText("The screen was not found");
-							alert.showAndWait();
+							Alert alert1 = new Alert(Alert.AlertType.ERROR);
+							alert1.setTitle("Screen Error");
+							alert1.setHeaderText("Screen Not found");
+							alert1.setContentText("The screen was not found");
+							alert1.showAndWait();
 						}
 					}
 				}

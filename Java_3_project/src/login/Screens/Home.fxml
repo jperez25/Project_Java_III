@@ -11,27 +11,35 @@
 <?import com.jfoenix.controls.JFXHamburger?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane id="AnchorPane" fx:id="root" prefHeight="700.0" prefWidth="832.0" style="-fx-background-color: #439f3e;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="login.Controllers.HomeController">
-    <children>
-      <JFXHamburger fx:id="hamburger" layoutX="755.0" layoutY="33.0" />
-      <Text layoutX="177.0" layoutY="99.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Welcome to AU Parking Guide Homepage!">
-         <font>
-            <Font size="24.0" />
-         </font>
-      </Text>
-      <Text layoutX="275.0" layoutY="197.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Feel free to use our navigation menu to navigate through our application." textAlignment="CENTER" wrappingWidth="281.2529296875">
-         <font>
-            <Font size="20.0" />
-         </font>
-      </Text>
-      <ImageView fitHeight="333.0" fitWidth="818.0" layoutX="7.0" layoutY="371.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="images/AuAerial.jpg" />
-         </image>
-         <effect>
-            <DropShadow />
-         </effect>
-      </ImageView>
-      <JFXDrawer fx:id="drawer" defaultDrawerSize="200.0" layoutY="-6.0" prefHeight="370.0" prefWidth="170.0" />
-    </children>
+<AnchorPane id="AnchorPane" fx:id="root" prefHeight="700.0"
+	prefWidth="832.0" style="-fx-background-color: #439f3e;" xmlns="http://javafx.com/javafx/8"
+	xmlns:fx="http://javafx.com/fxml/1" fx:controller="login.Controllers.HomeController">
+	<children>
+		<JFXHamburger fx:id="hamburger" layoutX="755.0" layoutY="33.0" />
+		<Text layoutX="177.0" layoutY="99.0" strokeType="OUTSIDE"
+			strokeWidth="0.0" text="Welcome to AU Parking Guide Homepage!">
+			<font>
+				<Font size="24.0" />
+			</font>
+		</Text>
+		<Text layoutX="275.0" layoutY="197.0" strokeType="OUTSIDE"
+			strokeWidth="0.0"
+			text="Feel free to use our navigation menu to navigate through our application."
+			textAlignment="CENTER" wrappingWidth="281.2529296875">
+			<font>
+				<Font size="20.0" />
+			</font>
+		</Text>
+		<ImageView fitHeight="333.0" fitWidth="818.0" layoutX="7.0"
+			layoutY="371.0" pickOnBounds="true" preserveRatio="true">
+			<image>
+				<Image url="images/AuAerial.jpg" />
+			</image>
+			<effect>
+				<DropShadow />
+			</effect>
+		</ImageView>
+		<JFXDrawer fx:id="drawer" defaultDrawerSize="200.0" layoutY="-6.0"
+			prefHeight="370.0" prefWidth="170.0" />
+	</children>
 </AnchorPane>

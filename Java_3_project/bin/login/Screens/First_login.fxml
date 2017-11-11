@@ -17,54 +17,73 @@
 <?import javafx.scene.paint.Stop?>
 <?import javafx.scene.text.Font?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="900.0" style="-fx-background-color: #1e932d;" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="login.Controllers.Controller">
-   <children>
-      <AnchorPane layoutX="275.0" layoutY="106.0" prefHeight="348.0" prefWidth="351.0" style="-fx-background-color: #1b4a7c; -fx-background-radius: 20px;">
-         <children>
-            <ImageView fitHeight="122.0" fitWidth="240.0" layoutX="53.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="/images/au_img.png" />
-               </image>
-            </ImageView>
-            <TextField fx:id="txtfl" layoutX="80.0" layoutY="176.0" prefHeight="25.0" prefWidth="183.0" promptText="User name" />
-            <PasswordField fx:id="passfl" layoutX="80.0" layoutY="211.0" prefHeight="25.0" prefWidth="183.0" promptText="Password" />
-            <Hyperlink fx:id="lnk1" layoutX="77.0" layoutY="246.0" text="Register" />
-            <Hyperlink fx:id="lnk2" layoutX="162.0" layoutY="246.0" text="Forgot Password?" />
-            <Button fx:id="bt1" layoutX="77.0" layoutY="294.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="192.0" text="Log in" />
-            <Label fx:id="userStar" layoutX="57.0" layoutY="175.0" text="*" textFill="#ff0e0e" visible="false">
-               <font>
-                  <Font size="18.0" />
-               </font>
-            </Label>
-            <Label fx:id="passStar" layoutX="57.0" layoutY="210.0" text="*" textFill="#ff0e0e" visible="false">
-               <font>
-                  <Font size="18.0" />
-               </font>
-            </Label>
-            <Label fx:id="errorLabel" alignment="CENTER" layoutX="68.0" layoutY="153.0" prefHeight="18.0" prefWidth="200.0" text="Wrong username or password" textAlignment="CENTER" textFill="RED" visible="false">
-               <font>
-                  <Font name="Bodoni MT" size="15.0" />
-               </font>
-            </Label>
-            <CheckBox fx:id="KeepLoggedIn" alignment="CENTER" layoutX="81.0" layoutY="269.0" mnemonicParsing="false" text="Keep me logged in">
-               <font>
-                  <Font size="14.0" />
-               </font>
-               <textFill>
-                  <LinearGradient endX="1.0" endY="1.0">
-                     <stops>
-                        <Stop color="#767ca1" />
-                        <Stop color="WHITE" offset="1.0" />
-                     </stops>
-                  </LinearGradient>
-               </textFill>
-            </CheckBox>
-         </children>
-         <effect>
-            <DropShadow color="#221f1f" height="124.53" radius="60.2825" width="118.6" />
-         </effect>
-      </AnchorPane>
-      <JFXHamburger fx:id="hamburger" layoutX="785.0" layoutY="53.0" />
-      <JFXDrawer fx:id="drawer" defaultDrawerSize="200.0" layoutY="-6.0" prefHeight="370.0" prefWidth="170.0" />
-   </children>
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity"
+	minWidth="-Infinity" prefHeight="700.0" prefWidth="900.0"
+	style="-fx-background-color: #1e932d;" xmlns="http://javafx.com/javafx/8.0.111"
+	xmlns:fx="http://javafx.com/fxml/1" fx:controller="login.Controllers.Controller">
+	<children>
+		<AnchorPane layoutX="275.0" layoutY="106.0" prefHeight="348.0"
+			prefWidth="351.0"
+			style="-fx-background-color: #1b4a7c; -fx-background-radius: 20px;">
+			<children>
+				<ImageView fitHeight="122.0" fitWidth="240.0" layoutX="53.0"
+					layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+					<image>
+						<Image url="/images/au_img.png" />
+					</image>
+				</ImageView>
+				<TextField fx:id="txtfl" layoutX="80.0" layoutY="176.0"
+					prefHeight="25.0" prefWidth="183.0" promptText="User name" />
+				<PasswordField fx:id="passfl" layoutX="80.0" layoutY="211.0"
+					prefHeight="25.0" prefWidth="183.0" promptText="Password" />
+				<Hyperlink fx:id="lnk1" layoutX="77.0" layoutY="246.0"
+					text="Register" />
+				<Hyperlink fx:id="lnk2" layoutX="162.0" layoutY="246.0"
+					text="Forgot Password?" />
+				<Button fx:id="bt1" layoutX="77.0" layoutY="294.0"
+					mnemonicParsing="false" prefHeight="25.0" prefWidth="192.0" text="Log in" />
+				<Label fx:id="userStar" layoutX="57.0" layoutY="175.0" text="*"
+					textFill="#ff0e0e" visible="false">
+					<font>
+						<Font size="18.0" />
+					</font>
+				</Label>
+				<Label fx:id="passStar" layoutX="57.0" layoutY="210.0" text="*"
+					textFill="#ff0e0e" visible="false">
+					<font>
+						<Font size="18.0" />
+					</font>
+				</Label>
+				<Label fx:id="errorLabel" alignment="CENTER" layoutX="68.0"
+					layoutY="153.0" prefHeight="18.0" prefWidth="200.0"
+					text="Wrong username or password" textAlignment="CENTER" textFill="RED"
+					visible="false">
+					<font>
+						<Font name="Bodoni MT" size="15.0" />
+					</font>
+				</Label>
+				<CheckBox fx:id="KeepLoggedIn" alignment="CENTER" layoutX="81.0"
+					layoutY="269.0" mnemonicParsing="false" text="Keep me logged in">
+					<font>
+						<Font size="14.0" />
+					</font>
+					<textFill>
+						<LinearGradient endX="1.0" endY="1.0">
+							<stops>
+								<Stop color="#767ca1" />
+								<Stop color="WHITE" offset="1.0" />
+							</stops>
+						</LinearGradient>
+					</textFill>
+				</CheckBox>
+			</children>
+			<effect>
+				<DropShadow color="#221f1f" height="124.53" radius="60.2825"
+					width="118.6" />
+			</effect>
+		</AnchorPane>
+		<JFXHamburger fx:id="hamburger" layoutX="785.0" layoutY="53.0" />
+		<JFXDrawer fx:id="drawer" defaultDrawerSize="200.0" layoutY="-6.0"
+			prefHeight="370.0" prefWidth="170.0" />
+	</children>
 </Pane>

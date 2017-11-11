@@ -12,36 +12,46 @@
 <?import javafx.scene.paint.Stop?>
 <?import javafx.scene.text.Font?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="900.0" style="-fx-background-color: #3cd8a4;" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="login.Controllers.WelcomeController">
-   <children>
-      <AnchorPane layoutX="68.0" layoutY="43.0" prefHeight="618.0" prefWidth="783.0" style="-fx-background-color: #bc6018; -fx-background-radius: 20px;">
-         <children>
-            <ImageView fitHeight="163.0" fitWidth="288.0" layoutX="248.0" layoutY="237.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="/images/au_img.png" />
-               </image>
-            </ImageView>
-            <ProgressBar fx:id="progressBar" layoutX="245.0" layoutY="422.0" prefHeight="18.0" prefWidth="270.0" progress="0.0" />
-            <Label fx:id="welcomeLbl" alignment="CENTER" layoutX="144.0" layoutY="91.0" prefHeight="54.0" prefWidth="472.0" text="Where is my Spot dude?">
-               <font>
-                  <Font name="Centaur" size="36.0" />
-               </font>
-               <effect>
-                  <Glow level="0.55" />
-               </effect>
-               <textFill>
-                  <RadialGradient centerX="0.49444444444444446" centerY="0.5095238095238095" radius="0.5">
-                     <stops>
-                        <Stop color="BLACK" />
-                        <Stop color="WHITE" offset="1.0" />
-                     </stops>
-                  </RadialGradient>
-               </textFill>
-            </Label>
-         </children>
-         <effect>
-            <DropShadow color="#401506" height="190.01" radius="75.9725" spread="0.29" width="115.88" />
-         </effect>
-      </AnchorPane>
-   </children>
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity"
+	minWidth="-Infinity" prefHeight="700.0" prefWidth="900.0"
+	style="-fx-background-color: #3cd8a4;" xmlns="http://javafx.com/javafx/8.0.111"
+	xmlns:fx="http://javafx.com/fxml/1" fx:controller="login.Controllers.WelcomeController">
+	<children>
+		<AnchorPane layoutX="68.0" layoutY="43.0" prefHeight="618.0"
+			prefWidth="783.0"
+			style="-fx-background-color: #bc6018; -fx-background-radius: 20px;">
+			<children>
+				<ImageView fitHeight="163.0" fitWidth="288.0" layoutX="248.0"
+					layoutY="237.0" pickOnBounds="true" preserveRatio="true">
+					<image>
+						<Image url="/images/au_img.png" />
+					</image>
+				</ImageView>
+				<ProgressBar fx:id="progressBar" layoutX="245.0"
+					layoutY="422.0" prefHeight="18.0" prefWidth="270.0" progress="0.0" />
+				<Label fx:id="welcomeLbl" alignment="CENTER" layoutX="144.0"
+					layoutY="91.0" prefHeight="54.0" prefWidth="472.0" text="Where is my Spot dude?">
+					<font>
+						<Font name="Centaur" size="36.0" />
+					</font>
+					<effect>
+						<Glow level="0.55" />
+					</effect>
+					<textFill>
+						<RadialGradient centerX="0.49444444444444446"
+							centerY="0.5095238095238095" radius="0.5">
+							<stops>
+								<Stop color="BLACK" />
+								<Stop color="WHITE" offset="1.0" />
+							</stops>
+						</RadialGradient>
+					</textFill>
+				</Label>
+			</children>
+			<effect>
+				<DropShadow color="#401506" height="190.01" radius="75.9725"
+					spread="0.29" width="115.88" />
+			</effect>
+		</AnchorPane>
+	</children>
 </Pane>

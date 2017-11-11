@@ -15,8 +15,16 @@ import java.sql.Statement;
 
 import javax.imageio.ImageIO;
 
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
+import org.jsoup.select.Elements;
+
 import com.mysql.jdbc.Buffer;
 
+import javafx.animation.KeyFrame;
+import javafx.animation.KeyValue;
+import javafx.animation.Timeline;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -32,13 +40,17 @@ import javafx.scene.control.Label;
 import javafx.scene.control.Labeled;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.text.Text;
 import javafx.scene.web.WebEngine;
 import javafx.scene.web.WebView;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 import login.Connector;
 import login.MainDriver;
 
 public class ParkingLotsController {
+	@FXML
+	private Text marquee_;
 	@FXML
 	private Button backBtn;
 	@FXML
@@ -59,10 +71,14 @@ public class ParkingLotsController {
 	private Label spotsAv;
 	@FXML
 	private Labeled hoursAv;
+	private static final String outPut = null;
 
 	public void initialize() throws Exception {
 		WebEngine webEngine = weather.getEngine();
-		webEngine.load("https://www.yahoo.com/news/weather");
+
+		webEngine.load(
+				"http://api.openweathermap.org/data/2.5/weather?q=North%20Aurora,%20us&units=imperial&mode=html&appid=1906951238f29646ce8ef804bea0b524\r\n"
+						+ "");
 
 		/*
 		 * Below are all the lists needed to populate the combo boxes.
@@ -168,6 +184,23 @@ public class ParkingLotsController {
 				}
 			}
 		});
+		try {
+			marquee_.setText(loop(outPut));
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		double msgWidth = marquee_.getLayoutBounds().getWidth();
+
+		KeyValue initKeyValue = new KeyValue(marquee_.translateXProperty(), 200);
+		KeyFrame initFrame = new KeyFrame(Duration.ZERO, initKeyValue);
+
+		KeyValue endKeyValue = new KeyValue(marquee_.translateXProperty(), -1.0 * msgWidth);
+		KeyFrame endFrame = new KeyFrame(Duration.minutes(10), endKeyValue);
+
+		Timeline timeline = new Timeline(initFrame, endFrame);
+
+		timeline.setCycleCount(Timeline.INDEFINITE);
+		timeline.play();
 
 		/*
 		 * When clicked the user is going to be asked if it is sure to log out, if yes
@@ -179,14 +212,15 @@ public class ParkingLotsController {
 			alert.setTitle("Message");
 			alert.setHeaderText("Are you sure you want to logout?");
 			alert.showAndWait().ifPresent(response -> {
-				
+
+				// Delete cookies if user log out
 				try {
 					PrintWriter delCookies = new PrintWriter("Cookies/cookies.txt");
 					delCookies.close();
 				} catch (FileNotFoundException e2) {
-					
+
 				}
-				
+
 				if (response == ButtonType.OK) {
 					FXMLLoader loader2 = new FXMLLoader(getClass().getResource("../Screens/First_Login.fxml"));
 					Parent root2;
@@ -206,5 +240,26 @@ public class ParkingLotsController {
 			});
 
 		});
+
+	}
+
+	public static String loop(String outPut) throws IOException {
+		final Document document = Jsoup
+				.connect("https://aurora.edu/academics/resources/academic-calendar.html#.WfjplNvMwYI").get();
+		StringBuilder sb = new StringBuilder();
+		for (Element row : document.select("table tr")) {
+
+			Elements title = row.select("td");
+
+			if (title.size() == 2) {
+
+				String oP = (title.get(1).text() + " " + title.get(0).text() + "\t\t\t\t");
+
+				outPut = sb.append(oP).toString();
+			}
+
+		}
+		return outPut;
+
 	}
 }

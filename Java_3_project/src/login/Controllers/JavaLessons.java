@@ -28,6 +28,9 @@ import javafx.stage.Stage;
 public class JavaLessons {
 	static private long begin_time;
 	static private long stop_time;
+	int searchSize = 10;
+	int passNumber = -1;
+	ArrayList<Integer> random = new ArrayList<>(searchSize);
 	
 	//Screen Elements
 	@FXML
@@ -57,9 +60,6 @@ public class JavaLessons {
 	@FXML
 	private Pane pane;
 	
-	int searchSize = 10;
-	int passNumber = -1;
-	ArrayList<Integer> random = new ArrayList<>(searchSize);
 	
 	
 	//Hash Elements
