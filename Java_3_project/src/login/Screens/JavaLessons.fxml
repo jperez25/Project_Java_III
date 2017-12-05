@@ -1,134 +1,101 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import javafx.geometry.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity"
-	minWidth="-Infinity" prefHeight="700.0" prefWidth="832.0"
-	style="-fx-background-color: #439f3e;" xmlns="http://javafx.com/javafx/8"
-	xmlns:fx="http://javafx.com/fxml/1" fx:controller="login.Controllers.JavaLessons">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="832.0" style="-fx-background-color: #439f3e;" xmlns="http://javafx.com/javafx/8.0.102" xmlns:fx="http://javafx.com/fxml/1" fx:controller="login.Controllers.JavaLessons">
 	<children>
-		<Button fx:id="backBtn" mnemonicParsing="false" prefHeight="39.0"
-			prefWidth="98.0" style="-fx-background-color:#439f3e;" text="&lt;">
+		<Button fx:id="backBtn" mnemonicParsing="false" prefHeight="39.0" prefWidth="98.0" style="-fx-background-color:#439f3e;" text="&lt;">
 			<font>
 				<Font name="Forte" size="31.0" />
 			</font>
 		</Button>
-		<AnchorPane layoutX="79.0" layoutY="67.0" maxHeight="1.7976931348623157E308"
-			maxWidth="1.7976931348623157E308" prefHeight="566.0" prefWidth="708.0"
-			style="-fx-background-color: #f2f2f2;">
+		<Text layoutX="252.0" layoutY="53.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Java Lessons 101">
+			<font>
+				<Font size="40.0" />
+			</font>
+		</Text>
+		<AnchorPane layoutX="73.0" layoutY="98.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="566.0" prefWidth="708.0" style="-fx-background-color: #f2f2f2;">
 			<children>
-				<Button fx:id="search" layoutY="1.0" mnemonicParsing="false"
-					text="Binary Search" />
-				<Button fx:id="sort" layoutX="113.0" layoutY="1.0"
-					mnemonicParsing="false" text="Selection Sort" />
-				<Button fx:id="hashing" layoutX="226.0" layoutY="1.0"
-					mnemonicParsing="false" text="Hashing" />
-				<Button fx:id="bblSort" layoutX="302.0" layoutY="1.0"
-					mnemonicParsing="false" text="Bubble Sort" />
-				<AnchorPane fx:id="searchPane" layoutX="29.0" layoutY="52.0"
-					prefHeight="456.0" prefWidth="652.0" visible="false">
+				<Button fx:id="search" layoutY="1.0" mnemonicParsing="false" text="Binary Search" />
+				<Button fx:id="sort" layoutX="113.0" layoutY="1.0" mnemonicParsing="false" text="Selection Sort" />
+				<Button fx:id="hashing" layoutX="226.0" layoutY="1.0" mnemonicParsing="false" text="Hashing" />
+				<Button fx:id="bblSort" layoutX="302.0" layoutY="1.0" mnemonicParsing="false" text="Bubble Sort" />
+            <Button fx:id="compare" layoutX="403.0" layoutY="2.0" mnemonicParsing="false" text="Comparator" />
+				<AnchorPane fx:id="searchPane" layoutX="29.0" layoutY="52.0" prefHeight="456.0" prefWidth="652.0" visible="false">
 					<children>
-						<Text fill="#943737" layoutX="200.0" layoutY="30.0"
-							strokeType="OUTSIDE" strokeWidth="0.0" text="Binary Search"
-							textAlignment="CENTER" wrappingWidth="267.13671875">
+						<Text fill="#943737" layoutX="200.0" layoutY="30.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Binary Search" textAlignment="CENTER" wrappingWidth="267.13671875">
 							<font>
 								<Font name="Bernard MT Condensed" size="37.0" />
 							</font>
 						</Text>
-						<Label alignment="TOP_CENTER" layoutX="24.0" layoutY="66.0"
-							prefHeight="106.0" prefWidth="608.0"
-							text="Binary search is the other common search approach for a list of values. For binary search to work, the elements in the array must already be ordered. Assume that the array is in ascending order. The binary search first compares the key with the element in the middle of the array."
-							textAlignment="CENTER" wrapText="true">
+						<Label alignment="TOP_CENTER" layoutX="24.0" layoutY="66.0" prefHeight="106.0" prefWidth="608.0" text="Binary search is the other common search approach for a list of values. For binary search to work, the elements in the array must already be ordered. Assume that the array is in ascending order. The binary search first compares the key with the element in the middle of the array." textAlignment="CENTER" wrapText="true">
 							<font>
 								<Font name="Bell MT" size="14.0" />
 							</font>
 						</Label>
-						<Text layoutX="213.0" layoutY="165.0" strokeType="OUTSIDE"
-							strokeWidth="0.0" text="Enter a value to search for:">
+						<Text layoutX="213.0" layoutY="165.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Enter a value to search for:">
 							<font>
 								<Font size="18.0" />
 							</font>
 						</Text>
 						<TextField fx:id="input" layoutX="243.0" layoutY="175.0" />
-						<Button fx:id="run" layoutX="307.0" layoutY="210.0"
-							mnemonicParsing="false" text="Run" />
-						<Text layoutX="21.0" layoutY="234.0" strokeType="OUTSIDE"
-							strokeWidth="0.0" text="Results:">
+						<Button fx:id="run" layoutX="307.0" layoutY="210.0" mnemonicParsing="false" text="Run" />
+						<Text layoutX="21.0" layoutY="234.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Results:">
 							<font>
 								<Font size="18.0" />
 							</font>
 						</Text>
-						<TextArea fx:id="textArea" layoutX="21.0" layoutY="250.0"
-							prefHeight="178.0" prefWidth="613.0" />
-						<Button fx:id="reset" layoutX="515.0" layoutY="450.0"
-							mnemonicParsing="false" text="Reset" />
+						<TextArea fx:id="textArea" layoutX="21.0" layoutY="250.0" prefHeight="178.0" prefWidth="613.0" />
+						<Button fx:id="reset" layoutX="515.0" layoutY="450.0" mnemonicParsing="false" text="Reset" />
 					</children>
 				</AnchorPane>
-				<AnchorPane fx:id="hashingPane" layoutX="29.0" layoutY="52.0"
-					prefHeight="456.0" prefWidth="652.0" visible="false">
+				<AnchorPane fx:id="hashingPane" layoutX="29.0" layoutY="52.0" prefHeight="456.0" prefWidth="652.0" visible="false">
 					<children>
-						<Text fill="#943737" layoutX="149.0" layoutY="50.0"
-							strokeType="OUTSIDE" strokeWidth="0.0" text="Hashing"
-							textAlignment="CENTER" wrappingWidth="267.13671875">
+						<Text fill="#943737" layoutX="149.0" layoutY="50.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Hashing" textAlignment="CENTER" wrappingWidth="267.13671875">
 							<font>
 								<Font name="Bernard MT Condensed" size="37.0" />
 							</font>
 						</Text>
-						<Label alignment="TOP_CENTER" layoutX="14.0" layoutY="77.0"
-							prefHeight="366.0" prefWidth="326.0"
-							text="Hashing means using some function or algorithm &#10;to map object data to some representative integer  value. &#10;This so-called hash code (or simply hash) &#10;can then be used as a way to narrow down our &#10;search when looking for the item in the map.&#10;&#10;The SHA (Secure Hash Algorithm) is one of the popular &#10;cryptographic hash functions. A cryptographic hash &#10;can be used to make a signature for a text or a data &#10;file.&#10;The SHA-256 algorithm generates an almost-unique, &#10;fixed-size 256-bit (32-byte) hash. This is a one-way &#10;function, so the result cannot be decrypted back to &#10;the original value.&#10;Currently, SHA-2 hashing is widely used as it is &#10;being considered as the most secure hashing algorithm &#10;in the cryptographic arena.&#10;In this article, let’s have a look how we can perform &#10;SHA-256 hashing operations using various &#10;Java libraries.">
+						<Label alignment="TOP_CENTER" layoutX="14.0" layoutY="77.0" prefHeight="366.0" prefWidth="326.0" text="Hashing means using some function or algorithm &#10;to map object data to some representative integer  value. &#10;This so-called hash code (or simply hash) &#10;can then be used as a way to narrow down our &#10;search when looking for the item in the map.&#10;&#10;The SHA (Secure Hash Algorithm) is one of the popular &#10;cryptographic hash functions. A cryptographic hash &#10;can be used to make a signature for a text or a data &#10;file.&#10;The SHA-256 algorithm generates an almost-unique, &#10;fixed-size 256-bit (32-byte) hash. This is a one-way &#10;function, so the result cannot be decrypted back to &#10;the original value.&#10;Currently, SHA-2 hashing is widely used as it is &#10;being considered as the most secure hashing algorithm &#10;in the cryptographic arena.&#10;In this article, let’s have a look how we can perform &#10;SHA-256 hashing operations using various &#10;Java libraries.">
 							<font>
 								<Font name="Bell MT" size="14.0" />
 							</font>
 						</Label>
-						<Label layoutX="402.0" layoutY="77.0" prefHeight="20.0"
-							prefWidth="191.0" text="Enter a string to be hashed">
+						<Label layoutX="402.0" layoutY="77.0" prefHeight="20.0" prefWidth="191.0" text="Enter a string to be hashed">
 							<font>
 								<Font size="14.0" />
 							</font>
 						</Label>
 						<TextField fx:id="HashFld" layoutX="402.0" layoutY="112.0" />
-						<TextArea fx:id="showHashedStringTxtArea" editable="false"
-							layoutX="398.0" layoutY="209.0" prefHeight="44.0" prefWidth="200.0"
-							style="-fx-background-color: #f2f2f2;" />
-						<Label layoutX="402.0" layoutY="165.0" prefHeight="20.0"
-							prefWidth="158.0" text="Your Hashed String">
+						<TextArea fx:id="showHashedStringTxtArea" editable="false" layoutX="398.0" layoutY="209.0" prefHeight="44.0" prefWidth="200.0" style="-fx-background-color: #f2f2f2;" />
+						<Label layoutX="402.0" layoutY="165.0" prefHeight="20.0" prefWidth="158.0" text="Your Hashed String">
 							<font>
 								<Font size="14.0" />
 							</font>
 						</Label>
-						<Button fx:id="hashStringBtn" layoutX="560.0" layoutY="112.0"
-							mnemonicParsing="false" text="Hash" />
+						<Button fx:id="hashStringBtn" layoutX="560.0" layoutY="112.0" mnemonicParsing="false" text="Hash" />
 					</children>
 				</AnchorPane>
-				<AnchorPane fx:id="sortingPane" layoutX="21.0" layoutY="62.0"
-					prefHeight="456.0" prefWidth="670.0" visible="false">
+				<AnchorPane fx:id="sortingPane" layoutX="21.0" layoutY="62.0" prefHeight="456.0" prefWidth="670.0" visible="false">
 					<children>
-						<BorderPane fx:id="sortingBorder" prefHeight="456.0"
-							prefWidth="652.0">
+						<BorderPane fx:id="sortingBorder" prefHeight="456.0" prefWidth="652.0">
 							<bottom>
-								<HBox fx:id="sortingBottom" alignment="CENTER" prefHeight="52.0"
-									prefWidth="652.0" BorderPane.alignment="CENTER">
+								<HBox fx:id="sortingBottom" alignment="CENTER" prefHeight="52.0" prefWidth="652.0" BorderPane.alignment="CENTER">
 									<children>
-										<Button fx:id="selectStart" mnemonicParsing="false"
-											text="Start" />
-										<Button fx:id="sortStepBtn" mnemonicParsing="false"
-											text="Next Step">
+										<Button fx:id="selectStart" mnemonicParsing="false" text="Start" />
+										<Button fx:id="sortStepBtn" mnemonicParsing="false" text="Next Step">
 											<opaqueInsets>
 												<Insets />
 											</opaqueInsets>
@@ -136,29 +103,22 @@
 												<Insets left="25.0" right="25.0" />
 											</HBox.margin>
 										</Button>
-										<Button fx:id="sortResetBtn" mnemonicParsing="false"
-											text="Reset" />
+										<Button fx:id="sortResetBtn" mnemonicParsing="false" text="Reset" />
 									</children>
 								</HBox>
 							</bottom>
 							<center>
-								<Pane fx:id="pane" prefHeight="200.0" prefWidth="200.0"
-									BorderPane.alignment="CENTER" />
+								<Pane fx:id="pane" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
 							</center>
 							<top>
-								<VBox alignment="CENTER" prefHeight="124.0" prefWidth="652.0"
-									BorderPane.alignment="CENTER">
+								<VBox alignment="CENTER" prefHeight="124.0" prefWidth="652.0" BorderPane.alignment="CENTER">
 									<children>
-										<Text fill="#943737" strokeType="OUTSIDE" strokeWidth="0.0"
-											text="Selection Sort" textAlignment="CENTER">
+										<Text fill="#943737" strokeType="OUTSIDE" strokeWidth="0.0" text="Selection Sort" textAlignment="CENTER">
 											<font>
 												<Font name="Bernard MT Condensed" size="37.0" />
 											</font>
 										</Text>
-										<Label alignment="CENTER" contentDisplay="CENTER"
-											prefHeight="91.0" prefWidth="652.0"
-											text="The selection sort algorithm sorts an array by repeatedly finding the minimum element from unsorted part and putting it at the beginning. In every iteration of selection sort, the minimum element (considering ascending order) from the unsorted subarray is picked and moved to the sorted subarray. Try it out for yourself below!"
-											textAlignment="CENTER" wrapText="true">
+										<Label alignment="CENTER" contentDisplay="CENTER" prefHeight="91.0" prefWidth="652.0" text="The selection sort algorithm sorts an array by repeatedly finding the minimum element from unsorted part and putting it at the beginning. In every iteration of selection sort, the minimum element (considering ascending order) from the unsorted subarray is picked and moved to the sorted subarray. Try it out for yourself below!" textAlignment="CENTER" wrapText="true">
 											<font>
 												<Font name="Bell MT" size="14.0" />
 											</font>
@@ -169,18 +129,14 @@
 						</BorderPane>
 					</children>
 				</AnchorPane>
-				<AnchorPane fx:id="bblSortPane" layoutX="9.0" layoutY="72.0"
-					prefHeight="462.0" prefWidth="692.0" visible="false">
+				<AnchorPane fx:id="bblSortPane" layoutX="9.0" layoutY="72.0" prefHeight="462.0" prefWidth="692.0" visible="false">
 					<children>
-						<BorderPane fx:id="bblSortBorder" prefHeight="462.0"
-							prefWidth="692.0">
+						<BorderPane fx:id="bblSortBorder" prefHeight="462.0" prefWidth="692.0">
 							<bottom>
-								<HBox fx:id="bblSortBottom" alignment="CENTER" prefHeight="52.0"
-									prefWidth="652.0" BorderPane.alignment="CENTER">
+								<HBox fx:id="bblSortBottom" alignment="CENTER" prefHeight="52.0" prefWidth="652.0" BorderPane.alignment="CENTER">
 									<children>
 										<Button fx:id="bblStart" mnemonicParsing="false" text="Start" />
-										<Button fx:id="bblStepBtn" mnemonicParsing="false"
-											text="Next Step">
+										<Button fx:id="bblStepBtn" mnemonicParsing="false" text="Next Step">
 											<opaqueInsets>
 												<Insets />
 											</opaqueInsets>
@@ -188,29 +144,22 @@
 												<Insets left="25.0" right="25.0" />
 											</HBox.margin>
 										</Button>
-										<Button fx:id="bblResetBtn" mnemonicParsing="false"
-											text="Reset" />
+										<Button fx:id="bblResetBtn" mnemonicParsing="false" text="Reset" />
 									</children>
 								</HBox>
 							</bottom>
 							<center>
-								<Pane fx:id="bblPane" prefHeight="200.0" prefWidth="200.0"
-									BorderPane.alignment="CENTER" />
+								<Pane fx:id="bblPane" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
 							</center>
 							<top>
-								<VBox alignment="CENTER" prefHeight="122.0" prefWidth="652.0"
-									BorderPane.alignment="CENTER">
+								<VBox alignment="CENTER" prefHeight="122.0" prefWidth="652.0" BorderPane.alignment="CENTER">
 									<children>
-										<Text fill="#943737" strokeType="OUTSIDE" strokeWidth="0.0"
-											text="Bubble Sort" textAlignment="CENTER">
+										<Text fill="#943737" strokeType="OUTSIDE" strokeWidth="0.0" text="Bubble Sort" textAlignment="CENTER">
 											<font>
 												<Font name="Bernard MT Condensed" size="37.0" />
 											</font>
 										</Text>
-										<Label alignment="CENTER" contentDisplay="CENTER"
-											prefHeight="91.0" prefWidth="652.0"
-											text="Bubble sort, sometimes referred to as sinking sort, is a simple sorting algorithm that repeatedly steps through the list to be sorted, compares each pair of adjacent items and swaps them if they are in the wrong order. This is repeated until no swaps are needed. Try it out for yourself below!"
-											textAlignment="CENTER" wrapText="true">
+										<Label alignment="CENTER" contentDisplay="CENTER" prefHeight="91.0" prefWidth="652.0" text="Bubble sort, sometimes referred to as sinking sort, is a simple sorting algorithm that repeatedly steps through the list to be sorted, compares each pair of adjacent items and swaps them if they are in the wrong order. This is repeated until no swaps are needed. Try it out for yourself below!" textAlignment="CENTER" wrapText="true">
 											<font>
 												<Font name="Bell MT" size="14.0" />
 											</font>
@@ -221,13 +170,116 @@
 						</BorderPane>
 					</children>
 				</AnchorPane>
+            <AnchorPane fx:id="comparatorPane" layoutY="82.0" prefHeight="462.0" prefWidth="711.0" visible="false">
+               <children>
+                  <BorderPane fx:id="bblSortBorder1" prefHeight="462.0" prefWidth="711.0">
+                     <center>
+                        <Pane fx:id="bblPane1" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+                           <children>
+                              <HBox prefHeight="205.0" prefWidth="692.0">
+                                 <children>
+                                    <ImageView fx:id="compareCode" fitHeight="203.0" fitWidth="335.0" pickOnBounds="true" preserveRatio="true" />
+                                    <TextArea fx:id="compResults" prefHeight="205.0" prefWidth="327.0" />
+                                 </children>
+                              </HBox>
+                           </children>
+                        </Pane>
+                     </center>
+                     <top>
+                        <VBox alignment="CENTER" prefHeight="122.0" prefWidth="652.0" BorderPane.alignment="CENTER">
+                           <children>
+                              <Text fill="#943737" strokeType="OUTSIDE" strokeWidth="0.0" text="Comparator" textAlignment="CENTER">
+                                 <font>
+                                    <Font name="Bernard MT Condensed" size="37.0" />
+                                 </font>
+                              </Text>
+                              <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="91.0" prefWidth="652.0" text="A Comparator is used in Java to sort objects. A neat use of Comparators is to compare objects based on several attributes. Test some out by filling out the first and last names and ages down below!" textAlignment="CENTER" wrapText="true">
+                                 <font>
+                                    <Font name="Bell MT" size="14.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </VBox>
+                     </top>
+                     <bottom>
+                        <VBox prefHeight="136.0" prefWidth="692.0" BorderPane.alignment="CENTER">
+                           <children>
+                              <HBox prefHeight="100.0" prefWidth="200.0">
+                                 <children>
+                                    <Label prefHeight="17.0" prefWidth="70.0" text="First Name:">
+                                       <padding>
+                                          <Insets left="2.0" />
+                                       </padding>
+                                    </Label>
+                                    <TextField fx:id="fname1" prefHeight="25.0" prefWidth="110.0" />
+                                    <Label prefHeight="17.0" prefWidth="70.0" text="Last Name:">
+                                       <padding>
+                                          <Insets left="3.0" />
+                                       </padding>
+                                    </Label>
+                                    <TextField fx:id="lname1" prefHeight="25.0" prefWidth="125.0" />
+                                    <Label prefHeight="17.0" prefWidth="30.0" text="Age:">
+                                       <padding>
+                                          <Insets left="3.0" />
+                                       </padding>
+                                    </Label>
+                                    <TextField fx:id="age1" prefHeight="25.0" prefWidth="50.0" />
+                                    <Button fx:id="compareLnameBtn" mnemonicParsing="false" text="Compare Last Name" />
+                                 </children>
+                              </HBox>
+                              <HBox prefHeight="100.0" prefWidth="200.0">
+                                 <children>
+                                    <Label prefHeight="17.0" prefWidth="70.0" text="First Name:">
+                                       <padding>
+                                          <Insets left="3.0" />
+                                       </padding>
+                                    </Label>
+                                    <TextField fx:id="fname2" prefHeight="25.0" prefWidth="110.0" />
+                                    <Label prefHeight="17.0" prefWidth="70.0" text="Last Name:">
+                                       <padding>
+                                          <Insets left="3.0" />
+                                       </padding>
+                                    </Label>
+                                    <TextField fx:id="lname2" layoutX="10.0" layoutY="10.0" prefHeight="25.0" prefWidth="125.0" />
+                                    <Label prefHeight="17.0" prefWidth="30.0" text="Age:">
+                                       <padding>
+                                          <Insets left="3.0" />
+                                       </padding>
+                                    </Label>
+                                    <TextField fx:id="age2" layoutX="159.0" layoutY="10.0" prefHeight="25.0" prefWidth="50.0" />
+                                    <Button fx:id="compareFnameBtn" mnemonicParsing="false" text="Compare First Name" />
+                                 </children>
+                              </HBox>
+                              <HBox prefHeight="100.0" prefWidth="200.0">
+                                 <children>
+                                    <Label prefHeight="17.0" prefWidth="70.0" text="First Name:">
+                                       <padding>
+                                          <Insets left="3.0" />
+                                       </padding>
+                                    </Label>
+                                    <TextField fx:id="fname3" prefHeight="25.0" prefWidth="110.0" />
+                                    <Label layoutX="10.0" layoutY="10.0" prefHeight="17.0" prefWidth="70.0" text="Last Name:">
+                                       <padding>
+                                          <Insets left="3.0" />
+                                       </padding>
+                                    </Label>
+                                    <TextField fx:id="lname3" layoutX="10.0" layoutY="10.0" prefHeight="25.0" prefWidth="125.0" />
+                                    <Label layoutX="187.0" layoutY="10.0" prefHeight="17.0" prefWidth="30.0" text="Age:">
+                                       <padding>
+                                          <Insets left="3.0" />
+                                       </padding>
+                                    </Label>
+                                    <TextField fx:id="age3" layoutX="159.0" layoutY="10.0" prefHeight="25.0" prefWidth="50.0" />
+                                    <Button fx:id="compareAgeBtn" mnemonicParsing="false" text="Compare Age" />
+                                 </children>
+                              </HBox>
+                           </children>
+                        </VBox>
+                     </bottom>
+                  </BorderPane>
+               </children>
+            </AnchorPane>
 			</children>
 		</AnchorPane>
-		<Text layoutX="252.0" layoutY="53.0" strokeType="OUTSIDE"
-			strokeWidth="0.0" text="Java Lessons 101">
-			<font>
-				<Font size="40.0" />
-			</font>
-		</Text>
 	</children>
 </Pane>

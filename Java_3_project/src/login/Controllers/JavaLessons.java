@@ -1,5 +1,5 @@
 package login.Controllers;
-
+import login.*;
 import java.io.IOException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -15,6 +15,8 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
@@ -43,6 +45,8 @@ public class JavaLessons {
 	private Button hashing;
 	@FXML
 	private Button bblSort;
+	@FXML
+	private Button compare;
 	
 	//Selection sorting Elements 
 	@FXML
@@ -104,12 +108,46 @@ public class JavaLessons {
 	private boolean endOfPass = true;
 	private int index = -1; 
 	
+	// Comparator Elements
+	@FXML
+	private AnchorPane comparatorPane;
+	@FXML
+	private ImageView compareCode;
+	@FXML
+	private TextArea compResults;
+	@FXML
+	private TextField fname1;
+	@FXML
+	private TextField fname2;
+	@FXML
+	private TextField fname3;
+	@FXML
+	private TextField lname1;
+	@FXML
+	private TextField lname2;
+	@FXML
+	private TextField lname3;
+	@FXML
+	private TextField age1;
+	@FXML
+	private TextField age2;
+	@FXML
+	private TextField age3;
+	@FXML
+	private Button compareFnameBtn;
+	@FXML
+	private Button compareLnameBtn;
+	@FXML
+	private Button compareAgeBtn;
+	
+	
 	public void initialize() {
 		
 		//Set panes to not visible
 		searchPane.setVisible(false);
 		hashingPane.setVisible(false);
 		sortingPane.setVisible(false);
+		comparatorPane.setVisible(false);
 		
 		
 		//This is the Binary Search Code. 
@@ -129,6 +167,7 @@ public class JavaLessons {
 			textArea.setEditable(false);
 			sortingPane.setVisible(false);
 			bblSortPane.setVisible(false);
+			comparatorPane.setVisible(false);
 			//
 			textArea.appendText(Arrays.toString(numbers));
 
@@ -195,6 +234,7 @@ public class JavaLessons {
 			searchPane.setVisible(false);
 			sortingPane.setVisible(false);
 			bblSortPane.setVisible(false);
+			comparatorPane.setVisible(false);
 		});
 		//Listener
 		HashFld.setOnKeyPressed(e -> {
@@ -240,6 +280,7 @@ public class JavaLessons {
 			searchPane.setVisible(false);
 			sortingPane.setVisible(true);
 			bblSortPane.setVisible(false);
+			comparatorPane.setVisible(false);
 		});
 		
 		selectStart.setOnAction(e->{
@@ -274,6 +315,7 @@ public class JavaLessons {
 	 			searchPane.setVisible(false);
 	 			sortingPane.setVisible(false);
 	 			bblSortPane.setVisible(true);
+	 			comparatorPane.setVisible(false);
 	 		});
 	 			
 	 		bblStart.setOnAction(e->{
@@ -297,9 +339,80 @@ public class JavaLessons {
 	 		  
 	 		  
 	 	
+	 	/*------------------------------------------------------------------------------------------------------------------------------*/
+		 
+		 //This is the Comparator Code. 
+	/*------------------------------------------------------------------------------------------------------------------------------*/
+		// going to use classes imported from login
+	 	 
+		
+	 	compare.setOnAction(e->{
+	 		compResults.setEditable(false);
+ 			hashingPane.setVisible(false);
+ 			searchPane.setVisible(false);
+ 			sortingPane.setVisible(false);
+ 			bblSortPane.setVisible(false);
+ 			comparatorPane.setVisible(true);
+ 		});
+	 	
+	 	compareFnameBtn.setOnAction(e->{
+	 		compResults.clear();
+	 		Person[] peeps = createArray();
+	 		Arrays.sort(peeps, new FirstNameComparator());
+	 		Image image1 = new Image("/images/fname.png");
+	 		compareCode.setImage(image1);
+	 		for (int i = 0; i < peeps.length; i++) {
+	 			compResults.appendText(peeps[i].toString() + "\n");
+	 		}
+	 	
+	 	});
+	 	
+	 	compareLnameBtn.setOnAction(e->{
+	 		compResults.clear();
+	 		Person[] peeps = createArray();
+	 		Arrays.sort(peeps, new LastNameComparator());
+	 		Image image2 = new Image("/images/lname.png");
+	 		compareCode.setImage(image2);
+	 		for (int i = 0; i < peeps.length; i++) {
+	 			compResults.appendText(peeps[i].toString() + "\n");
+	 		}
+	 	
+	 	});
+	 	
+	 	compareAgeBtn.setOnAction(e->{
+	 		compResults.clear();
+	 		Person[] peeps = createArray();
+	 		Arrays.sort(peeps, new AgeComparator());
+	 		Image image3 = new Image("/images/age.png");
+	 		compareCode.setImage(image3);
+	 		for (int i = 0; i < peeps.length; i++) {
+	 			compResults.appendText(peeps[i].toString() + "\n");
+	 		}
+	 	
+	 	});
+	 	 
+	 	 
+	 	 
+	 	 
+	 	 
+	 	 
+	 	 
+	 	 
+	 	 
+	 	 
+	 	 
+	 	 
+	 	 
+	 	 
+	 	 
+	 	 
+	 	 
+	 	 
+	 	 
+	 	 
+	 	 
 	 /*------------------------------------------------------------------------------------------------------------------------------*/
-		
-		
+		 
 		//Go back to the home page screen
 		backBtn.setOnAction(e->{
 			FXMLLoader loader = new FXMLLoader(getClass().getResource("../Screens/Home.fxml"));
@@ -445,4 +558,33 @@ public class JavaLessons {
 		  index = -1;
 		  bblRepaint();
 	}
+	
+/*-------------------------------------------------------------------------------------------------------------------------------------*/
+	
+	// Comparator methods
+/*---------------------------------------------------------------------------------------------------------------------------------------*/
+	public Person[] createArray() {
+		String firstN1 = fname1.getText();
+		String firstN2 = fname2.getText();
+		String firstN3 = fname3.getText();
+		
+		String lastN1 = lname1.getText();
+		String lastN2 = lname2.getText();
+		String lastN3 = lname3.getText();
+		
+		int year1 = Integer.parseInt(age1.getText());
+		int year2 = Integer.parseInt(age2.getText());
+		int year3 = Integer.parseInt(age3.getText());
+		
+		
+		Person[] persons = new Person[3];
+		persons[0] = new Person(firstN1, lastN1, year1);
+		persons[1] = new Person(firstN2, lastN2, year2);
+		persons[2] = new Person(firstN3, lastN3, year3);
+		
+		return persons;
+		
+	}
+	
 }
+	
