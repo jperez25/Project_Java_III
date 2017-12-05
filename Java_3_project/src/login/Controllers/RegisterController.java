@@ -185,7 +185,7 @@ public class RegisterController {
 		});
 		// Go back to the main screen
 		backBtn.setOnAction(e -> {
-			FXMLLoader loader = new FXMLLoader(getClass().getResource("../Screens/First_login.fxml"));
+			FXMLLoader loader = new FXMLLoader(getClass().getResource("../Screens/Home.fxml"));
 			Parent root;
 			try {
 				root = loader.load();

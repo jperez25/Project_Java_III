@@ -6,6 +6,10 @@ import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.Iterator;
+import java.util.LinkedList;
+import java.util.ListIterator;
+import java.util.Random;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -13,6 +17,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
@@ -47,6 +52,8 @@ public class JavaLessons {
 	private Button bblSort;
 	@FXML
 	private Button compare;
+	@FXML
+	private Button iteratorBtn;
 	
 	//Selection sorting Elements 
 	@FXML
@@ -104,6 +111,29 @@ public class JavaLessons {
 	@FXML
 	private Pane bblPane;
 	
+	//Iterator Elements
+	@FXML
+	private AnchorPane iteratorPane;
+	@FXML
+	private Label listFld; 
+	@FXML
+	private Button addBtn;
+	@FXML
+	private Button removeBtn;
+	@FXML
+	private Button nextBtn;
+	@FXML
+	private Button previuosBtn;
+	@FXML
+	private Label iterationFld;
+	@FXML
+	private Label iterationFld2;
+	
+	private String temp = "";
+	private Random rand = new Random();
+	private LinkedList<String> lisa = new LinkedList<String>();
+	private Iterator<String> itr;
+	
 	private boolean needNextPass = true;
 	private boolean endOfPass = true;
 	private int index = -1; 
@@ -148,6 +178,7 @@ public class JavaLessons {
 		hashingPane.setVisible(false);
 		sortingPane.setVisible(false);
 		comparatorPane.setVisible(false);
+		iteratorPane.setVisible(false);
 		
 		
 		//This is the Binary Search Code. 
@@ -168,6 +199,7 @@ public class JavaLessons {
 			sortingPane.setVisible(false);
 			bblSortPane.setVisible(false);
 			comparatorPane.setVisible(false);
+			iteratorPane.setVisible(false);
 			//
 			textArea.appendText(Arrays.toString(numbers));
 
@@ -235,6 +267,7 @@ public class JavaLessons {
 			sortingPane.setVisible(false);
 			bblSortPane.setVisible(false);
 			comparatorPane.setVisible(false);
+			iteratorPane.setVisible(false);
 		});
 		//Listener
 		HashFld.setOnKeyPressed(e -> {
@@ -281,6 +314,7 @@ public class JavaLessons {
 			sortingPane.setVisible(true);
 			bblSortPane.setVisible(false);
 			comparatorPane.setVisible(false);
+			iteratorPane.setVisible(false);
 		});
 		
 		selectStart.setOnAction(e->{
@@ -316,6 +350,7 @@ public class JavaLessons {
 	 			sortingPane.setVisible(false);
 	 			bblSortPane.setVisible(true);
 	 			comparatorPane.setVisible(false);
+	 			iteratorPane.setVisible(false);
 	 		});
 	 			
 	 		bblStart.setOnAction(e->{
@@ -353,6 +388,7 @@ public class JavaLessons {
  			sortingPane.setVisible(false);
  			bblSortPane.setVisible(false);
  			comparatorPane.setVisible(true);
+ 			iteratorPane.setVisible(false);
  		});
 	 	
 	 	compareFnameBtn.setOnAction(e->{
@@ -390,25 +426,106 @@ public class JavaLessons {
 	 		}
 	 	
 	 	});
+/*------------------------------------------------------------------------------------------------------------------------------*/
 	 	 
 	 	 
-	 	 
-	 	 
-	 	 
-	 	 
-	 	 
-	 	 
-	 	 
-	 	 
-	 	 
-	 	 
-	 	 
-	 	 
-	 	 
-	 	 
-	 	 
-	 	 
-	 	 
+		 //This is the Iterator code Code. 
+/*------------------------------------------------------------------------------------------------------------------------------*/
+		iteratorBtn.setOnAction(e->{
+			hashingPane.setVisible(false);
+			searchPane.setVisible(false);
+			sortingPane.setVisible(false);
+			bblSortPane.setVisible(false);
+			iteratorPane.setVisible(true);
+			comparatorPane.setVisible(false);
+		});
+		
+		addBtn.setOnAction(e->{
+
+			Integer  n = rand.nextInt(1000) + 1;
+			
+			if (lisa.size() <= 20) {
+				lisa.add(n.toString());
+				
+				listFld.setText(lisa.toString());
+			}
+			else {
+				Alert alert = new Alert(Alert.AlertType.ERROR);
+				alert.setTitle("Maximum lenght reached");
+				alert.setContentText("The maximum lenght of the list has been reached");
+				alert.showAndWait();
+			}
+			
+		});
+		
+		removeBtn.setOnAction(e->{
+			
+			if (lisa.size() >= 1) {
+				lisa.removeLast();
+				listFld.setText(lisa.toString());
+			}
+			else {
+				Alert alert = new Alert(Alert.AlertType.ERROR);
+				alert.setTitle("No elements");
+				alert.setContentText("There is no elements to remove from List");
+				alert.showAndWait();
+			}
+			
+		});
+		
+		nextBtn.setOnAction(e->{
+			temp = "";
+			Iterator<String> itr = lisa.iterator();
+			String message;
+			String listAsString;
+			
+			if (lisa.size() >= 1) {
+				
+				while (itr.hasNext()) {
+					listAsString = itr.next();
+					temp += listAsString+" ";
+					iterationFld.setText(temp);
+					System.out.println(temp);
+					message = "Current element: "+ listAsString;
+			        iterationFld2.setText(message);
+			        
+			        for(long i = 0; i < 1000000000; i++)
+			        {
+			            int x = 5 * 14505 + 454 % 34 -1232;
+			        }
+					
+				}
+			}
+		});
+		previuosBtn.setOnAction(e->{
+			
+			temp = "";
+			ListIterator<String> itr = lisa.listIterator();
+			String message;
+			String listAsString;
+			
+			if (lisa.size() >= 1) {
+				
+				while (itr.hasPrevious()) {
+					listAsString = itr.previous();
+					temp += listAsString+" ";
+					iterationFld.setText(temp);
+					System.out.println(temp);
+					message = "Current element: "+ listAsString;
+			        iterationFld2.setText(message);
+			        
+			        for(long i = 0; i < 1000000000; i++)
+			        {
+			            int x = 5 * 14505 + 454 % 34 -1232;
+			        }
+					
+				}
+			}
+		});
+		
+		
+/*------------------------------------------------------------------------------------------------------------------------------*/
+		 
 	 	 
 	 	 
 	 /*------------------------------------------------------------------------------------------------------------------------------*/

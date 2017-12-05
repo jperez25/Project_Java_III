@@ -156,6 +156,7 @@ public class SidePanelContentController implements Initializable {
 				Stage stage = (Stage) b3.getScene().getWindow();
 				stage.setScene(scene);
 			} catch (IOException e1) {
+				e1.printStackTrace();
 				Alert alert = new Alert(Alert.AlertType.ERROR);
 				alert.setTitle("Screen Error");
 				alert.setHeaderText("Screen Not found");

@@ -77,7 +77,7 @@ public class ParkingLotsController {
 		WebEngine webEngine = weather.getEngine();
 
 		webEngine.load(
-				"http://api.openweathermap.org/data/2.5/weather?q=North%20Aurora,%20us&units=imperial&mode=html&appid=1906951238f29646ce8ef804bea0b524\r\n"
+				"http://api.openweathermap.org/data/2.5/weather?q=Aurora,%20us&units=imperial&mode=html&appid=1906951238f29646ce8ef804bea0b524\r\n"
 						+ "");
 
 		/*
